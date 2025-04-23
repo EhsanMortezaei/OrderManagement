@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Orders\Event\" />
+    <Folder Include="ProductCategories\Event\" />
+    <Folder Include="Products\Events\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Zamin.Core.ApplicationServices" Version="9.0.0" />
+    <PackageReference Include="Zamin.Core.Contracts" Version="9.0.0" />
+    <PackageReference Include="Zamin.Core.Domain" Version="9.0.0" />
+    <PackageReference Include="Zamin.Core.Domain.Toolkits" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ShopManagement.Core.Contracts\ShopManagement.Core.Contracts.csproj" />
+    <ProjectReference Include="..\ShopManagement.Core.RequestResponse\ShopManagement.Core.RequestResponse.csproj" />
+  </ItemGroup>
+
+</Project>
