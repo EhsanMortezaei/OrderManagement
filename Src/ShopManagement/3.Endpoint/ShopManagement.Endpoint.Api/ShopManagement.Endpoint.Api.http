@@ -1,6 +1,6 @@
-@ShopManagement.Endpoint.Api_HostAddress = http://localhost:5114
+@ShopManagement.EndPoint.Api_HostAddress = http://localhost:5243
 
-GET {{ShopManagement.Endpoint.Api_HostAddress}}/weatherforecast/
+GET {{ShopManagement.EndPoint.Api_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
