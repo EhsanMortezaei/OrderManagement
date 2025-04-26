@@ -1,7 +1,7 @@
 ﻿using Zamin.Core.RequestResponse.Commands;
 using Zamin.Core.RequestResponse.Endpoints;
 
-namespace ShopManagement.Core.RequestResponse.OrderItems.Command.Delete
+namespace ShopManagement.Core.RequestResponse.OrderItems.Commands.Delete
 {
     public class DeleteOrderItemCommand : ICommand, IWebRequest
     {

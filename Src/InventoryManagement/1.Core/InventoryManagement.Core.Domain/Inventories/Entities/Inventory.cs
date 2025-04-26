@@ -5,7 +5,7 @@ namespace InventoryManagement.Core.Domain.Inventories.Entities
 {
     public class Inventory : AggregateRoot<int>
     {
-        public int Id { get; set; }
+        public int Id { get;private set; }
         public long ProductId { get; private set; }
         public double UnitPrice { get; private set; }
         public bool InStock { get; private set; }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Zamin.Core.RequestResponse.Commands;
 using Zamin.Core.RequestResponse.Endpoints;
 
-namespace ShopManagement.Core.RequestResponse.OrderItems.Command.Create
+namespace ShopManagement.Core.RequestResponse.OrderItems.Commands.Create
 {
     public class CreateOrderItemCommand : ICommand<Guid>, IWebRequest
     {
