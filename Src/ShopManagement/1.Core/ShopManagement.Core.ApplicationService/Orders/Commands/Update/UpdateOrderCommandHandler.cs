@@ -5,7 +5,7 @@ using Zamin.Core.Domain.Exceptions;
 using Zamin.Core.RequestResponse.Commands;
 using Zamin.Utilities;
 
-namespace ShopManagement.Core.ApplicationService.Orders.Command.Update
+namespace ShopManagement.Core.ApplicationService.Orders.Commands.Update
 {
     public class UpdateOrderCommandHandler : CommandHandler<UpdateOrderCommand>
     {

@@ -21,7 +21,12 @@ public class Order : AggregateRoot<int>
         Items = items;
     }
 
-    public Order(long accountId, int paymentMethod, double totalAmount, double discountAmount, double payAmount, List<OrderItem> items)
+    public Order(long accountId,
+                 int paymentMethod,
+                 double totalAmount,
+                 double discountAmount,
+                 double payAmount,
+                 List<OrderItem> items)
     {
         AccountId = accountId;
         TotalAmount = totalAmount;

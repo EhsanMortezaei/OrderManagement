@@ -4,7 +4,7 @@ using Zamin.Core.ApplicationServices.Queries;
 using Zamin.Core.RequestResponse.Queries;
 using Zamin.Utilities;
 
-namespace ShopManagement.Core.ApplicationService.Orders.Query.GetById
+namespace ShopManagement.Core.ApplicationService.Orders.Queries.GetById
 {
     public class GetOrderByIdQueryHandler : QueryHandler<GetOrderByIdQuery, OrderQr>
     {

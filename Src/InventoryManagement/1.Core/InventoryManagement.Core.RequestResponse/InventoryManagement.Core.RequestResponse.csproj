@@ -6,4 +6,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+	<ItemGroup>
+		<PackageReference Include="Zamin.Core.RequestResponse" Version="9.0.0" />
+		<PackageReference Include="Zamin.Extensions.Translations.Abstractions" Version="9.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\InventoryManagement.Core.Domain\InventoryManagement.Core.Domain.csproj" />
+	</ItemGroup>
+
 </Project>

@@ -6,4 +6,22 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Inventories\Events\" />
+    <Folder Include="InventoryOperations\Events\" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Zamin.Core.ApplicationServices" Version="9.0.0" />
+		<PackageReference Include="Zamin.Core.Contracts" Version="9.0.0" />
+		<PackageReference Include="Zamin.Core.Domain" Version="9.0.0" />
+		<PackageReference Include="Zamin.Core.Domain.Toolkits" Version="9.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\InventoryManagement.Core.Contracts\InventoryManagement.Core.Contracts.csproj" />
+	  <ProjectReference Include="..\InventoryManagement.Core.Domain\InventoryManagement.Core.Domain.csproj" />
+	  <ProjectReference Include="..\InventoryManagement.Core.RequestResponse\InventoryManagement.Core.RequestResponse.csproj" />
+	</ItemGroup>
+
 </Project>

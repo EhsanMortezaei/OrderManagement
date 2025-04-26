@@ -6,7 +6,7 @@ using Zamin.Core.Domain.Exceptions;
 using Zamin.Core.RequestResponse.Commands;
 using Zamin.Utilities;
 
-namespace ShopManagement.Core.ApplicationService.Orders.Command.Delete
+namespace ShopManagement.Core.ApplicationService.Orders.Commands.Delete
 {
     public sealed class DeleteOrderCommandHandler(ZaminServices zaminServices,
         IOrderCommandRepository orderCommandRepository,

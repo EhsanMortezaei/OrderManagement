@@ -4,11 +4,11 @@ using Zamin.Extensions.Translations.Abstractions;
 
 namespace ShopManagement.Core.RequestResponse.Orders.Queries
 {
-    public class GetOrderByIdQueryValidator : AbstractValidator<CreateOrderCommand>
+    public class GetOrderByIdQueryValidator : AbstractValidator<GetOrderByIdQuery>
     {
         public GetOrderByIdQueryValidator(ITranslator translator)
         {
-            RuleFor(query => query.Id)
+            RuleFor(query => query.OrderId)
                 .NotEmpty()
                 .WithMessage(translator["Required", nameof(GetOrderByIdQuery.OrderId)]);
         }

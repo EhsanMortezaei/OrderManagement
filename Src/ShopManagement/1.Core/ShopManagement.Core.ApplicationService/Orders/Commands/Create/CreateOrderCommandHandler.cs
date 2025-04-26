@@ -5,7 +5,7 @@ using Zamin.Core.ApplicationServices.Commands;
 using Zamin.Core.RequestResponse.Commands;
 using Zamin.Utilities;
 
-namespace ShopManagement.Core.ApplicationService.Orders.Command.Create
+namespace ShopManagement.Core.ApplicationService.Orders.Commands.Create
 {
     public class CreateOrderCommandHandler : CommandHandler<CreateOrderCommand, Guid>
     {
@@ -19,8 +19,12 @@ namespace ShopManagement.Core.ApplicationService.Orders.Command.Create
 
         public override async Task<CommandResult<Guid>> Handle(CreateOrderCommand command)
         {
-            var order = new Order(command.AccountId, command.PaymentMethod,
-                command.TotalAmount, command.DiscountAmount, command.PayAmount, command.Items);
+            var order = new Order(command.AccountId,
+                                  command.PaymentMethod,
+                                  command.TotalAmount,
+                                  command.DiscountAmount,
+                                  command.PayAmount,
+                                  command.Items);
 
             await _orderCommandRepository.InsertAsync(order);
             await _orderCommandRepository.CommitAsync();

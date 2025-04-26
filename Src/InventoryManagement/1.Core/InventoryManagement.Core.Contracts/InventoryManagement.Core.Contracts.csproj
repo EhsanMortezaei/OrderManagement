@@ -6,4 +6,16 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+	<ItemGroup>
+		<PackageReference Include="Zamin.Core.Contracts" Version="9.0.0" />
+		<PackageReference Include="Zamin.Core.Domain" Version="9.0.0" />
+		<PackageReference Include="Zamin.Core.RequestResponse" Version="9.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\..\ShopManagement\1.Core\ShopManagement.Core.RequestResponse\ShopManagement.Core.RequestResponse.csproj" />
+	  <ProjectReference Include="..\InventoryManagement.Core.Domain\InventoryManagement.Core.Domain.csproj" />
+	  <ProjectReference Include="..\InventoryManagement.Core.RequestResponse\InventoryManagement.Core.RequestResponse.csproj" />
+	</ItemGroup>
+
 </Project>

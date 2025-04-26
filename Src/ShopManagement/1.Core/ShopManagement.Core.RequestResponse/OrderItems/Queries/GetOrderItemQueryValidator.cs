@@ -1,10 +1,9 @@
 ﻿using FluentValidation;
-using ShopManagement.Core.RequestResponse.OrderItems.Command.Create;
 using Zamin.Extensions.Translations.Abstractions;
 
 namespace ShopManagement.Core.RequestResponse.OrderItems.Queries
 {
-    public class GetOrderItemQueryValidator: AbstractValidator<CreateOrderItemCommand>
+    public class GetOrderItemQueryValidator : AbstractValidator<GetOrderItemByIdQuery>
     {
         public GetOrderItemQueryValidator(ITranslator translator)
         {
