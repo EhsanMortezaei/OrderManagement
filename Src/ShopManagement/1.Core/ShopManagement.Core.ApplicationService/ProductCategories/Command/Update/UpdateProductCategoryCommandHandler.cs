@@ -22,7 +22,14 @@ namespace ShopManagement.Core.ApplicationService.ProductCategories.Command.Updat
             var productCategory = await _productCategoryCommandRepository.GetAsync(command.Id);
             if (productCategory is null)
                 throw new InvalidEntityStateException("گروه محصولی یافت نشد");
-            productCategory.Edit(command.Name, command.Description, command.Picture, command.PictureAlt, command.PictureTitle, command.KeyWords, command.MetaDescription, command.Slug);
+            productCategory.Edit(command.Name,
+                                 command.Description,
+                                 command.Picture,
+                                 command.PictureAlt,
+                                 command.PictureTitle,
+                                 command.KeyWords,
+                                 command.MetaDescription,
+                                 command.Slug);
 
             await _productCategoryCommandRepository.CommitAsync();
 

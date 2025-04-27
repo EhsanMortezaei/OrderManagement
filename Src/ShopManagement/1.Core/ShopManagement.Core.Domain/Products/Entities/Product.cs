@@ -21,9 +21,17 @@ namespace ShopManagement.Core.Domain.Products.Entities
         //Property ProductCategoryId
         public ProductCategory Category { get; private set; }
 
-        public Product(string name, string code, string shortDescription, string descrption,
-            string picture, string pictureAlt, string pictureTitle,
-            long categoryId, string slug, string keywords, string metaDescription)
+        public Product(string name,
+                       string code,
+                       string shortDescription,
+                       string descrption,
+                       string picture,
+                       string pictureAlt,
+                       string pictureTitle,
+                       long categoryId,
+                       string slug,
+                       string keywords,
+                       string metaDescription)
         {
             Name = name;
             Code = code;
@@ -42,9 +50,17 @@ namespace ShopManagement.Core.Domain.Products.Entities
                 CategoryId, Slug, Keywords, MetaDescription));
         }
 
-        public void Edit(string name, string code, string shortDescription, string descrption,
-            string picture, string pictureAlt, string pictureTitle,
-            long categoryId, string slug, string keywords, string metaDescription)
+        public void Edit(string name,
+                         string code,
+                         string shortDescription,
+                         string descrption,
+                         string picture,
+                         string pictureAlt,
+                         string pictureTitle,
+                         long categoryId,
+                         string slug,
+                         string keywords,
+                         string metaDescription)
         {
             Name = name;
             Code = code;

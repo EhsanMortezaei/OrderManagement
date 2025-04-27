@@ -11,7 +11,10 @@ namespace ShopManagement.Core.Domain.Orders.Entities
         public long OrderId { get; private set; }
         public Order Order { get; private set; }
 
-        public OrderItem(long productId, int count, double unitPrice, int discountRate)
+        public OrderItem(long productId,
+                         int count,
+                         double unitPrice,
+                         int discountRate)
         {
             ProductId = productId;
             Count = count;

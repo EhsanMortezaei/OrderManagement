@@ -24,7 +24,12 @@ namespace AccountManagement.Core.ApplicationService.Accounts.Commands.Create
         public override async Task<CommandResult<Guid>> Handle(CreateAccountCommand command)
         {
             var passwordHasher = _passwordHasher.Hash(command.Password);
-            var account = new Account(command.Fullname, command.Username, passwordHasher, command.Mobile, command.RoleId, command.ProfilePhoto);
+            var account = new Account(command.Fullname,
+                                      command.Username,
+                                      passwordHasher,
+                                      command.Mobile,
+                                      command.RoleId,
+                                      command.ProfilePhoto);
 
             await _accountCommandRepository.InsertAsync(account);
             await _accountCommandRepository.CommitAsync();

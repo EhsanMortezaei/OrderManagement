@@ -19,9 +19,14 @@ namespace ShopManagement.Core.ApplicationService.ProductCategories.Command.Creat
 
         public override async Task<CommandResult<Guid>> Handle(CreateProductCategoryCommand command)
         {
-            var productCategory = new ProductCategory(command.Name, command.Description,
-                command.Picture, command.PictureAlt, command.PictureTitle,
-                command.KeyWords, command.MetaDescription, command.Slug);
+            var productCategory = new ProductCategory(command.Name,
+                                                      command.Description,
+                                                      command.Picture,
+                                                      command.PictureAlt,
+                                                      command.PictureTitle,
+                                                      command.KeyWords,
+                                                      command.MetaDescription,
+                                                      command.Slug);
 
             await _productCategoryCommandRepository.InsertAsync(productCategory);
             await _productCategoryCommandRepository.CommitAsync();

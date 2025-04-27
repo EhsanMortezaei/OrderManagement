@@ -23,9 +23,11 @@ namespace ShopManagement.Core.ApplicationService.Orders.Commands.Update
             if (order is null)
                 throw new InvalidEntityStateException("سفارش یافت نشد");
 
-            order.Edit(command.AccountId, command.PaymentMethod,
-                command.TotalAmount, command.DiscountAmount,
-                command.PayAmount);
+            order.Edit(command.AccountId,
+                       command.PaymentMethod,
+                       command.TotalAmount,
+                       command.DiscountAmount,
+                       command.PayAmount);
 
             await _orderCommandRepository.CommitAsync();
             return Ok();

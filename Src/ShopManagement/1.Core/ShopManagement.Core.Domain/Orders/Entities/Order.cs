@@ -40,7 +40,12 @@ public class Order : AggregateRoot<int>
         //TODO
         Items = new List<OrderItem>();
         Items = items;
-        AddEvent(new OrderCreated(BusinessId.Value, AccountId, PaymentMethod, TotalAmount, DiscountAmount, PayAmount));
+        AddEvent(new OrderCreated(BusinessId.Value,
+                                  AccountId,
+                                  PaymentMethod,
+                                  TotalAmount,
+                                  DiscountAmount,
+                                  PayAmount));
     }
 
     public void Edit(long accountId, int paymentMethod, double totalAmount, double discountAmount, double payAmount)

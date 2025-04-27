@@ -10,12 +10,16 @@ namespace AccountManagement.Core.Domain.Accounts.Entities
         public string Username { get; private set; }
         public string Password { get; private set; }
         public string Mobile { get; private set; }
-        public long RoleId { get; private set; }
+        public int RoleId { get; private set; }
         public Role Role { get; private set; }
         public string ProfilePhoto { get; private set; }
 
-        public Account(string fullname, string username, string password, string mobile,
-            long roleId, string profilePhoto)
+        public Account(string fullname,
+                       string username,
+                       string password,
+                       string mobile,
+                       int roleId,
+                       string profilePhoto)
         {
             Fullname = fullname;
             Username = username;
@@ -33,8 +37,11 @@ namespace AccountManagement.Core.Domain.Accounts.Entities
             AddEvent(new AccountCreated(BusinessId.Value, Fullname, Username, Password, Mobile, RoleId, ProfilePhoto));
         }
 
-        public void Edit(string fullname, string username, string mobile,
-            long roleId, string profilePhoto)
+        public void Edit(string fullname,
+                         string username,
+                         string mobile,
+                         int roleId,
+                         string profilePhoto)
         {
             Fullname = fullname;
             Username = username;

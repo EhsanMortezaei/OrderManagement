@@ -23,7 +23,11 @@ namespace AccountManagement.Core.ApplicationService.Accounts.Commands.Update
             if (account is null)
                 throw new InvalidEntityStateException("کاربر یافت نشد");
 
-            account.Edit(command.Fullname, command.Username, command.Mobile, command.RoleId, command.ProfilePhoto);
+            account.Edit(command.Fullname,
+                         command.Username,
+                         command.Mobile,
+                         command.RoleId,
+                         command.ProfilePhoto);
             await _accountCommandRepository.CommitAsync();
             return Ok();
         }

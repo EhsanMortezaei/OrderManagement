@@ -18,7 +18,14 @@ namespace ShopManagement.Core.Domain.ProductCategories.Entities
             Products = new List<Products.Entities.Product>();
         }
 
-        public ProductCategory(string name, string description, string picture, string pictureAlt, string pictureTitle, string keyWords, string metaDescription, string slug)
+        public ProductCategory(string name,
+                               string description,
+                               string picture,
+                               string pictureAlt,
+                               string pictureTitle,
+                               string keyWords,
+                               string metaDescription,
+                               string slug)
         {
             Name = name;
             Description = description;
@@ -30,7 +37,14 @@ namespace ShopManagement.Core.Domain.ProductCategories.Entities
             Slug = slug;
         }
 
-        public void Edit(string name, string description, string picture, string pictureAlt, string pictureTitle, string keyWords, string metaDescription, string slug)
+        public void Edit(string name,
+                         string description,
+                         string picture,
+                         string pictureAlt,
+                         string pictureTitle,
+                         string keyWords,
+                         string metaDescription,
+                         string slug)
         {
             Name = name;
             Description = description;

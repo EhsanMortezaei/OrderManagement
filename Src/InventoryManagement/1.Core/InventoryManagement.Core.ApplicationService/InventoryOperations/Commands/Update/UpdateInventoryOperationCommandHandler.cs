@@ -24,7 +24,13 @@ namespace InventoryManagement.Core.ApplicationService.InventoryOperations.Comman
             if (inventoryOperation is null)
                 throw new InvalidEntityStateException("یافت نشد");
 
-            inventoryOperation.Edit(command.Operation, command.Count, command.OperatorId, command.CurrentCount, command.Description, command.OrderId, command.InventoryId);
+            inventoryOperation.Edit(command.Operation,
+                                    command.Count,
+                                    command.OperatorId,
+                                    command.CurrentCount,
+                                    command.Description,
+                                    command.OrderId,
+                                    command.InventoryId);
             await _inventoryOperationCommandRepository.CommitAsync();
             return Ok();
 

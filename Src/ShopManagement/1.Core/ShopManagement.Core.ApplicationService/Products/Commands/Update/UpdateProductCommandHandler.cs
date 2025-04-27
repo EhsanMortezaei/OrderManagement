@@ -22,10 +22,17 @@ namespace ShopManagement.Core.ApplicationService.Products.Commands.Update
             var product = await _productCommandRepository.GetAsync(command.Id);
             if (product is null)
                 throw new InvalidEntityStateException("محصول یافت نشد");
-            product.Edit(command.Name, command.Code, command.ShortDescription,
-                command.Descrption, command.Picture, command.PictureAlt,
-                command.PictureTitle, command.CategoryId, command.Slug,
-                command.Keywords, command.MetaDescription);
+            product.Edit(command.Name,
+                         command.Code,
+                         command.ShortDescription,
+                         command.Descrption,
+                         command.Picture,
+                         command.PictureAlt,
+                         command.PictureTitle,
+                         command.CategoryId,
+                         command.Slug,
+                         command.Keywords,
+                         command.MetaDescription);
 
             await _productCommandRepository.CommitAsync();
 

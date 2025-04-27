@@ -9,7 +9,7 @@ namespace AccountManagement.Core.RequestResponse.Accounts.Commands.Create
         public string Username { get; set; }
         public string Password { get; set; }
         public string Mobile { get; set; }
-        public long RoleId { get; set; }
+        public int RoleId { get; set; }
         public string ProfilePhoto { get; set; }
         public string Path => "/api/Account/Create";
     }

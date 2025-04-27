@@ -17,8 +17,13 @@ namespace InventoryManagement.Core.Domain.InventoryOperations.Entities
         public Inventory Inventory { get; private set; }
         protected InventoryOperation() { }
 
-        public InventoryOperation(bool operation, long count, long operatorId, long currentCount,
-            string description, long orderId, long inventoryId)
+        public InventoryOperation(bool operation,
+                                  long count,
+                                  long operatorId,
+                                  long currentCount,
+                                  string description,
+                                  long orderId,
+                                  long inventoryId)
         {
             Operation = operation;
             Count = count;
@@ -30,8 +35,13 @@ namespace InventoryManagement.Core.Domain.InventoryOperations.Entities
             OperationDate = DateTime.Now;
         }
 
-        public void Edit(bool operation, long count, long operatorId, long currentCount,
-            string description, long orderId, long inventoryId)
+        public void Edit(bool operation,
+                         long count,
+                         long operatorId,
+                         long currentCount,
+                         string description,
+                         long orderId,
+                         long inventoryId)
         {
             Operation = operation;
             Count = count;
