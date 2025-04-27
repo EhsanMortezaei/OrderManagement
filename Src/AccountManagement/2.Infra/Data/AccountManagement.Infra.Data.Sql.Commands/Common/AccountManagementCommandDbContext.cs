@@ -7,9 +7,9 @@ namespace AccountManagement.Infra.Data.Sql.Queries.Common
 {
     public class AccountManagementCommandDbContext : BaseOutboxCommandDbContext
     {
-        DbSet<Account> Accounts { get; set; }
-        DbSet<Role> Roles { get; set; }
-        DbSet<Permission> Permissions { get; set; }
+        public DbSet<Account> Accounts { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<Permission> Permissions { get; set; }
 
         public AccountManagementCommandDbContext(
             DbContextOptions<AccountManagementCommandDbContext> options) : base(options)

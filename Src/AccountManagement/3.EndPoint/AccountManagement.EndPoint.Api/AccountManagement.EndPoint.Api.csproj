@@ -43,6 +43,8 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\..\1.Core\AccountManagement.Core.RequestResponse\AccountManagement.Core.RequestResponse.csproj" />
+	  <ProjectReference Include="..\..\2.Infra\Data\AccountManagement.Infra.Data.Sql.Commands\AccountManagement.Infra.Data.Sql.Commands.csproj" />
+	  <ProjectReference Include="..\..\2.Infra\Data\AccountManagement.Infra.Data.Sql.Queries\AccountManagement.Infra.Data.Sql.Queries.csproj" />
 	</ItemGroup>
 
 </Project>
