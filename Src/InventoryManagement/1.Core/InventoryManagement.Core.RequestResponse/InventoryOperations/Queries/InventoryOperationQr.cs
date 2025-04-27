@@ -1,6 +1,6 @@
 ﻿namespace InventoryManagement.Core.RequestResponse.InventoryOperations.Queries
 {
-    public class InventiryOperationQr
+    public class InventoryOperationQr
     {
         public long Id { get; set; }
         public bool Operation { get; set; }

@@ -3,7 +3,7 @@ using Zamin.Core.RequestResponse.Queries;
 
 namespace InventoryManagement.Core.RequestResponse.InventoryOperations.Queries
 {
-    public class GetInventoryOperationByIdQuery : IQuery<InventiryOperationQr?>, IWebRequest
+    public class GetInventoryOperationByIdQuery : IQuery<InventoryOperationQr?>, IWebRequest
     {
         public int InventoryOperationId { get; set; }
         public string Path => "/api/InventoryOperation/GetById";

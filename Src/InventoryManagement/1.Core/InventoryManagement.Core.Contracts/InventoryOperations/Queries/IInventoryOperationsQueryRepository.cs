@@ -5,6 +5,6 @@ namespace InventoryManagement.Core.Contracts.InventoryOperations.Queries
 {
     public interface IInventoryOperationsQueryRepository
     {
-        public Task<InventiryOperationQr> ExecuteAsync(GetInventoryOperationByIdQuery query);
+        public Task<InventoryOperationQr> ExecuteAsync(GetInventoryOperationByIdQuery query);
     }
 }
