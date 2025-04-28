@@ -8,7 +8,7 @@ namespace AccountManagement.Core.Domain.Roles.Entities
         public int Code { get; private set; }
         public string Name { get; private set; }
         public long RoleId { get; private set; }
-        public Role Role { get; private set; }
+        //public Role Role { get; private set; }
 
         public Permission(int code)
         {

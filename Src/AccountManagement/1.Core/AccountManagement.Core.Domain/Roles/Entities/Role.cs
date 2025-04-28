@@ -9,7 +9,7 @@ namespace AccountManagement.Core.Domain.Roles.Entities
     {
         public string Name { get; private set; }
         public List<Permission> Permissions { get; private set; }
-        public List<Account> Accounts { get; private set; }
+        //public List<Account> Accounts { get; private set; }
 
         protected Role()
         {

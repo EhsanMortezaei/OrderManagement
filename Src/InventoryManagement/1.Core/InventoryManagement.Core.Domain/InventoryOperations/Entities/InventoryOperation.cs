@@ -14,7 +14,8 @@ namespace InventoryManagement.Core.Domain.InventoryOperations.Entities
         public string Description { get; private set; }
         public long OrderId { get; private set; }
         public long InventoryId { get; private set; }
-        public Inventory Inventory { get; private set; }
+        
+        //public Inventory Inventory { get; private set; }
         protected InventoryOperation() { }
 
         public InventoryOperation(bool operation,

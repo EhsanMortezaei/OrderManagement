@@ -11,7 +11,7 @@ namespace AccountManagement.Core.Domain.Accounts.Entities
         public string Password { get; private set; }
         public string Mobile { get; private set; }
         public int RoleId { get; private set; }
-        public Role Role { get; private set; }
+        //public Role Role { get; private set; }
         public string ProfilePhoto { get; private set; }
 
         public Account(string fullname,
