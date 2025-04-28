@@ -34,13 +34,13 @@ namespace AccountManagement.Core.ApplicationService.Accounts.Commands.Login
             var account = await _accountCommandommandRepository.GetAsync(command.UserName);
             if (account == null)
             {
-                throw new InvalidEntityStateException("نام کربری یا کلمه رمز اشتباه است");
+                throw new InvalidEntityStateException("نام کاربری یا کلمه رمز اشتباه است");
             }
 
             var result = _passwordHasher.Check(account.Password, command.Password);
             if (!result.Verified)
             {
-                throw new InvalidEntityStateException("نام کربری یا کلمه رمز اشتباه است");
+                throw new InvalidEntityStateException("نام کاربری یا کلمه رمز اشتباه است");
             }
 
             var permissins = _roleCommandRepository.Get(account.RoleId)
