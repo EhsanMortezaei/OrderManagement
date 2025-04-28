@@ -6,4 +6,14 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+	<ItemGroup>
+		<PackageReference Include="Zamin.Core.Contracts" Version="9.0.0" />
+		<PackageReference Include="Zamin.Extensions.Events.Abstractions" Version="9.0.0" />
+		<PackageReference Include="Zamin.Infra.Data.Sql.Queries" Version="9.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\1.Core\ShopManagement.Core.Contracts\ShopManagement.Core.Contracts.csproj" />
+	</ItemGroup>
+
 </Project>

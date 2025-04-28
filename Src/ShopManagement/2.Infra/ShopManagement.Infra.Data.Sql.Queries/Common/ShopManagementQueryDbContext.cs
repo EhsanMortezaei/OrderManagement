@@ -1,20 +1,23 @@
-﻿using AccountManagement.Infra.Data.Sql.Queries.Accounts;
-using AccountManagement.Infra.Data.Sql.Queries.Roles;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using ShopManagement.Infra.Data.Sql.Queries.Orders;
+using ShopManagement.Infra.Data.Sql.Queries.ProductCategories;
+using ShopManagement.Infra.Data.Sql.Queries.Products;
 using Zamin.Extensions.Events.Abstractions;
 using Zamin.Infra.Data.Sql.Queries;
+using Zamin.Utilities.DateTimes;
 
-namespace AccountManagement.Infra.Data.Sql.Queries.Common
+namespace ShopManagement.Infra.Data.Sql.Queries.Common
 {
-    public partial class AccountManagementQueryDbContext : BaseQueryDbContext
+    public partial class ShopManagementQueryDbContext : BaseQueryDbContext
     {
-        public AccountManagementQueryDbContext(DbContextOptions<AccountManagementQueryDbContext> options)
-            : base(options)
+        public ShopManagementQueryDbContext(DbContextOptions<ShopManagementQueryDbContext> options)
+             : base(options)
         {
         }
 
-        public virtual DbSet<Account> Accounts { get; set; } = null!;
-        public virtual DbSet<Role> Roles { get; set; } = null!;
+        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<ProductCategory> ProductCategories { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -28,11 +31,9 @@ namespace AccountManagement.Infra.Data.Sql.Queries.Common
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Account>(entity =>
+            modelBuilder.Entity<Order>(entity =>
             {
-                entity.Property(e => e.Username).HasMaxLength(50);
-
-                entity.Property(e => e.ProfilePhoto).HasMaxLength(50);
+                entity.Property(e => e.TotalAmount).IsRequired();
             });
 
             modelBuilder.Entity<OutBoxEventItem>(entity =>

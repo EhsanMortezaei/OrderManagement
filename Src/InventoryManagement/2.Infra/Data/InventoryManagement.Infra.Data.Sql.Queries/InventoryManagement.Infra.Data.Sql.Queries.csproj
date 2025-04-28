@@ -1,9 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Zamin.Core.Contracts" Version="9.0.0" />
+		<PackageReference Include="Zamin.Extensions.Events.Abstractions" Version="9.0.0" />
+		<PackageReference Include="Zamin.Infra.Data.Sql.Queries" Version="9.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\..\..\AccountManagement\1.Core\AccountManagement.Core.Contract\AccountManagement.Core.Contract.csproj" />
+	  <ProjectReference Include="..\..\..\1.Core\InventoryManagement.Core.Contracts\InventoryManagement.Core.Contracts.csproj" />
+	  <ProjectReference Include="..\..\..\1.Core\InventoryManagement.Core.RequestResponse\InventoryManagement.Core.RequestResponse.csproj" />
+	</ItemGroup>
 
 </Project>

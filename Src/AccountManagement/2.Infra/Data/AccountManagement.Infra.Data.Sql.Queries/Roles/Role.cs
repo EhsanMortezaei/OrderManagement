@@ -1,8 +1,8 @@
 ﻿using AccountManagement.Core.Domain.Roles.Entities;
 
-namespace AccountManagement.Core.RequestResponse.Roles.Queries
+namespace AccountManagement.Infra.Data.Sql.Queries.Roles
 {
-    public class RoleQr
+    public class Role
     {
         public int Id { get; set; }
         public string Name { get; set; }

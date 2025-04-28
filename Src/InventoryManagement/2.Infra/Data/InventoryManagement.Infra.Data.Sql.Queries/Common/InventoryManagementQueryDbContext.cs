@@ -1,20 +1,21 @@
-﻿using AccountManagement.Infra.Data.Sql.Queries.Accounts;
-using AccountManagement.Infra.Data.Sql.Queries.Roles;
+﻿using InventoryManagement.Infra.Data.Sql.Queries.Inventories;
+using InventoryManagement.Infra.Data.Sql.Queries.InventoryOperations;
 using Microsoft.EntityFrameworkCore;
 using Zamin.Extensions.Events.Abstractions;
 using Zamin.Infra.Data.Sql.Queries;
 
-namespace AccountManagement.Infra.Data.Sql.Queries.Common
+namespace InventoryManagement.Infra.Data.Sql.Queries.Common
 {
-    public partial class AccountManagementQueryDbContext : BaseQueryDbContext
+    public partial class InventoryManagementQueryDbContext : BaseQueryDbContext
     {
-        public AccountManagementQueryDbContext(DbContextOptions<AccountManagementQueryDbContext> options)
+        public InventoryManagementQueryDbContext(DbContextOptions<InventoryManagementQueryDbContext> options)
             : base(options)
         {
         }
 
-        public virtual DbSet<Account> Accounts { get; set; } = null!;
-        public virtual DbSet<Role> Roles { get; set; } = null!;
+        public virtual DbSet<Inventory> Inventories { get; set; } = null!;
+        public virtual DbSet<InventoryOperation> InventoryOperations { get; set; } = null!;
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -28,11 +29,9 @@ namespace AccountManagement.Infra.Data.Sql.Queries.Common
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Account>(entity =>
+            modelBuilder.Entity<Inventory>(entity =>
             {
-                entity.Property(e => e.Username).HasMaxLength(50);
-
-                entity.Property(e => e.ProfilePhoto).HasMaxLength(50);
+                entity.Property(e => e.UnitPrice).IsRequired();
             });
 
             modelBuilder.Entity<OutBoxEventItem>(entity =>

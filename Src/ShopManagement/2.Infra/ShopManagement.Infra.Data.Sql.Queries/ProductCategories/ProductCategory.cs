@@ -1,6 +1,6 @@
-﻿namespace ShopManagement.Core.RequestResponse.ProductCategories.Query
+﻿namespace ShopManagement.Infra.Data.Sql.Queries.ProductCategories
 {
-    public class ProductCategoryQr
+    public class ProductCategory
     {
         public int Id { get; set; }
         public string Name { get; set; }

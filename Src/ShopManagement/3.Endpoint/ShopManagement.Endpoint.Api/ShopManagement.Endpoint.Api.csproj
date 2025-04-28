@@ -42,6 +42,8 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\..\1.Core\ShopManagement.Core.RequestResponse\ShopManagement.Core.RequestResponse.csproj" />
+	  <ProjectReference Include="..\..\2.Infra\ShopManagement.Infra.Data.Sql.Commands\ShopManagement.Infra.Data.Sql.Commands.csproj" />
+	  <ProjectReference Include="..\..\2.Infra\ShopManagement.Infra.Data.Sql.Queries\ShopManagement.Infra.Data.Sql.Queries.csproj" />
 	</ItemGroup>
 
 </Project>

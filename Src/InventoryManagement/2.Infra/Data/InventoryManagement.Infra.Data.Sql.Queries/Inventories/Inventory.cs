@@ -1,6 +1,6 @@
-﻿namespace InventoryManagement.Core.RequestResponse.Inventories.Queries
+﻿namespace InventoryManagement.Infra.Data.Sql.Queries.Inventories
 {
-    public class InventoryQr
+    public class Inventory
     {
         public int Id { get; set; }
         public long ProductId { get; set; }

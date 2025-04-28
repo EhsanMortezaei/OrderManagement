@@ -17,8 +17,4 @@
 	  <ProjectReference Include="..\AccountManagement.Infra.Data.Sql.Commands\AccountManagement.Infra.Data.Sql.Commands.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="Roles\" />
-	</ItemGroup>
-
 </Project>
