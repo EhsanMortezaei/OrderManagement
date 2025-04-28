@@ -12,7 +12,7 @@ namespace ShopManagement.Core.Domain.ProductCategories.Entities
         public string KeyWords { get; private set; }
         public string MetaDescription { get; private set; }
         public string Slug { get; private set; }
-        public List<Products.Entities.Product> Products { get; private set; }
+        ///public List<Products.Entities.Product> Products { get; private set; }
         public ProductCategory()
         {
             Products = new List<Products.Entities.Product>();

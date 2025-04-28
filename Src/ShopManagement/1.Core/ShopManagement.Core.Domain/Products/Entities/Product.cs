@@ -19,7 +19,9 @@ namespace ShopManagement.Core.Domain.Products.Entities
         public string MetaDescription { get; private set; }
         //TODO
         //Property ProductCategoryId
-        public ProductCategory Category { get; private set; }
+
+        //TODO Delete
+        //public ProductCategory Category { get; private set; }
 
         public Product(string name,
                        string code,

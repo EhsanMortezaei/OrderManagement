@@ -9,7 +9,7 @@ namespace ShopManagement.Core.Domain.Orders.Entities
         public double UnitPrice { get; private set; }
         public int DiscountRate { get; private set; }
         public long OrderId { get; private set; }
-        public Order Order { get; private set; }
+        //public Order Order { get; private set; }
 
         public OrderItem(long productId,
                          int count,
