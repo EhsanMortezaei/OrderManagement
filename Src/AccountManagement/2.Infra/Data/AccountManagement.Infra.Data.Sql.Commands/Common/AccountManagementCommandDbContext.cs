@@ -1,4 +1,5 @@
 ﻿using AccountManagement.Core.Domain.Accounts.Entities;
+using AccountManagement.Core.Domain.Permissions.Entities;
 using AccountManagement.Core.Domain.Roles.Entities;
 using Microsoft.EntityFrameworkCore;
 using Zamin.Extensions.Events.Outbox.Dal.EF;

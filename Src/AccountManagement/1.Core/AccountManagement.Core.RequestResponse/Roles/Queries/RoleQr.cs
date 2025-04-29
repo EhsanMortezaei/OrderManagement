@@ -1,4 +1,4 @@
-﻿using AccountManagement.Core.Domain.Roles.Entities;
+﻿using AccountManagement.Core.Domain.Permissions.Entities;
 
 namespace AccountManagement.Core.RequestResponse.Roles.Queries
 {

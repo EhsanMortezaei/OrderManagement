@@ -5,20 +5,20 @@ namespace InventoryManagement.Core.Domain.Inventories.Entities
 {
     public class Inventory : AggregateRoot<int>
     {
-        public int Id { get;private set; }
-        public long ProductId { get; private set; }
+        public int Id { get; private set; }
+        public int ProductId { get; private set; }
         public double UnitPrice { get; private set; }
         public bool InStock { get; private set; }
         public List<InventoryOperation> Operations { get; private set; }
 
-        public Inventory(long productId, double unitPrice)
+        public Inventory(int productId, double unitPrice)
         {
             ProductId = productId;
             UnitPrice = unitPrice;
             InStock = false;
         }
 
-        public void Edit(long productId, double unitPrice)
+        public void Edit(int productId, double unitPrice)
         {
             ProductId = productId;
             UnitPrice = unitPrice;
@@ -26,7 +26,7 @@ namespace InventoryManagement.Core.Domain.Inventories.Entities
 
         public long CalculateCurrentCount()
         {
-            var plus = Operations.Where(x => x.Operation).Sum(x => x.Count);
+            var plus = Operations.Where(x => x.Operation && x.InventoryId == Id).Sum(x => x.Count);
             var minuse = Operations.Where(x => !x.Operation).Sum(x => x.Count);
             return plus - minuse;
         }

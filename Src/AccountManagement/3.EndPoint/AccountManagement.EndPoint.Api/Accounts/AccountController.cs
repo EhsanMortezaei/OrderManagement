@@ -1,8 +1,12 @@
-﻿using AccountManagement.Core.RequestResponse.Accounts.Commands.Create;
+﻿using AccountManagement.Core.Domain.Permissions.Event;
+using AccountManagement.Core.RequestResponse.Accounts.Commands.Create;
 using AccountManagement.Core.RequestResponse.Accounts.Commands.Delete;
 using AccountManagement.Core.RequestResponse.Accounts.Commands.Login;
 using AccountManagement.Core.RequestResponse.Accounts.Commands.Update;
 using AccountManagement.Core.RequestResponse.Accounts.Queries;
+using AccountManagement.Core.RequestResponse.Permissions.Commands.Create;
+using AccountManagement.Core.RequestResponse.Permissions.Commands.Delete;
+using AccountManagement.Core.RequestResponse.Permissions.Commands.Update;
 using AccountManagement.Core.RequestResponse.Roles.Commands.Create;
 using AccountManagement.Core.RequestResponse.Roles.Commands.Delete;
 using AccountManagement.Core.RequestResponse.Roles.Commands.Update;
@@ -51,6 +55,15 @@ namespace AccountManagement.EndPoint.Api.Accounts
             var result = await _mediator.Send(command);
             return Ok(result);
         }
+
+        [HttpPost("CreatePermission")]
+        public async Task<IActionResult> CreatePermission([FromBody] CreatePermissionCommand command) => await Create<CreatePermissionCommand, Guid>(command);
+
+        [HttpPost("UpdatePermission")]
+        public async Task<IActionResult> UpdeatePermission([FromBody] UpdatePermissionCommand command) => await Edit(command);
+
+        [HttpPost("DeletePermission")]
+        public async Task<IActionResult> DeletePermission([FromBody] DeletePermissionCommand command) => await Delete(command);
 
         [HttpGet("GetByIdAccount")]
         public async Task<IActionResult> GetByIdAccount(GetAccountByIdQuery query) => await Query<GetAccountByIdQuery, AccountQr?>(query);

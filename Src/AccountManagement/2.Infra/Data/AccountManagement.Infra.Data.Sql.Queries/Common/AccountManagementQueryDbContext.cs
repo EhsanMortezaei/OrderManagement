@@ -1,4 +1,5 @@
 ﻿using AccountManagement.Infra.Data.Sql.Queries.Accounts;
+using AccountManagement.Infra.Data.Sql.Queries.Permissions;
 using AccountManagement.Infra.Data.Sql.Queries.Roles;
 using Microsoft.EntityFrameworkCore;
 using Zamin.Extensions.Events.Abstractions;
@@ -15,6 +16,7 @@ namespace AccountManagement.Infra.Data.Sql.Queries.Common
 
         public virtual DbSet<Account> Accounts { get; set; } = null!;
         public virtual DbSet<Role> Roles { get; set; } = null!;
+        public virtual DbSet<Permission> Permissions { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

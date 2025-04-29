@@ -1,4 +1,5 @@
 ﻿using AccountManagement.Core.Domain.Accounts.Entities;
+using AccountManagement.Core.Domain.Permissions.Entities;
 using AccountManagement.Core.Domain.Roles.Events;
 using System.Security;
 using Zamin.Core.Domain.Entities;
@@ -19,8 +20,8 @@ namespace AccountManagement.Core.Domain.Roles.Entities
         {
             Name = name;
             Permissions = permissions;
-            Accounts = new List<Account>();
-            AddEvent(new RoleCreated(BusinessId.Value, Name, Permissions, Accounts));
+            //Accounts = new List<Account>();
+            AddEvent(new RoleCreated(BusinessId.Value, Name, Permissions));
         }
 
         public void Edite(string name, List<Permission> permissions)

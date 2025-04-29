@@ -1,4 +1,4 @@
-﻿using AccountManagement.Core.Domain.Roles.Entities;
+﻿using AccountManagement.Core.Domain.Permissions.Entities;
 using Zamin.Core.RequestResponse.Commands;
 using Zamin.Core.RequestResponse.Endpoints;
 

@@ -3,7 +3,7 @@ using Zamin.Core.Domain.Entities;
 
 namespace InventoryManagement.Core.Domain.InventoryOperations.Entities
 {
-    public class InventoryOperation : AggregateRoot<int>
+    public class InventoryOperation : Entity<int>
     {
         public long Id { get; private set; }
         public bool Operation { get; private set; }
@@ -14,7 +14,7 @@ namespace InventoryManagement.Core.Domain.InventoryOperations.Entities
         public string Description { get; private set; }
         public long OrderId { get; private set; }
         public long InventoryId { get; private set; }
-        
+
         //public Inventory Inventory { get; private set; }
         protected InventoryOperation() { }
 
