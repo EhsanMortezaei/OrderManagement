@@ -19,6 +19,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\..\..\Utilities\Framework\Framework.csproj" />
 	  <ProjectReference Include="..\InventoryManagement.Core.Contracts\InventoryManagement.Core.Contracts.csproj" />
 	  <ProjectReference Include="..\InventoryManagement.Core.Domain\InventoryManagement.Core.Domain.csproj" />
 	  <ProjectReference Include="..\InventoryManagement.Core.RequestResponse\InventoryManagement.Core.RequestResponse.csproj" />

@@ -1,5 +1,7 @@
 ﻿using InventoryManagement.Core.RequestResponse.Inventories.Commands.Create;
 using InventoryManagement.Core.RequestResponse.Inventories.Commands.Delet;
+using InventoryManagement.Core.RequestResponse.Inventories.Commands.IncreaseInventory;
+using InventoryManagement.Core.RequestResponse.Inventories.Commands.ReduceInventory;
 using InventoryManagement.Core.RequestResponse.Inventories.Commands.Update;
 using InventoryManagement.Core.RequestResponse.Inventories.Queries;
 using InventoryManagement.Core.RequestResponse.InventoryOperations.Commands.Create;
@@ -23,6 +25,11 @@ namespace InventoryManagement.EndPoint.Api.Inventories
         [HttpDelete("DeleteInventory")]
         public async Task<IActionResult> DeleteInventory([FromBody] DeleteInventoryCommand command) => await Delete(command);
 
+        [HttpPost("IncreaseInventory")]
+        public async Task<IActionResult> IncreaseInventory([FromBody] IncreaseInventoryCommand command) => await IncreaseInventory(command);
+
+        [HttpPost("ReduceInventory")]
+        public async Task<IActionResult> ReduceInventory([FromBody] ReduceInventoryCommand command) => await ReduceInventory(command);
 
         [HttpPost("CreateInventoryOperation")]
         public async Task<IActionResult> CreateInventoryOperation([FromBody] CreateInventoryOperationCommand command) => await Create<CreateInventoryOperationCommand, Guid>(command);

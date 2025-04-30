@@ -1,7 +1,6 @@
-﻿using InventoryManagement.Core.Domain.Inventories.Entities;
-using Zamin.Core.Domain.Entities;
+﻿using Zamin.Core.Domain.Entities;
 
-namespace InventoryManagement.Core.Domain.InventoryOperations.Entities
+namespace InventoryManagement.Core.Domain.Inventories.Entities
 {
     public class InventoryOperation : Entity<int>
     {

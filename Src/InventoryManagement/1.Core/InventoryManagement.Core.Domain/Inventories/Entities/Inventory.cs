@@ -1,5 +1,4 @@
-﻿using InventoryManagement.Core.Domain.InventoryOperations.Entities;
-using Zamin.Core.Domain.Entities;
+﻿using Zamin.Core.Domain.Entities;
 
 namespace InventoryManagement.Core.Domain.Inventories.Entities
 {
@@ -11,17 +10,19 @@ namespace InventoryManagement.Core.Domain.Inventories.Entities
         public bool InStock { get; private set; }
         public List<InventoryOperation> Operations { get; private set; }
 
-        public Inventory(int productId, double unitPrice)
+        public Inventory(int productId, double unitPrice, List<InventoryOperation> operations)
         {
             ProductId = productId;
             UnitPrice = unitPrice;
+            Operations = operations;
             InStock = false;
         }
 
-        public void Edit(int productId, double unitPrice)
+        public void Edit(int productId, double unitPrice, List<InventoryOperation> operations)
         {
             ProductId = productId;
             UnitPrice = unitPrice;
+            Operations = operations;
         }
 
         public long CalculateCurrentCount()

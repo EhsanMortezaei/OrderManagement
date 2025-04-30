@@ -1,6 +1,6 @@
 ﻿using Zamin.Core.Domain.Events;
 
-namespace InventoryManagement.Core.Domain.InventoryOperations.Events
+namespace InventoryManagement.Core.Domain.Inventories.Entities
 {
     public class InventoryOperationUpdated(bool operation,
                                            long count,

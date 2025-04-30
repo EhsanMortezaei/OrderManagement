@@ -22,7 +22,7 @@ namespace InventoryManagement.Core.ApplicationService.Inventories.Commands.Updat
             if (inventory is null)
                 throw new InvalidEntityStateException("در انبار یافت نشد");
 
-            inventory.Edit(command.ProductId, command.UnitPrice);
+            inventory.Edit(command.ProductId, command.UnitPrice, command.Operations);
             await _inventoryCommandRepository.CommitAsync();
             return Ok();
         }

@@ -1,5 +1,4 @@
 ﻿using InventoryManagement.Core.Domain.Inventories.Entities;
-using InventoryManagement.Core.Domain.InventoryOperations.Entities;
 using Microsoft.EntityFrameworkCore;
 using Zamin.Extensions.Events.Outbox.Dal.EF;
 

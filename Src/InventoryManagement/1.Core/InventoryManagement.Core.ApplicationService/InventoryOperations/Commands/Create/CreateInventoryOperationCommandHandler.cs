@@ -1,11 +1,4 @@
-﻿using InventoryManagement.Core.Contracts.InventoryOperations.Commands;
-using InventoryManagement.Core.Domain.InventoryOperations.Entities;
-using InventoryManagement.Core.RequestResponse.InventoryOperations.Commands.Create;
-using Zamin.Core.ApplicationServices.Commands;
-using Zamin.Core.RequestResponse.Commands;
-using Zamin.Utilities;
-
-namespace InventoryManagement.Core.ApplicationService.InventoryOperations.Commands.Create
+﻿namespace InventoryManagement.Core.ApplicationService.InventoryOperations.Commands.Create
 {
     //public class CreateInventoryOperationCommandHandler : CommandHandler<CreateInventoryOperationCommand, Guid>
     //{

@@ -19,7 +19,7 @@ namespace InventoryManagement.Core.ApplicationService.Inventories.Commands.Creat
 
         public override async Task<CommandResult<Guid>> Handle(CreateInventoryCommand command)
         {
-            var inventory = new Inventory(command.ProductId, command.UnitPrice);
+            var inventory = new Inventory(command.ProductId, command.UnitPrice, command.Operations);
 
             await _inventoryCommandRepository.InsertAsync(inventory);
             await _inventoryCommandRepository.CommitAsync();
