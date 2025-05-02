@@ -12,4 +12,7 @@ namespace AccountManagement.Core.Domain.AccountRoles
         public long AccountId { get; set; }
         public long RoleId { get; set; }
     }
+
+    //TODO: Hamed
+    //contructor protected
 }

@@ -9,6 +9,7 @@ namespace AccountManagement.Core.Domain.Roles.Entities
     public class Role : AggregateRoot<int>
     {
         public string Name { get; private set; }
+        //TODO: Hamed Delete this
         public List<Permission> Permissions { get; private set; }
         //public List<Account> Accounts { get; private set; }
 

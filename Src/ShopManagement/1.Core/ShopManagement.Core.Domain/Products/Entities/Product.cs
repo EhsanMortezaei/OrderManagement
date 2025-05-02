@@ -13,7 +13,10 @@ namespace ShopManagement.Core.Domain.Products.Entities
         public string Picture { get; private set; }
         public string PictureAlt { get; private set; }
         public string PictureTitle { get; private set; }
+        
+        //TODO: Hamed Rename to ProductCategoryId
         public long CategoryId { get; private set; }
+        
         public string Slug { get; private set; }
         public string Keywords { get; private set; }
         public string MetaDescription { get; private set; }

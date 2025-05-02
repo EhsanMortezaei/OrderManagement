@@ -10,6 +10,7 @@ namespace AccountManagement.Core.Domain.Accounts.Entities
         public string Username { get; private set; }
         public string Password { get; private set; }
         public string Mobile { get; private set; }
+        //TODO: Hamed Delete This
         public int RoleId { get; private set; }
         //public Role Role { get; private set; }
         public string ProfilePhoto { get; private set; }
