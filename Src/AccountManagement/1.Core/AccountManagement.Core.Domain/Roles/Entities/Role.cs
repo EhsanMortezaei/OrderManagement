@@ -9,7 +9,7 @@ namespace AccountManagement.Core.Domain.Roles.Entities
     public class Role : AggregateRoot<int>
     {
         public string Name { get; private set; }
-        public List<Permission> Permissions { get; private set; }
+        
 
         protected Role()
         {
