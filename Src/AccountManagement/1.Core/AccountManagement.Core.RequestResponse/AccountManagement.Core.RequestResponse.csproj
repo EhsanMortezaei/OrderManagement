@@ -15,5 +15,9 @@
 	  <ProjectReference Include="..\AccountManagement.Core.Domain\AccountManagement.Core.Domain.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="AccountRole\Command\Create\" />
+	</ItemGroup>
+
 
 </Project>

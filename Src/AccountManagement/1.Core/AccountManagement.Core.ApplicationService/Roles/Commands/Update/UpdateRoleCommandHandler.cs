@@ -23,7 +23,7 @@ namespace AccountManagement.Core.ApplicationService.Roles.Commands.Update
             if (role is null)
                 throw new InvalidEntityStateException("کاربر یافت نشد");
 
-            role.Edite(command.Name, command.Permissions);
+            role.Edite(command.Name);
             await _roleCommandRepository.CommitAsync();
             return Ok();
         }

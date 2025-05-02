@@ -10,32 +10,22 @@ namespace AccountManagement.Core.Domain.Accounts.Entities
         public string Username { get; private set; }
         public string Password { get; private set; }
         public string Mobile { get; private set; }
-        //TODO: Hamed Delete This
-        public int RoleId { get; private set; }
-        //public Role Role { get; private set; }
         public string ProfilePhoto { get; private set; }
 
         public Account(string fullname,
                        string username,
                        string password,
                        string mobile,
-                       int roleId,
                        string profilePhoto)
         {
             Fullname = fullname;
             Username = username;
             Password = password;
             Mobile = mobile;
-            RoleId = roleId;
-
-            if (roleId == 0)
-            {
-                RoleId = 2;
-            }
 
             ProfilePhoto = profilePhoto;
 
-            AddEvent(new AccountCreated(BusinessId.Value, Fullname, Username, Password, Mobile, RoleId, ProfilePhoto));
+            AddEvent(new AccountCreated(BusinessId.Value, Fullname, Username, Password, Mobile,ProfilePhoto));
         }
 
         public void Edit(string fullname,
@@ -47,7 +37,6 @@ namespace AccountManagement.Core.Domain.Accounts.Entities
             Fullname = fullname;
             Username = username;
             Mobile = mobile;
-            RoleId = roleId;
             if (!string.IsNullOrEmpty(profilePhoto))
             {
                 ProfilePhoto = profilePhoto;

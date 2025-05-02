@@ -28,7 +28,6 @@ namespace AccountManagement.Core.ApplicationService.Accounts.Commands.Create
                                       command.Username,
                                       passwordHasher,
                                       command.Mobile,
-                                      command.RoleId,
                                       command.ProfilePhoto);
 
             await _accountCommandRepository.InsertAsync(account);

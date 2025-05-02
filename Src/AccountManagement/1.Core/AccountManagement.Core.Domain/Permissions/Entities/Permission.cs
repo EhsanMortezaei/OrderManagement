@@ -10,11 +10,6 @@ namespace AccountManagement.Core.Domain.Permissions.Entities
         public string Name { get; private set; }
         public int RoleId { get; private set; }
 
-        //TODO: Hamed Delete this
-        public int AccountId { get; private set; }
-
-        //public Role Role { get; private set; }
-
         public Permission(int code)
         {
             Code = code;

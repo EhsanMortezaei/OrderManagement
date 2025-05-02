@@ -19,7 +19,7 @@ namespace AccountManagement.Core.ApplicationService.Roles.Commands.Create
 
         public override async Task<CommandResult<Guid>> Handle(CreateRoleCommand command)
         {
-            var role = new Role(command.Name, command.Permissions);
+            var role = new Role(command.Name);
 
             await _roleCommandRepository.InsertAsync(role);
             await _roleCommandRepository.CommitAsync();

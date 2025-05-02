@@ -8,6 +8,9 @@
 
   <ItemGroup>
     <Folder Include="Inventories\Events\" />
+    <Folder Include="InventoryOperations\Commands\Create\" />
+    <Folder Include="InventoryOperations\Commands\Delete\" />
+    <Folder Include="InventoryOperations\Commands\Update\" />
     <Folder Include="InventoryOperations\Events\" />
   </ItemGroup>
 

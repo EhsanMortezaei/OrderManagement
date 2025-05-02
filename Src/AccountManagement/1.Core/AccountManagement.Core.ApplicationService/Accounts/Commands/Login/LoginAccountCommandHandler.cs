@@ -1,4 +1,5 @@
 ﻿using _0_Framework.Application;
+using AccountManagement.Core.Contract.AccountRoles.Commands;
 using AccountManagement.Core.Contract.Accounts.Commands;
 using AccountManagement.Core.Contract.Roles.Commands;
 using AccountManagement.Core.RequestResponse.Accounts.Commands.Login;
@@ -14,6 +15,7 @@ namespace AccountManagement.Core.ApplicationService.Accounts.Commands.Login
         private readonly IAccountCommandRepository _accountCommandommandRepository;
         private readonly IPasswordHasher _passwordHasher;
         private readonly IRoleCommandRepository _roleCommandRepository;
+        private readonly IAccountRoleCommandRepository _accountRoleCommandRepository;
         private readonly IAuthHelper _authHelper;
 
 
@@ -21,12 +23,14 @@ namespace AccountManagement.Core.ApplicationService.Accounts.Commands.Login
             IAccountCommandRepository accountCommandommandRepository,
             IPasswordHasher passwordHasher,
             IRoleCommandRepository roleCommandRepository,
-            IAuthHelper authHelper) : base(zainServices)
+            IAuthHelper authHelper,
+            IAccountRoleCommandRepository accountRoleCommandRepository) : base(zainServices)
         {
             _accountCommandommandRepository = accountCommandommandRepository;
             _passwordHasher = passwordHasher;
             _roleCommandRepository = roleCommandRepository;
             _authHelper = authHelper;
+            _accountRoleCommandRepository = accountRoleCommandRepository;
         }
 
         public override async Task<CommandResult<Guid>> Handle(LoginAccountCommand command)
@@ -43,13 +47,12 @@ namespace AccountManagement.Core.ApplicationService.Accounts.Commands.Login
                 throw new InvalidEntityStateException("نام کاربری یا کلمه رمز اشتباه است");
             }
 
-            var permissins = _roleCommandRepository.Get(account.RoleId)
+            var permissins = _accountRoleCommandRepository.Get(account.Username)
                 .Permissions
                 .Select(x => x.Code)
                 .ToList();
 
             var authModel = new AuthViewModel(account.Id,
-                                              account.RoleId,
                                               account.Fullname,
                                               account.Username,
                                               permissins);

@@ -14,17 +14,11 @@ namespace ShopManagement.Core.Domain.Products.Entities
         public string PictureAlt { get; private set; }
         public string PictureTitle { get; private set; }
         
-        //TODO: Hamed Rename to ProductCategoryId
-        public long CategoryId { get; private set; }
+        public int ProductCategoryId { get; private set; }
         
         public string Slug { get; private set; }
         public string Keywords { get; private set; }
         public string MetaDescription { get; private set; }
-        //TODO
-        //Property ProductCategoryId
-
-        //TODO Delete
-        //public ProductCategory Category { get; private set; }
 
         public Product(string name,
                        string code,
@@ -33,7 +27,7 @@ namespace ShopManagement.Core.Domain.Products.Entities
                        string picture,
                        string pictureAlt,
                        string pictureTitle,
-                       long categoryId,
+                       int categoryId,
                        string slug,
                        string keywords,
                        string metaDescription)
@@ -45,14 +39,14 @@ namespace ShopManagement.Core.Domain.Products.Entities
             Picture = picture;
             PictureAlt = pictureAlt;
             PictureTitle = pictureTitle;
-            CategoryId = categoryId;
+            ProductCategoryId = categoryId;
             Slug = slug;
             Keywords = keywords;
             MetaDescription = metaDescription;
 
             AddEvent(new ProductCreated(BusinessId.Value, Name, Code, ShortDescription,
                 Descrption, Picture, PictureAlt, PictureTitle,
-                CategoryId, Slug, Keywords, MetaDescription));
+                ProductCategoryId, Slug, Keywords, MetaDescription));
         }
 
         public void Edit(string name,
@@ -62,7 +56,7 @@ namespace ShopManagement.Core.Domain.Products.Entities
                          string picture,
                          string pictureAlt,
                          string pictureTitle,
-                         long categoryId,
+                         int categoryId,
                          string slug,
                          string keywords,
                          string metaDescription)
@@ -77,13 +71,13 @@ namespace ShopManagement.Core.Domain.Products.Entities
             }
             PictureAlt = pictureAlt;
             PictureTitle = pictureTitle;
-            CategoryId = categoryId;
+            ProductCategoryId = categoryId;
             Slug = slug;
             Keywords = keywords;
             MetaDescription = metaDescription;
 
             AddEvent(new ProductUpdated(BusinessId.Value, Name, Code, ShortDescription,
-                Descrption, Picture, PictureAlt, PictureTitle, CategoryId, Slug, Keywords, MetaDescription));
+                Descrption, Picture, PictureAlt, PictureTitle, ProductCategoryId, Slug, Keywords, MetaDescription));
         }
     }
 }

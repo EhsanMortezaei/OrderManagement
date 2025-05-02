@@ -15,10 +15,9 @@ namespace _0_Framework.Application
         {
         }
 
-        public AuthViewModel(long id, long roleId, string fullname, string username, List<int> permissions)
+        public AuthViewModel(long id, string fullname, string username, List<int> permissions)
         {
             Id = id;
-            RoleId = roleId;
             Fullname = fullname;
             Username = username;
             Permissions = permissions;

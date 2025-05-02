@@ -1,4 +1,5 @@
-﻿using AccountManagement.Core.Domain.Accounts.Entities;
+﻿using AccountManagement.Core.Domain.AccountRoles.Entities;
+using AccountManagement.Core.Domain.Accounts.Entities;
 using AccountManagement.Core.Domain.Permissions.Entities;
 using AccountManagement.Core.Domain.Roles.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ namespace AccountManagement.Infra.Data.Sql.Queries.Common
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Permission> Permissions { get; set; }
+        public DbSet<AccountRole> RolesRoles { get; set; }
 
         public AccountManagementCommandDbContext(
             DbContextOptions<AccountManagementCommandDbContext> options) : base(options)

@@ -6,7 +6,6 @@ namespace AccountManagement.Core.Domain.Accounts.Events
                                 string username,
                                 string password,
                                 string mobile,
-                                long roleId,
                                 string profilePhoto) : IDomainEvent
     {
     }
