@@ -11,6 +11,7 @@ namespace AccountManagement.Infra.Data.Sql.Queries.Common
     {
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Role> Roles { get; set; }
+        public DbSet<AccountRole> AccountRoles { get; set; }
         public DbSet<Permission> Permissions { get; set; }
         public DbSet<AccountRole> RolesRoles { get; set; }
 

@@ -19,8 +19,4 @@
 	  <ProjectReference Include="..\..\..\1.Core\AccountManagement.Core.Domain\AccountManagement.Core.Domain.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="AccountRoles\Configs\" />
-	</ItemGroup>
-
 </Project>

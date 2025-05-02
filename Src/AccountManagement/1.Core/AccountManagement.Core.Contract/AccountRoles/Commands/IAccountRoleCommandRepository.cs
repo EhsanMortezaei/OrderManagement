@@ -5,5 +5,6 @@ namespace AccountManagement.Core.Contract.AccountRoles.Commands
 {
     public interface IAccountRoleCommandRepository : ICommandRepository<AccountRole, int>
     {
+        public Task<List<AccountRole>> GetByAccountId(int accountId);
     }
 }

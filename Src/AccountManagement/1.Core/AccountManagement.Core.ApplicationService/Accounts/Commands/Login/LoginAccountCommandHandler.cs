@@ -1,6 +1,7 @@
 ﻿using _0_Framework.Application;
 using AccountManagement.Core.Contract.AccountRoles.Commands;
 using AccountManagement.Core.Contract.Accounts.Commands;
+using AccountManagement.Core.Contract.Permissions.Commands;
 using AccountManagement.Core.Contract.Roles.Commands;
 using AccountManagement.Core.RequestResponse.Accounts.Commands.Login;
 using Zamin.Core.ApplicationServices.Commands;
@@ -17,6 +18,7 @@ namespace AccountManagement.Core.ApplicationService.Accounts.Commands.Login
         private readonly IRoleCommandRepository _roleCommandRepository;
         private readonly IAccountRoleCommandRepository _accountRoleCommandRepository;
         private readonly IAuthHelper _authHelper;
+        private readonly IPermissionCommandRepository _permissionCommandRepository;
 
 
         public LoginAccountCommandHandler(ZaminServices zainServices,
@@ -24,13 +26,15 @@ namespace AccountManagement.Core.ApplicationService.Accounts.Commands.Login
             IPasswordHasher passwordHasher,
             IRoleCommandRepository roleCommandRepository,
             IAuthHelper authHelper,
-            IAccountRoleCommandRepository accountRoleCommandRepository) : base(zainServices)
+            IAccountRoleCommandRepository accountRoleCommandRepository,
+            IPermissionCommandRepository permissionCommandRepository) : base(zainServices)
         {
             _accountCommandommandRepository = accountCommandommandRepository;
             _passwordHasher = passwordHasher;
             _roleCommandRepository = roleCommandRepository;
             _authHelper = authHelper;
             _accountRoleCommandRepository = accountRoleCommandRepository;
+            _permissionCommandRepository = permissionCommandRepository;
         }
 
         public override async Task<CommandResult<Guid>> Handle(LoginAccountCommand command)
@@ -47,15 +51,17 @@ namespace AccountManagement.Core.ApplicationService.Accounts.Commands.Login
                 throw new InvalidEntityStateException("نام کاربری یا کلمه رمز اشتباه است");
             }
 
-            var permissins = _accountRoleCommandRepository.Get(account.Username)
-                .Permissions
-                .Select(x => x.Code)
-                .ToList();
+            var accountRoles = await _accountRoleCommandRepository.GetByAccountId(account.Id);
+            var roleIds = accountRoles.Select(x => x.RoleId).ToList();
+
+
+            var permissions = await _permissionCommandRepository.GetByRoleIds(roleIds);
+            var permissionCodes = permissions.Select(x => x.Code).ToList();
 
             var authModel = new AuthViewModel(account.Id,
                                               account.Fullname,
                                               account.Username,
-                                              permissins);
+                                              permissionCodes);
 
             _authHelper.Signin(authModel);
 

@@ -10,5 +10,13 @@ namespace AccountManagement.Core.Domain.AccountRoles.Entities
         public List<Permission> Permissions { get; private set; }
 
         protected AccountRole() { }
+
+        public AccountRole(int accountId, int roleId)
+        {
+            AccountId = accountId;
+            RoleId = roleId;
+        }
+
+        public static AccountRole Create(int accountId, int roleId) => new AccountRole(accountId, roleId);
     }
 }

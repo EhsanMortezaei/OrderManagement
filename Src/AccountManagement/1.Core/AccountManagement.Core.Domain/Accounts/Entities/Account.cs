@@ -1,5 +1,4 @@
 ﻿using AccountManagement.Core.Domain.Accounts.Events;
-using AccountManagement.Core.Domain.Roles.Entities;
 using Zamin.Core.Domain.Entities;
 
 namespace AccountManagement.Core.Domain.Accounts.Entities
@@ -11,6 +10,8 @@ namespace AccountManagement.Core.Domain.Accounts.Entities
         public string Password { get; private set; }
         public string Mobile { get; private set; }
         public string ProfilePhoto { get; private set; }
+
+        protected Account() { }
 
         public Account(string fullname,
                        string username,
@@ -25,8 +26,11 @@ namespace AccountManagement.Core.Domain.Accounts.Entities
 
             ProfilePhoto = profilePhoto;
 
-            AddEvent(new AccountCreated(BusinessId.Value, Fullname, Username, Password, Mobile,ProfilePhoto));
+            AddEvent(new AccountCreated(BusinessId.Value, Fullname, Username, Password, Mobile, ProfilePhoto));
         }
+
+        public static Account Create(string fullname, string username, string password, string mobile, string profilePhoto)
+            => new Account(fullname, username, password, mobile, profilePhoto);
 
         public void Edit(string fullname,
                          string username,
