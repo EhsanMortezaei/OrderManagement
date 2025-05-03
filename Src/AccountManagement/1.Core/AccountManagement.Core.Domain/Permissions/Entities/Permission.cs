@@ -12,9 +12,10 @@ namespace AccountManagement.Core.Domain.Permissions.Entities
 
         protected Permission() { }
 
-        public Permission(int code)
+        public Permission(int code, string name)
         {
             Code = code;
+            Name = name;
         }
 
         public Permission(int code, string name, int roleId)
