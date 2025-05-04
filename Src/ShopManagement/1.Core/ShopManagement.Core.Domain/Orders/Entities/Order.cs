@@ -16,6 +16,8 @@ public class Order : AggregateRoot<int>
     public long RefId { get; private set; }
     public List<OrderItem> Items { get; private set; }
 
+    protected Order() { }
+
     public Order(List<OrderItem> items)
     {
         Items = items;

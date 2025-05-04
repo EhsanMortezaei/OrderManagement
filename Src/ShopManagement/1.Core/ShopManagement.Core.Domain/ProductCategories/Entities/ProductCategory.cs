@@ -13,6 +13,8 @@ namespace ShopManagement.Core.Domain.ProductCategories.Entities
         public string MetaDescription { get; private set; }
         public string Slug { get; private set; }
 
+        protected ProductCategory() { }
+
         public ProductCategory(string name,
                                string description,
                                string picture,

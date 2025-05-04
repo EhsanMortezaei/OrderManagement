@@ -20,6 +20,8 @@ namespace ShopManagement.Core.Domain.Products.Entities
         public string Keywords { get; private set; }
         public string MetaDescription { get; private set; }
 
+        protected Product() { }
+
         public Product(string name,
                        string code,
                        string shortDescription,

@@ -10,6 +10,8 @@ namespace InventoryManagement.Core.Domain.Inventories.Entities
         public bool InStock { get; private set; }
         public List<InventoryOperation> Operations { get; private set; }
 
+        protected Inventory() { }
+
         public Inventory(int productId, double unitPrice, List<InventoryOperation> operations)
         {
             ProductId = productId;

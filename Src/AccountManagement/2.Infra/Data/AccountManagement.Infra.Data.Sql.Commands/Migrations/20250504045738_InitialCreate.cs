@@ -1,0 +1,113 @@
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
+
+#nullable disable
+
+namespace AccountManagement.Infra.Data.Sql.Commands.Migrations
+{
+    /// <inheritdoc />
+    public partial class InitialCreate : Migration
+    {
+        /// <inheritdoc />
+        protected override void Up(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.EnsureSchema(
+                name: "zamin");
+
+            migrationBuilder.CreateTable(
+                name: "AccountRole",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    AccountId = table.Column<int>(type: "int", nullable: false),
+                    RoleId = table.Column<int>(type: "int", nullable: false),
+                    CreatedByUserId = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    CreatedDateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedByUserId = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    ModifiedDateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    BusinessId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AccountRole", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Accounts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Fullname = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Mobile = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ProfilePhoto = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedByUserId = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    CreatedDateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedByUserId = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    ModifiedDateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    BusinessId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Accounts", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Permissions",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Code = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RoleId = table.Column<int>(type: "int", nullable: false),
+                    CreatedByUserId = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    CreatedDateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedByUserId = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    ModifiedDateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    BusinessId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Permissions", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Roles",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedByUserId = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    CreatedDateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedByUserId = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    ModifiedDateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    BusinessId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Roles", x => x.Id);
+                });
+        }
+
+        /// <inheritdoc />
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.DropTable(
+                name: "AccountRole");
+
+            migrationBuilder.DropTable(
+                name: "Accounts");
+
+            migrationBuilder.DropTable(
+                name: "Permissions");
+
+            migrationBuilder.DropTable(
+                name: "Roles");
+        }
+    }
+}
