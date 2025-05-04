@@ -48,13 +48,6 @@ namespace _0_Framework.Application
                 : 0;
         }
 
-        //public string CurrentAccountMobile()
-        //{
-        //    return IsAuthenticated()
-        //        ? _contextAccessor.HttpContext.User.Claims.First(x => x.Type == "Mobile")?.Value
-        //        : "";
-        //}
-
         public string CurrentAccountRole()
         {
             if (IsAuthenticated())
@@ -65,11 +58,6 @@ namespace _0_Framework.Application
         public bool IsAuthenticated()
         {
             return _contextAccessor.HttpContext.User.Identity.IsAuthenticated;
-            //var claims = _contextAccessor.HttpContext.User.Claims.ToList();
-            ////if (claims.Count > 0)
-            ////    return true;
-            ////return false;
-            //return claims.Count > 0;
         }
 
         public void Signin(AuthViewModel account)

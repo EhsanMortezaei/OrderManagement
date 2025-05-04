@@ -38,14 +38,6 @@ namespace InventoryManagement.Core.Domain.Inventories.Entities
             var operation = new InventoryOperation(true, count, operatorId, currentCount, description, 0, Id);
             Operations.Add(operation);
 
-            //if (currentCount > 0)
-            //{
-            //    InStock = true;
-            //}
-            //else
-            //{
-            //    InStock = false;
-
             InStock = currentCount > 0;
         }
 

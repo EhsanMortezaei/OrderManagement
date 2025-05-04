@@ -20,8 +20,5 @@ namespace ShopManagement.Core.RequestResponse.Orders.Command.Create
         public List<OrderItem> Items { get; set; }
         public string Path => "/api/Order/Create";
 
-        //TODO:
-        //property OrderItems
-
     }
 }

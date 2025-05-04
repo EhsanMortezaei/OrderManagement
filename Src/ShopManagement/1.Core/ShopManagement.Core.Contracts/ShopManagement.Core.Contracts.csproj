@@ -17,4 +17,8 @@
     <ProjectReference Include="..\ShopManagement.Core.RequestResponse\ShopManagement.Core.RequestResponse.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="OrderItem\Command\" />
+  </ItemGroup>
+
 </Project>

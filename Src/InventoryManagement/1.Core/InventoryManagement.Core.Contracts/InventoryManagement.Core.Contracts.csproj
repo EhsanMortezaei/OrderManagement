@@ -18,4 +18,8 @@
 	  <ProjectReference Include="..\InventoryManagement.Core.RequestResponse\InventoryManagement.Core.RequestResponse.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="InventoryOperations\Commands\" />
+	</ItemGroup>
+
 </Project>

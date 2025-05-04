@@ -46,9 +46,6 @@ namespace AccountManagement.EndPoint.Api.Accounts
         [HttpPost("DeleteRole")]
         public async Task<IActionResult> DeleteRole([FromBody] DeleteRoleCommand command) => await Delete(command);
 
-        //[HttpPost("Login")]
-        //public async Task<IActionResult> Login([FromForm] LoginAccountCommand command) => await Login(command);
-
         [HttpPost("Login")]
         public async Task<IActionResult> Login([FromBody] LoginAccountCommand command)
         {

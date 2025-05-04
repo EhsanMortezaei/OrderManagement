@@ -37,7 +37,6 @@ public class Order : AggregateRoot<int>
         IsCanceled = false;
         RefId = 0;
 
-        //TODO
         Items = new List<OrderItem>();
         Items = items;
         AddEvent(new OrderCreated(BusinessId.Value,
