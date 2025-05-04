@@ -30,7 +30,7 @@ namespace AccountManagement.EndPoint.Api.Accounts
         [HttpPost("CreateAccount")]
         public async Task<IActionResult> CreateAccount([FromBody] CreateAccountCommand command) => await Create<CreateAccountCommand, Guid>(command);
 
-        [HttpPost("UpdateAccount")]
+        [HttpPut("UpdateAccount")]
         public async Task<IActionResult> UpdateAccount([FromBody] UpdateAccountCommand command) => await Edit(command);
 
         [HttpDelete("DeleteAccount")]
@@ -40,7 +40,7 @@ namespace AccountManagement.EndPoint.Api.Accounts
         [HttpPost("CreateRole")]
         public async Task<IActionResult> DeleteRole([FromBody] CreateRoleCommand command) => await Create<CreateRoleCommand, Guid>(command);
 
-        [HttpPost("UpdateRole")]
+        [HttpPut("UpdateRole")]
         public async Task<IActionResult> UpdateRole([FromBody] UpdateRoleCommand command) => await Edit(command);
 
         [HttpPost("DeleteRole")]
@@ -56,7 +56,7 @@ namespace AccountManagement.EndPoint.Api.Accounts
         [HttpPost("CreatePermission")]
         public async Task<IActionResult> CreatePermission([FromBody] CreatePermissionCommand command) => await Create<CreatePermissionCommand, Guid>(command);
 
-        [HttpPost("UpdatePermission")]
+        [HttpPut("UpdatePermission")]
         public async Task<IActionResult> UpdeatePermission([FromBody] UpdatePermissionCommand command) => await Edit(command);
 
         [HttpPost("DeletePermission")]

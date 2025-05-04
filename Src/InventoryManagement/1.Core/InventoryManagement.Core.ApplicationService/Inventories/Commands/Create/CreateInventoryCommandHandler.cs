@@ -11,8 +11,8 @@ namespace InventoryManagement.Core.ApplicationService.Inventories.Commands.Creat
     {
         private readonly IInventoryCommandRepository _inventoryCommandRepository;
 
-        public CreateInventoryCommandHandler(ZaminServices zainServices,
-            IInventoryCommandRepository inventoryCommandRepository) : base(zainServices)
+        public CreateInventoryCommandHandler(ZaminServices zaminServices,
+            IInventoryCommandRepository inventoryCommandRepository) : base(zaminServices)
         {
             _inventoryCommandRepository = inventoryCommandRepository;
         }

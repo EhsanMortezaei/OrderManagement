@@ -19,7 +19,7 @@ namespace InventoryManagement.EndPoint.Api.Inventories
         [HttpPost("CreateInventory")]
         public async Task<IActionResult> CreateInventory([FromBody] CreateInventoryCommand command) => await Create<CreateInventoryCommand, Guid>(command);
 
-        [HttpPost("UpdateInventory")]
+        [HttpPut("UpdateInventory")]
         public async Task<IActionResult> UpdateInventory([FromBody] UpdateInventoryCommand command) => await Edit(command);
 
         [HttpDelete("DeleteInventory")]
@@ -34,7 +34,7 @@ namespace InventoryManagement.EndPoint.Api.Inventories
         [HttpPost("CreateInventoryOperation")]
         public async Task<IActionResult> CreateInventoryOperation([FromBody] CreateInventoryOperationCommand command) => await Create<CreateInventoryOperationCommand, Guid>(command);
 
-        [HttpPost("UpdateInventoryOperation")]
+        [HttpPut("UpdateInventoryOperation")]
         public async Task<IActionResult> UpdateInventoryOperation([FromBody] UpdateInventoryOperationCommand command) => await Edit(command);
 
         [HttpDelete("DeleteInventoryOperation")]
