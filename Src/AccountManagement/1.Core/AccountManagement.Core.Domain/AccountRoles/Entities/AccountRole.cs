@@ -7,7 +7,6 @@ namespace AccountManagement.Core.Domain.AccountRoles.Entities
     {
         public int AccountId { get; private set; }
         public int RoleId { get; private set; }
-        public List<Permission> Permissions { get; private set; }
 
         protected AccountRole() { }
 
