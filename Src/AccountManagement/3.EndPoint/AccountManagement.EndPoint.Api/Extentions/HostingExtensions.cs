@@ -23,7 +23,7 @@ public static class HostingExtensions
         builder.Services.AddSingleton<QueryDispatcherDecorator, CustomQueryDecorator>();
         builder.Services.AddSingleton<EventDispatcherDecorator, CustomEventDecorator>();
 
-        builder.Services.AddZaminApiCore("Zamin", "ZaminTemplate");
+        builder.Services.AddZaminApiCore("Zamin", "AccountManagement");
 
         builder.Services.AddEndpointsApiExplorer();
 
