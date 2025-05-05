@@ -14,7 +14,8 @@ namespace InventoryManagement.Core.ApplicationService.Inventories.Commands.Incre
         private readonly IAuthHelper _authHelper;
 
         public IncreaseInventoryCommandHandler(ZaminServices zaminServices,
-            IAuthHelper authHelper, IInventoryCommandRepository inventoryCommandRepository) : base(zaminServices)
+                                               IAuthHelper authHelper,
+                                               IInventoryCommandRepository inventoryCommandRepository) : base(zaminServices)
         {
             _authHelper = authHelper;
             _inventoryCommandRepository = inventoryCommandRepository;
@@ -24,7 +25,8 @@ namespace InventoryManagement.Core.ApplicationService.Inventories.Commands.Incre
         {
             var inventory = await _inventoryCommandRepository.GetAsync(command.InventoryId);
 
-            const long operatorId = 1;
+            var operatorId = _authHelper.CurrentAccountId();
+            //const long operatorId = 1;
             inventory.Increase(command.Count, operatorId, command.Description);
             await _inventoryCommandRepository.CommitAsync();
 

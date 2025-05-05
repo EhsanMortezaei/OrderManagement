@@ -1,4 +1,5 @@
-﻿using InventoryManagement.EndPoint.Api.CustomDecorators;
+﻿using Framework.AuthHelper;
+using InventoryManagement.EndPoint.Api.CustomDecorators;
 using InventoryManagement.EndPoint.Api.Extentions.DependencyInjection.Swaggers.Extentions;
 using InventoryManagement.Infra.Data.Sql.Command.Common;
 using InventoryManagement.Infra.Data.Sql.Queries.Common;
@@ -23,6 +24,7 @@ public static class HostingExtensions
         builder.Services.AddSingleton<CommandDispatcherDecorator, CustomCommandDecorator>();
         builder.Services.AddSingleton<QueryDispatcherDecorator, CustomQueryDecorator>();
         builder.Services.AddSingleton<EventDispatcherDecorator, CustomEventDecorator>();
+        builder.Services.AddTransient<IAuthHelper, AuthHelper>();
 
         builder.Services.AddZaminApiCore("Zamin", "InventoryManagement");
 

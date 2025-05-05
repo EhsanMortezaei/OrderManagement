@@ -41,6 +41,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\..\1.Core\InventoryManagement.Core.ApplicationService\InventoryManagement.Core.ApplicationService.csproj" />
+	  <ProjectReference Include="..\..\1.Core\InventoryManagement.Core.Contracts\InventoryManagement.Core.Contracts.csproj" />
+	  <ProjectReference Include="..\..\1.Core\InventoryManagement.Core.Domain\InventoryManagement.Core.Domain.csproj" />
 	  <ProjectReference Include="..\..\1.Core\InventoryManagement.Core.RequestResponse\InventoryManagement.Core.RequestResponse.csproj" />
 	  <ProjectReference Include="..\..\2.Infra\Data\InventoryManagement.Infra.Data.Sql.Command\InventoryManagement.Infra.Data.Sql.Command.csproj" />
 	  <ProjectReference Include="..\..\2.Infra\Data\InventoryManagement.Infra.Data.Sql.Queries\InventoryManagement.Infra.Data.Sql.Queries.csproj" />
