@@ -2,6 +2,9 @@
 using AccountManagement.EndPoint.Api.Extentions.DependencyInjection.Swaggers.Extentions;
 using AccountManagement.Infra.Data.Sql.Commands.Common;
 using AccountManagement.Infra.Data.Sql.Queries.Common;
+using Framework.AuthHelper;
+using Framework.PasswordHasher;
+using MediatR;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
@@ -23,6 +26,9 @@ public static class HostingExtensions
         builder.Services.AddSingleton<CommandDispatcherDecorator, CustomCommandDecorator>();
         builder.Services.AddSingleton<QueryDispatcherDecorator, CustomQueryDecorator>();
         builder.Services.AddSingleton<EventDispatcherDecorator, CustomEventDecorator>();
+        builder.Services.AddTransient<IPasswordHasher, PasswordHasher>();
+        builder.Services.AddTransient<IAuthHelper, AuthHelper>();
+        builder.Services.AddTransient<IMediator, Mediator>();
 
         builder.Services.AddZaminApiCore("Zamin", "AccountManagement");
 
