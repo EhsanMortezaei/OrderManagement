@@ -41,6 +41,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\..\1.Core\ShopManagement.Core.ApplicationService\ShopManagement.Core.ApplicationService.csproj" />
+	  <ProjectReference Include="..\..\1.Core\ShopManagement.Core.Contracts\ShopManagement.Core.Contracts.csproj" />
+	  <ProjectReference Include="..\..\1.Core\ShopManagement.Core.Domain\ShopManagement.Core.Domain.csproj" />
 	  <ProjectReference Include="..\..\1.Core\ShopManagement.Core.RequestResponse\ShopManagement.Core.RequestResponse.csproj" />
 	  <ProjectReference Include="..\..\2.Infra\ShopManagement.Infra.Data.Sql.Commands\ShopManagement.Infra.Data.Sql.Commands.csproj" />
 	  <ProjectReference Include="..\..\2.Infra\ShopManagement.Infra.Data.Sql.Queries\ShopManagement.Infra.Data.Sql.Queries.csproj" />

@@ -1,4 +1,4 @@
-using AccountManagement.EndPoint.Api.Extentions;
+using InventoryManagement.EndPoint.Api.Extentions;
 using Zamin.Extensions.DependencyInjection;
 using Zamin.Utilities.SerilogRegistration.Extensions;
 

@@ -1,5 +1,5 @@
-﻿using AccountManagement.EndPoint.Api.CustomDecorators;
-using AccountManagement.EndPoint.Api.Extentions.DependencyInjection.Swaggers.Extentions;
+﻿using InventoryManagement.EndPoint.Api.CustomDecorators;
+using InventoryManagement.EndPoint.Api.Extentions.DependencyInjection.Swaggers.Extentions;
 using InventoryManagement.Infra.Data.Sql.Command.Common;
 using InventoryManagement.Infra.Data.Sql.Queries.Common;
 using Microsoft.AspNetCore.Cors.Infrastructure;
@@ -12,7 +12,7 @@ using Zamin.EndPoints.Web.Extensions.ModelBinding;
 using Zamin.Extensions.DependencyInjection;
 using Zamin.Infra.Data.Sql.Commands.Interceptors;
 
-namespace AccountManagement.EndPoint.Api.Extentions;
+namespace InventoryManagement.EndPoint.Api.Extentions;
 
 public static class HostingExtensions
 {

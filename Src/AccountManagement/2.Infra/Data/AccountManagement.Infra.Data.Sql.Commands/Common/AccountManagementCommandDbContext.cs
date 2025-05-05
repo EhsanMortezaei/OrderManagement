@@ -5,7 +5,7 @@ using AccountManagement.Core.Domain.Roles.Entities;
 using Microsoft.EntityFrameworkCore;
 using Zamin.Extensions.Events.Outbox.Dal.EF;
 
-namespace AccountManagement.Infra.Data.Sql.Queries.Common
+namespace AccountManagement.Infra.Data.Sql.Commands.Common
 {
     public class AccountManagementCommandDbContext : BaseOutboxCommandDbContext
     {

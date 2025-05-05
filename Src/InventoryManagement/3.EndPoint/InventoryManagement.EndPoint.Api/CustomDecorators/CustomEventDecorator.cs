@@ -1,6 +1,6 @@
 ﻿using Zamin.Core.ApplicationServices.Events;
 
-namespace AccountManagement.EndPoint.Api.CustomDecorators;
+namespace InventoryManagement.EndPoint.Api.CustomDecorators;
 
 public class CustomEventDecorator : EventDispatcherDecorator
 {

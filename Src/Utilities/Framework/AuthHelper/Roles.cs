@@ -1,4 +1,4 @@
-﻿namespace _0_Framework.Infrastructure
+﻿namespace Framework.AuthHelper
 {
     public static class Roles
     {

@@ -1,4 +1,4 @@
-﻿namespace AccountManagement.EndPoint.Api.Extentions.DependencyInjection.IdentityServer.Options;
+﻿namespace ShopManagement.EndPoint.Api.Extentions.DependencyInjection.IdentityServer.Options;
 
 public class OAuthOption
 {

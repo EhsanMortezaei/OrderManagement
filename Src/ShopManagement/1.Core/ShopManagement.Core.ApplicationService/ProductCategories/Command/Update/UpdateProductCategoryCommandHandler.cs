@@ -9,10 +9,10 @@ namespace ShopManagement.Core.ApplicationService.ProductCategories.Command.Updat
 {
     public class UpdateProductCategoryCommandHandler : CommandHandler<UpdateProductCategoryCommand>
     {
-        private readonly IProductCategoryCommandRepository? _productCategoryCommandRepository;
+        private readonly IProductCategoryCommandRepository _productCategoryCommandRepository;
 
         public UpdateProductCategoryCommandHandler(ZaminServices zaminServices,
-            IProductCategoryCommandRepository? productCategoryCommandRepository) : base(zaminServices)
+                                                   IProductCategoryCommandRepository productCategoryCommandRepository) : base(zaminServices)
         {
             _productCategoryCommandRepository = productCategoryCommandRepository;
         }

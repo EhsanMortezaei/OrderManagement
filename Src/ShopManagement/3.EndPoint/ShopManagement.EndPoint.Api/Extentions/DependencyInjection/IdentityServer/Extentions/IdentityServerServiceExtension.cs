@@ -1,6 +1,6 @@
-﻿using AccountManagement.EndPoint.Api.Extentions.DependencyInjection.IdentityServer.Options;
+﻿using ShopManagement.EndPoint.Api.Extentions.DependencyInjection.IdentityServer.Options;
 
-namespace AccountManagement.EndPoint.Api.Extentions.DependencyInjection.IdentityServer.Extentions;
+namespace ShopManagement.EndPoint.Api.Extentions.DependencyInjection.IdentityServer.Extentions;
 
 public static class IdentityServerServiceExtension
 {

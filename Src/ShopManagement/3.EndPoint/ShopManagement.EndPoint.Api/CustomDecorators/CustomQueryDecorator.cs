@@ -2,7 +2,7 @@
 using Zamin.Core.Contracts.ApplicationServices.Queries;
 using Zamin.Core.RequestResponse.Queries;
 
-namespace AccountManagement.EndPoint.Api.CustomDecorators;
+namespace ShopManagement.EndPoint.Api.CustomDecorators;
 
 public class CustomQueryDecorator : QueryDispatcherDecorator
 {

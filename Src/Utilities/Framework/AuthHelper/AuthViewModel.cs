@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace _0_Framework.Application
+namespace Framework.AuthHelper
 {
     public class AuthViewModel
     {

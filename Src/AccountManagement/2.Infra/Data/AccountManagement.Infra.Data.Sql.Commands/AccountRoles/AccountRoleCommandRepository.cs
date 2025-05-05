@@ -1,6 +1,6 @@
 ﻿using AccountManagement.Core.Contract.AccountRoles.Commands;
 using AccountManagement.Core.Domain.AccountRoles.Entities;
-using AccountManagement.Infra.Data.Sql.Queries.Common;
+using AccountManagement.Infra.Data.Sql.Commands.Common;
 using Microsoft.EntityFrameworkCore;
 using Zamin.Infra.Data.Sql.Commands;
 

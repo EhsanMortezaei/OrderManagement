@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace AccountManagement.Infra.Data.Sql.Queries.Roles.Configs
+namespace AccountManagement.Infra.Data.Sql.Commands.Roles.Configs
 {
     public class RoleConfig : IEntityTypeConfiguration<Role>
     {

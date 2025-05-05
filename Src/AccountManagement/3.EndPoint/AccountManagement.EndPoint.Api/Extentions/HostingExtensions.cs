@@ -1,5 +1,6 @@
 ﻿using AccountManagement.EndPoint.Api.CustomDecorators;
 using AccountManagement.EndPoint.Api.Extentions.DependencyInjection.Swaggers.Extentions;
+using AccountManagement.Infra.Data.Sql.Commands.Common;
 using AccountManagement.Infra.Data.Sql.Queries.Common;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.EntityFrameworkCore;
@@ -23,7 +24,7 @@ public static class HostingExtensions
         builder.Services.AddSingleton<QueryDispatcherDecorator, CustomQueryDecorator>();
         builder.Services.AddSingleton<EventDispatcherDecorator, CustomEventDecorator>();
 
-        builder.Services.AddZaminApiCore("Zamin", "ZaminTemplate");
+        builder.Services.AddZaminApiCore("Zamin", "AccountManagement");
 
         builder.Services.AddEndpointsApiExplorer();
 

@@ -1,8 +1,8 @@
-﻿using AccountManagement.EndPoint.Api.CustomDecorators;
-using AccountManagement.EndPoint.Api.Extentions.DependencyInjection.Swaggers.Extentions;
-using Microsoft.AspNetCore.Cors.Infrastructure;
+﻿using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
+using ShopManagement.EndPoint.Api.CustomDecorators;
+using ShopManagement.EndPoint.Api.Extentions.DependencyInjection.Swaggers.Extentions;
 using ShopManagement.Infra.Data.Sql.Commands.Common;
 using ShopManagement.Infra.Data.Sql.Queries.Common;
 using Zamin.Core.ApplicationServices.Commands;
@@ -12,7 +12,7 @@ using Zamin.EndPoints.Web.Extensions.ModelBinding;
 using Zamin.Extensions.DependencyInjection;
 using Zamin.Infra.Data.Sql.Commands.Interceptors;
 
-namespace AccountManagement.EndPoint.Api.Extentions;
+namespace ShopManagement.EndPoint.Api.Extentions;
 
 public static class HostingExtensions
 {
@@ -20,11 +20,11 @@ public static class HostingExtensions
     {
         IConfiguration configuration = builder.Configuration;
 
-        builder.Services.AddSingleton<CommandDispatcherDecorator, CustomCommandDecorator>();
-        builder.Services.AddSingleton<QueryDispatcherDecorator, CustomQueryDecorator>();
-        builder.Services.AddSingleton<EventDispatcherDecorator, CustomEventDecorator>();
+        //builder.Services.AddSingleton<CommandDispatcherDecorator, CustomCommandDecorator>();
+        //builder.Services.AddSingleton<QueryDispatcherDecorator, CustomQueryDecorator>();
+        //builder.Services.AddSingleton<EventDispatcherDecorator, CustomEventDecorator>();
 
-        builder.Services.AddZaminApiCore("Zamin", "ZaminTemplate");
+        builder.Services.AddZaminApiCore("Zamin", "ShopManagement");
 
         builder.Services.AddEndpointsApiExplorer();
 
@@ -62,6 +62,7 @@ public static class HostingExtensions
         app.UseSwaggerUI("Swagger");
 
         app.UseStatusCodePages();
+
 
         app.UseCors(delegate (CorsPolicyBuilder builder)
         {

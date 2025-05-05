@@ -3,7 +3,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using Microsoft.Extensions.Options;
 
-namespace _0_Framework.Application
+namespace Framework.PasswordHasher
 {
     public class PasswordHasher : IPasswordHasher
     {

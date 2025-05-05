@@ -1,10 +1,10 @@
-﻿using AccountManagement.EndPoint.Api.Extentions.DependencyInjection.Swaggers.Extentions;
-using AccountManagement.EndPoint.Api.Extentions.DependencyInjection.Swaggers.Filters;
-using AccountManagement.EndPoint.Api.Extentions.DependencyInjection.Swaggers.Options;
+﻿using InventoryManagement.EndPoint.Api.Extentions.DependencyInjection.Swaggers.Extentions;
+using InventoryManagement.EndPoint.Api.Extentions.DependencyInjection.Swaggers.Filters;
+using InventoryManagement.EndPoint.Api.Extentions.DependencyInjection.Swaggers.Options;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerUI;
 
-namespace AccountManagement.EndPoint.Api.Extentions.DependencyInjection.Swaggers.Extentions;
+namespace InventoryManagement.EndPoint.Api.Extentions.DependencyInjection.Swaggers.Extentions;
 
 public static class SwaggerExtentions
 {

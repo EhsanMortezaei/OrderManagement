@@ -2,7 +2,7 @@
 using Zamin.Core.Contracts.ApplicationServices.Commands;
 using Zamin.Core.RequestResponse.Commands;
 
-namespace AccountManagement.EndPoint.Api.CustomDecorators;
+namespace InventoryManagement.EndPoint.Api.CustomDecorators;
 
 public class CustomCommandDecorator : CommandDispatcherDecorator
 {

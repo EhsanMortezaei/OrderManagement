@@ -1,7 +1,7 @@
-﻿using _0_Framework.Application;
-using AccountManagement.Core.Contract.Accounts.Commands;
+﻿using AccountManagement.Core.Contract.Accounts.Commands;
 using AccountManagement.Core.Domain.Accounts.Entities;
 using AccountManagement.Core.RequestResponse.Accounts.Commands.Create;
+using Framework.PasswordHasher;
 using Zamin.Core.ApplicationServices.Commands;
 using Zamin.Core.RequestResponse.Commands;
 using Zamin.Utilities;

@@ -1,4 +1,4 @@
-﻿namespace AccountManagement.EndPoint.Api.Extentions.DependencyInjection.Swaggers.Options;
+﻿namespace InventoryManagement.EndPoint.Api.Extentions.DependencyInjection.Swaggers.Options;
 
 public class SwaggerOption
 {

@@ -1,9 +1,9 @@
 ﻿using AccountManagement.Core.Contract.Accounts.Commands;
 using AccountManagement.Core.Domain.Accounts.Entities;
-using AccountManagement.Infra.Data.Sql.Queries.Common;
+using AccountManagement.Infra.Data.Sql.Commands.Common;
 using Zamin.Infra.Data.Sql.Commands;
 
-namespace AccountManagement.Infra.Data.Sql.Queries.Accounts
+namespace AccountManagement.Infra.Data.Sql.Commands.Accounts
 {
     public class AccountCommandRepository :
         BaseCommandRepository<Account, AccountManagementCommandDbContext, int>,

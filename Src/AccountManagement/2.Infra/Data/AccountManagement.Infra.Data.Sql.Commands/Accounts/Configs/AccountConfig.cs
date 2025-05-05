@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace AccountManagement.Infra.Data.Sql.Queries.Accounts.Configs
+namespace AccountManagement.Infra.Data.Sql.Commands.Accounts.Configs
 {
     public class AccountConfig : IEntityTypeConfiguration<Account>
     {

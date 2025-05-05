@@ -1,4 +1,4 @@
-﻿namespace _0_Framework.Application
+﻿namespace Framework.PasswordHasher
 {
     public sealed class HashingOptions
     {
