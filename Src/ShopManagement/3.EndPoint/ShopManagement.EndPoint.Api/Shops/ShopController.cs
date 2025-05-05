@@ -24,7 +24,7 @@ namespace ShopManagement.EndPoint.Api.Shops
         [HttpPut("UpdateOrder")]
         public async Task<IActionResult> UpdateOrder([FromBody] UpdateOrderCommand command) => await Edit(command);
 
-        [HttpPost("DeleteOrder")]
+        [HttpDelete("DeleteOrder")]
         public async Task<IActionResult> DeletOrder([FromBody] DeleteOrderCommand command) => await Delete(command);
 
         [HttpPost("CreateProductCategory")]
@@ -33,7 +33,7 @@ namespace ShopManagement.EndPoint.Api.Shops
         [HttpPut("UpdateProductCategory")]
         public async Task<IActionResult> UpdateProductCategory([FromBody] UpdateProductCategoryCommand command) => await Edit(command);
 
-        [HttpPost("DeleteProductCategory")]
+        [HttpDelete("DeleteProductCategory")]
         public async Task<IActionResult> DeleteProductCategory([FromBody] DeleteProductCategoryCommand command) => await Delete(command);
 
         [HttpPost("CreateProduct")]
@@ -42,7 +42,7 @@ namespace ShopManagement.EndPoint.Api.Shops
         [HttpPut("UpdateProduct")]
         public async Task<IActionResult> UpdateProduct([FromBody] UpdateProductCommand command) => await Edit(command);
 
-        [HttpPost("DeleteProduct")]
+        [HttpDelete("DeleteProduct")]
         public async Task<IActionResult> DeleteProduct([FromBody] DeleteProductCommand command) => await Delete(command);
 
 
