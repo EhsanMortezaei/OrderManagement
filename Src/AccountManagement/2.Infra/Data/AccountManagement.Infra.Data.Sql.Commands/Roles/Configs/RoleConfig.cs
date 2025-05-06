@@ -8,7 +8,8 @@ namespace AccountManagement.Infra.Data.Sql.Commands.Roles.Configs
     {
         public void Configure(EntityTypeBuilder<Role> builder)
         {
-            builder.Property(x => x.Name).HasMaxLength(100).IsRequired();
+            builder.HasKey(x => x.Id);
+            builder.Property(x => x.Name).HasMaxLength(50).IsRequired();
         }
     }
 }

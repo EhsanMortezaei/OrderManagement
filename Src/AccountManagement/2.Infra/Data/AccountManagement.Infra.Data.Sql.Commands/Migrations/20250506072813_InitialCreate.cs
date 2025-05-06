@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace InventoryManagement.Infra.Data.Sql.Command.Migrations
+namespace AccountManagement.Infra.Data.Sql.Commands.Migrations
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration
@@ -15,14 +15,13 @@ namespace InventoryManagement.Infra.Data.Sql.Command.Migrations
                 name: "zamin");
 
             migrationBuilder.CreateTable(
-                name: "Inventories",
+                name: "AccountRole",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ProductId = table.Column<int>(type: "int", nullable: false),
-                    UnitPrice = table.Column<double>(type: "float", nullable: false),
-                    InStock = table.Column<bool>(type: "bit", nullable: false),
+                    AccountId = table.Column<int>(type: "int", nullable: false),
+                    RoleId = table.Column<int>(type: "int", nullable: false),
                     CreatedByUserId = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     CreatedDateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedByUserId = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
@@ -31,7 +30,29 @@ namespace InventoryManagement.Infra.Data.Sql.Command.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Inventories", x => x.Id);
+                    table.PrimaryKey("PK_AccountRole", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Accounts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Fullname = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Mobile = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ProfilePhoto = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedByUserId = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    CreatedDateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedByUserId = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    ModifiedDateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    BusinessId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Accounts", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -60,54 +81,62 @@ namespace InventoryManagement.Infra.Data.Sql.Command.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "InventoryOperations",
+                name: "Permissions",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Operation = table.Column<bool>(type: "bit", nullable: false),
-                    Count = table.Column<long>(type: "bigint", nullable: false),
-                    OperatorId = table.Column<long>(type: "bigint", nullable: false),
-                    OperationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CurrentCount = table.Column<long>(type: "bigint", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    OrderId = table.Column<long>(type: "bigint", nullable: false),
-                    InventoryId = table.Column<long>(type: "bigint", nullable: false),
+                    Code = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RoleId = table.Column<int>(type: "int", nullable: false),
                     CreatedByUserId = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     CreatedDateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    InventoryId1 = table.Column<int>(type: "int", nullable: true),
                     ModifiedByUserId = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     ModifiedDateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     BusinessId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_InventoryOperations", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_InventoryOperations_Inventories_InventoryId1",
-                        column: x => x.InventoryId1,
-                        principalTable: "Inventories",
-                        principalColumn: "Id");
+                    table.PrimaryKey("PK_Permissions", x => x.Id);
                 });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_InventoryOperations_InventoryId1",
-                table: "InventoryOperations",
-                column: "InventoryId1");
+            migrationBuilder.CreateTable(
+                name: "Roles",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedByUserId = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    CreatedDateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedByUserId = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    ModifiedDateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    BusinessId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Roles", x => x.Id);
+                });
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "InventoryOperations");
+                name: "AccountRole");
+
+            migrationBuilder.DropTable(
+                name: "Accounts");
 
             migrationBuilder.DropTable(
                 name: "OutBoxEventItems",
                 schema: "zamin");
 
             migrationBuilder.DropTable(
-                name: "Inventories");
+                name: "Permissions");
+
+            migrationBuilder.DropTable(
+                name: "Roles");
         }
     }
 }

@@ -8,7 +8,15 @@ namespace ShopManagement.Infra.Data.Sql.Commands.Products.Configs
     {
         public void Configure(EntityTypeBuilder<Product> builder)
         {
-            throw new NotImplementedException();
+            builder.HasKey(x => x.Id);
+            builder.Property(x => x.Name).HasMaxLength(100).IsRequired();
+            builder.Property(x => x.Descrption).HasMaxLength(1000).IsRequired();
+            builder.Property(x => x.ShortDescription).HasMaxLength(500).IsRequired();
+            builder.Property(x => x.Picture).HasMaxLength(100);
+            builder.Property(x => x.PictureTitle).HasMaxLength(100);
+            builder.Property(x => x.PictureAlt).HasMaxLength(100);
+            builder.Property(x => x.Slug).HasMaxLength(100);
+
         }
     }
 }

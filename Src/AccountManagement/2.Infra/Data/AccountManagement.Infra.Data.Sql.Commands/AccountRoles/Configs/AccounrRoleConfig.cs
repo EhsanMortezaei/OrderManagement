@@ -8,6 +8,10 @@ namespace AccountManagement.Infra.Data.Sql.Commands.AccountRoles.Configs
     {
         public void Configure(EntityTypeBuilder<AccountRole> builder)
         {
+            builder.HasKey(x => x.Id);
+            builder.Property(x => x.AccountId).IsRequired();
+            builder.Property(x => x.RoleId).IsRequired();
+
         }
     }
 }

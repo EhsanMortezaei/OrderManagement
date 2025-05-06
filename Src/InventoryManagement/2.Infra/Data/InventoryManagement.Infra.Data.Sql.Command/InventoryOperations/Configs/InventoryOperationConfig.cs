@@ -8,6 +8,7 @@ namespace InventoryManagement.Infra.Data.Sql.Command.InventoryOperations.Configs
     {
         public void Configure(EntityTypeBuilder<InventoryOperation> builder)
         {
+            builder.HasKey(x => x.Id);
             builder.Property(x => x.Description).HasMaxLength(1000).IsRequired();
         }
     }

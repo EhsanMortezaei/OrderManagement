@@ -8,7 +8,7 @@ namespace ShopManagement.Infra.Data.Sql.Commands.Orders.Configs
     {
         public void Configure(EntityTypeBuilder<OrderItem> builder)
         {
-            throw new NotImplementedException();
+            builder.HasKey(x => x.Id);
         }
     }
 }

@@ -7,7 +7,13 @@ namespace ShopManagement.Infra.Data.Sql.Commands.Products.Configs
     {
         public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<ProductCategory> builder)
         {
-            throw new NotImplementedException();
+            builder.HasKey(x => x.Id);
+            builder.Property(x => x.Name).HasMaxLength(50).IsRequired();
+            builder.Property(x => x.Description).HasMaxLength(1000).IsRequired();
+            builder.Property(x => x.MetaDescription).HasMaxLength(200).IsRequired();
+            builder.Property(x => x.Picture).HasMaxLength(100);
+            builder.Property(x => x.PictureTitle).HasMaxLength(100);
+            builder.Property(x => x.PictureAlt).HasMaxLength(100);
         }
     }
 }

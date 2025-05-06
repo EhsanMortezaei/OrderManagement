@@ -1,6 +1,7 @@
 ﻿using InventoryManagement.Core.Domain.Inventories.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System.Reflection.Emit;
 
 namespace InventoryManagement.Infra.Data.Sql.Command.Inventories.Configs
 {
@@ -8,7 +9,7 @@ namespace InventoryManagement.Infra.Data.Sql.Command.Inventories.Configs
     {
         public void Configure(EntityTypeBuilder<Inventory> builder)
         {
-            throw new NotImplementedException();
+            builder.HasKey(x => x.Id);
         }
     }
 }

@@ -40,8 +40,6 @@ namespace ShopManagement.Infra.Data.Sql.Commands.Migrations
                     table.PrimaryKey("PK_Orders", x => x.Id);
                 });
 
-            
-
             migrationBuilder.CreateTable(
                 name: "ProductCategories",
                 columns: table => new
@@ -134,6 +132,10 @@ namespace ShopManagement.Infra.Data.Sql.Commands.Migrations
         {
             migrationBuilder.DropTable(
                 name: "OrderItems");
+
+            migrationBuilder.DropTable(
+                name: "OutBoxEventItems",
+                schema: "zamin");
 
             migrationBuilder.DropTable(
                 name: "ProductCategories");

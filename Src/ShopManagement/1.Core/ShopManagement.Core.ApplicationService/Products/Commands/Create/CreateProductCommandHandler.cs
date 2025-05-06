@@ -19,6 +19,11 @@ namespace ShopManagement.Core.ApplicationService.Products.Commands.Create
 
         public override async Task<CommandResult<Guid>> Handle(CreateProductCommand command)
         {
+            //var entity = await _productCommandRepository.GetAsync(command.Id);
+            //if (entity is null)
+            //{
+            //    throw new Exception("id نمیتواند خالی باشد") ;
+            //}
             var product = new Product(command.Name,
                                       command.Code,
                                       command.ShortDescription,

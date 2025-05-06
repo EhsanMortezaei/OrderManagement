@@ -25,7 +25,6 @@ namespace ShopManagement.Infra.Data.Sql.Queries.Products
             Picture = c.Picture,
             PictureAlt = c.PictureAlt,
             PictureTitle = c.PictureTitle,
-            CategoryId = c.CategoryId,
             Slug = c.Slug,
             Keywords = c.Keywords,
             MetaDescription = c.MetaDescription,
