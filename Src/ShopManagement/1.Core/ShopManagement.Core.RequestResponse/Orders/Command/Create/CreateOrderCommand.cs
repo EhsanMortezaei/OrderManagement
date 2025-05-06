@@ -7,7 +7,6 @@ namespace ShopManagement.Core.RequestResponse.Orders.Command.Create
 {
     public class CreateOrderCommand : ICommand<Guid>, IWebRequest
     {
-        public int Id { get; set; }
         public long AccountId { get; set; }
         public int PaymentMethod { get; set; }
         public double TotalAmount { get; set; }
