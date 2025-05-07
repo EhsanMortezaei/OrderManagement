@@ -47,11 +47,12 @@ namespace AccountManagement.EndPoint.Api.Accounts
         public async Task<IActionResult> DeleteRole([FromBody] DeleteRoleCommand command) => await Delete(command);
 
         [HttpPost("Login")]
-        public async Task<IActionResult> Login([FromBody] LoginAccountCommand command)
-        {
-            var result = await _mediator.Send(command);
-            return Ok(result);
-        }
+        public async Task<IActionResult> Login([FromBody] LoginAccountCommand command) => await Edit<LoginAccountCommand, Guid>(command);
+        //public async Task<IActionResult> Login([FromBody] LoginAccountCommand command)
+        //{
+        //    var result = await _mediator.Send(command);
+        //    return Ok(result);
+        //}
 
         [HttpPost("CreatePermission")]
         public async Task<IActionResult> CreatePermission([FromBody] CreatePermissionCommand command) => await Create<CreatePermissionCommand, Guid>(command);

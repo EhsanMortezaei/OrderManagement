@@ -40,7 +40,7 @@ namespace AccountManagement.Core.ApplicationService.Accounts.Commands.Login
 
         public override async Task<CommandResult<Guid>> Handle(LoginAccountCommand command)
         {
-            var account = await _accountCommandommandRepository.GetAsync(command.UserName);
+            var account = _accountCommandommandRepository.GetBy(command.UserName);
             if (account == null)
             {
                 throw new InvalidEntityStateException("نام کاربری یا کلمه رمز اشتباه است");

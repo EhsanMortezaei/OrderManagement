@@ -4,6 +4,6 @@ namespace AccountManagement.Core.Contract.Roles.Queries
 {
     public interface IRoleQueryRepository
     {
-        public Task<RoleQr?> ExecuteAsync(GetRoleByIdQuery query);
+        public Task<RoleQr> ExecuteAsync(GetRoleByIdQuery query);
     }
 }

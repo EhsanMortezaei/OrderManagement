@@ -26,7 +26,7 @@ namespace InventoryManagement.EndPoint.Api.Inventories
         public async Task<IActionResult> DeleteInventory([FromBody] DeleteInventoryCommand command) => await Delete(command);
 
         [HttpPost("IncreaseInventory")]
-        public async Task<IActionResult> IncreaseInventory([FromBody] IncreaseInventoryCommand command) => await IncreaseInventory(command);
+        public async Task<IActionResult> IncreaseInventory([FromBody] IncreaseInventoryCommand command) => await Create<IncreaseInventoryCommand, Guid>(command);
 
         [HttpPost("ReduceInventory")]
         public async Task<IActionResult> ReduceInventory([FromBody] ReduceInventoryCommand command) => await ReduceInventory(command);

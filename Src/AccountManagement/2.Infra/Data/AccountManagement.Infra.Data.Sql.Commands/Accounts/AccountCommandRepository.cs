@@ -9,9 +9,15 @@ namespace AccountManagement.Infra.Data.Sql.Commands.Accounts
         BaseCommandRepository<Account, AccountManagementCommandDbContext, int>,
         IAccountCommandRepository
     {
-        public AccountCommandRepository(AccountManagementCommandDbContext dbContext) : base(dbContext)
+        private readonly AccountManagementCommandDbContext _context;
+        public AccountCommandRepository(AccountManagementCommandDbContext dbContext, AccountManagementCommandDbContext context) : base(dbContext)
         {
+            _context = context;
+        }
 
+        public Account GetBy(string username)
+        {
+            return _context.Accounts.FirstOrDefault(x => x.Username == username);
         }
     }
 }

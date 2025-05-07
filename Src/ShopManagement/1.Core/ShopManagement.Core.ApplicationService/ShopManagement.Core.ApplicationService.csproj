@@ -7,9 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Orders\Events\" />
-    <Folder Include="ProductCategories\Event\" />
-    <Folder Include="Products\Events\" />
+    <Compile Remove="Orders\Events\**" />
+    <Compile Remove="ProductCategories\Event\**" />
+    <Compile Remove="Products\Events\**" />
+    <EmbeddedResource Remove="Orders\Events\**" />
+    <EmbeddedResource Remove="ProductCategories\Event\**" />
+    <EmbeddedResource Remove="Products\Events\**" />
+    <None Remove="Orders\Events\**" />
+    <None Remove="ProductCategories\Event\**" />
+    <None Remove="Products\Events\**" />
   </ItemGroup>
 
   <ItemGroup>

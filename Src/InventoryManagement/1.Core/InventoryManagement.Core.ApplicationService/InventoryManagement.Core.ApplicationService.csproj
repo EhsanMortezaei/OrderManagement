@@ -7,11 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Inventories\Events\" />
-    <Folder Include="InventoryOperations\Commands\Create\" />
-    <Folder Include="InventoryOperations\Commands\Delete\" />
-    <Folder Include="InventoryOperations\Commands\Update\" />
-    <Folder Include="InventoryOperations\Events\" />
+    <Compile Remove="Inventories\Events\**" />
+    <Compile Remove="InventoryOperations\Commands\**" />
+    <Compile Remove="InventoryOperations\Events\**" />
+    <EmbeddedResource Remove="Inventories\Events\**" />
+    <EmbeddedResource Remove="InventoryOperations\Commands\**" />
+    <EmbeddedResource Remove="InventoryOperations\Events\**" />
+    <None Remove="Inventories\Events\**" />
+    <None Remove="InventoryOperations\Commands\**" />
+    <None Remove="InventoryOperations\Events\**" />
   </ItemGroup>
 
 	<ItemGroup>
