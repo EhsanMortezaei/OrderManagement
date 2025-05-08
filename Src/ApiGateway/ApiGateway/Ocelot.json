@@ -1,0 +1,111 @@
+﻿{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/swagger/v1/swagger.json",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5298
+        }
+      ],
+      "UpstreamPathTemplate": "/ApiGateway/swagger.json",
+      "UpstreamHttpMethod": [ "POST", "PUT", "DELETE", "GET" ],
+      "DangerousAcceptAnyServerCertificateValidator": true
+    },
+    {
+      "DownstreamPathTemplate": "/swagger/v1/swagger.json",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7077
+        }
+      ],
+      "UpstreamPathTemplate": "/AccountManagement/swagger.json",
+      "UpstreamHttpMethod": [ "POST", "PUT", "DELETE", "GET" ],
+      "DangerousAcceptAnyServerCertificateValidator": true
+    },
+    {
+      "DownstreamPathTemplate": "/api/AccountManagement/{everything}",
+      "DownstreamScheme": "https",
+      "UpstreamPathTemplate": "/api/AccountManagement/{everything}",
+      "UpstreamHttpMethod": [ "POST", "DELETE", "PUT", "GET" ],
+      "ReRouteIsCaseSensitive": false,
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7077
+        }
+      ],
+      "QoSOptions": {
+        "TimeoutValue": 1800000
+      },
+      "DangerousAcceptAnyServerCertificateValidator": true
+    },
+    {
+      "DownstreamPathTemplate": "/swagger/v1/swagger.json",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7271
+        }
+      ],
+      "UpstreamPathTemplate": "/InventoryManagement/swagger.json",
+      "UpstreamHttpMethod": [ "POST", "PUT", "DELETE", "GET" ],
+      "DangerousAcceptAnyServerCertificateValidator": true
+    },
+    {
+      "DownstreamPathTemplate": "/api/InventoryManagement/{everything}",
+      "DownstreamScheme": "https",
+      "UpstreamPathTemplate": "/api/InventoryManagement/{everything}",
+      "UpstreamHttpMethod": [ "POST", "DELETE", "PUT", "GET" ],
+      "ReRouteIsCaseSensitive": false,
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7271
+        }
+      ],
+      "QoSOptions": {
+        "TimeoutValue": 1800000
+      },
+      "DangerousAcceptAnyServerCertificateValidator": true
+    },
+    {
+      "DownstreamPathTemplate": "/swagger/v1/swagger.json",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7180
+        }
+      ],
+      "UpstreamPathTemplate": "/ShopManagement/swagger.json",
+      "UpstreamHttpMethod": [ "POST", "PUT", "DELETE", "GET" ],
+      "DangerousAcceptAnyServerCertificateValidator": true
+    },
+    {
+      "DownstreamPathTemplate": "/api/ShopManagement/{everything}",
+      "DownstreamScheme": "https",
+      "UpstreamPathTemplate": "/api/ShopManagement/{everything}",
+      "UpstreamHttpMethod": [ "POST", "DELETE", "PUT", "GET" ],
+      "ReRouteIsCaseSensitive": false,
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7180
+        }
+      ],
+      "QoSOptions": {
+        "TimeoutValue": 1800000
+      },
+      "DangerousAcceptAnyServerCertificateValidator": true
+    }
+  ],
+  "GlobalConfiguration": {
+    "RequestIdKey": "CorrelationId",
+    "AdministrationPath": "/administration"
+  }
+}

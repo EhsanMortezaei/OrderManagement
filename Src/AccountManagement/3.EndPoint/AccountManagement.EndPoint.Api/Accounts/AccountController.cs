@@ -17,7 +17,7 @@ using Zamin.EndPoints.Web.Controllers;
 
 namespace AccountManagement.EndPoint.Api.Accounts
 {
-    [Route("api/[controller]")]
+    [Route("api/AccountManagement/[controller]")]
     public class AccountController : BaseController
     {
         private readonly IMediator _mediator;

@@ -13,7 +13,7 @@ using Zamin.EndPoints.Web.Controllers;
 
 namespace InventoryManagement.EndPoint.Api.Inventories
 {
-    [Route("api/[controller]")]
+    [Route("api/InventoryManagement/[controller]")]
     public class InventoryController : BaseController
     {
         [HttpPost("CreateInventory")]

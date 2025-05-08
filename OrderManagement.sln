@@ -81,6 +81,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccountManagement.EndPoint.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccountManagement.Infra.Data.Sql.Commands", "Src\AccountManagement\2.Infra\Data\AccountManagement.Infra.Data.Sql.Commands\AccountManagement.Infra.Data.Sql.Commands.csproj", "{6E5B18DB-203D-40B6-9CA0-BEF31C98C802}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApiGateway", "ApiGateway", "{DB87A4C9-B5C8-4A08-8F48-44D35B4C9146}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiGateway", "Src\ApiGateway\ApiGateway\ApiGateway.csproj", "{CE10733D-C59B-4016-AA31-7FB53E9709CC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -175,6 +179,10 @@ Global
 		{6E5B18DB-203D-40B6-9CA0-BEF31C98C802}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6E5B18DB-203D-40B6-9CA0-BEF31C98C802}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6E5B18DB-203D-40B6-9CA0-BEF31C98C802}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE10733D-C59B-4016-AA31-7FB53E9709CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE10733D-C59B-4016-AA31-7FB53E9709CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE10733D-C59B-4016-AA31-7FB53E9709CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE10733D-C59B-4016-AA31-7FB53E9709CC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -218,6 +226,8 @@ Global
 		{88569B73-04B0-413A-A8D3-DD5DF1DA36AC} = {808748F0-EB9F-4C84-BCF1-467E9475DAD8}
 		{93A1A6CA-6E9A-4205-AB2E-7A8A529F6999} = {5BA1353A-9FB9-427A-A8D0-D5909DE63D69}
 		{6E5B18DB-203D-40B6-9CA0-BEF31C98C802} = {9C49768D-504B-4B5A-A38B-70176ED6BBFD}
+		{DB87A4C9-B5C8-4A08-8F48-44D35B4C9146} = {97DBCF5D-D006-4E4A-A876-36ACA5D54596}
+		{CE10733D-C59B-4016-AA31-7FB53E9709CC} = {DB87A4C9-B5C8-4A08-8F48-44D35B4C9146}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2B76888E-4DE0-431C-9EE9-23DB72BE45A9}

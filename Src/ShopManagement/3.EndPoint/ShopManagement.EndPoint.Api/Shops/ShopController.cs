@@ -15,7 +15,7 @@ using Zamin.EndPoints.Web.Controllers;
 
 namespace ShopManagement.EndPoint.Api.Shops
 {
-    [Route("api/[Controller]")]
+    [Route("api/ShopManagement/[Controller]")]
     public class ShopController : BaseController
     {
         [HttpPost("CreateOrder")]
