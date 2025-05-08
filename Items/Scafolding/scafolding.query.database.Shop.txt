@@ -1,0 +1,1 @@
+Scaffold-DbContext "Data Source=.; Initial Catalog=Order; Integrated Security=True;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -Context ShopManagementQueryDbContext -f

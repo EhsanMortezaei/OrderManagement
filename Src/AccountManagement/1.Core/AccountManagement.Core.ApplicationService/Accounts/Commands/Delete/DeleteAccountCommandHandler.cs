@@ -6,23 +6,22 @@ using Zamin.Core.Domain.Exceptions;
 using Zamin.Core.RequestResponse.Commands;
 using Zamin.Utilities;
 
-namespace AccountManagement.Core.ApplicationService.Accounts.Commands.Delete
+namespace AccountManagement.Core.ApplicationService.Accounts.Commands.Delete;
+
+public class DeleteAccountCommandHandler(ZaminServices zaminServices,
+    IAccountCommandRepository accountCommandRepository,
+    IUnitOfWork accountUnitOfWork) : CommandHandler<DeleteAccountCommand>(zaminServices)
 {
-    public class DeleteAccountCommandHandler(ZaminServices zaminServices,
-        IAccountCommandRepository accountCommandRepository,
-        IUnitOfWork accountUnitOfWork) : CommandHandler<DeleteAccountCommand>(zaminServices)
+    private readonly IAccountCommandRepository _accountCommandRepository = accountCommandRepository;
+    private readonly IUnitOfWork _accountUnitOfWork = accountUnitOfWork;
+
+    public override async Task<CommandResult> Handle(DeleteAccountCommand command)
     {
-        private readonly IAccountCommandRepository _accountCommandRepository = accountCommandRepository;
-        private readonly IUnitOfWork _accountUnitOfWork = accountUnitOfWork;
+        var account = await _accountCommandRepository.GetGraphAsync(command.Id) ?? throw new InvalidEntityStateException("حساب یافت نشد");
 
-        public override async Task<CommandResult> Handle(DeleteAccountCommand command)
-        {
-            var account = await _accountCommandRepository.GetGraphAsync(command.Id) ?? throw new InvalidEntityStateException("حساب یافت نشد");
+        _accountCommandRepository.Delete(account);
+        await _accountCommandRepository.CommitAsync();
 
-            _accountCommandRepository.Delete(account);
-            await _accountCommandRepository.CommitAsync();
-
-            return Ok();
-        }
+        return Ok();
     }
 }

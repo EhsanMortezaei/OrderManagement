@@ -1,25 +1,21 @@
-﻿using AccountManagement.Core.Contract.Accounts.Queries;
-using AccountManagement.Core.Contract.Roles.Queries;
-using AccountManagement.Core.RequestResponse.Accounts.Queries;
+﻿using AccountManagement.Core.Contract.Roles.Queries;
 using AccountManagement.Core.RequestResponse.Roles.Queries;
 using AccountManagement.Infra.Data.Sql.Queries.Common;
 using Microsoft.EntityFrameworkCore;
 using Zamin.Infra.Data.Sql.Queries;
 
-namespace AccountManagement.Infra.Data.Sql.Queries.Roles
-{
-    public class RoleQueryRepository : BaseQueryRepository<AccountManagementQueryDbContext>, IRoleQueryRepository
-    {
-        public RoleQueryRepository(AccountManagementQueryDbContext dbContext) : base(dbContext)
-        {
-        }
+namespace AccountManagement.Infra.Data.Sql.Queries.Roles;
 
-        public async Task<RoleQr?> ExecuteAsync(GetRoleByIdQuery query)
-        => await _dbContext.Roles.Select(c => new RoleQr()
-        {
-            Id = c.Id,
-            Name = c.Name,
-            Permissions = c.Permissions,
-        }).FirstOrDefaultAsync(c => c.Id.Equals(query.RoleId));
+public class RoleQueryRepository : BaseQueryRepository<AccountManagementQueryDbContext>, IRoleQueryRepository
+{
+    public RoleQueryRepository(AccountManagementQueryDbContext dbContext) : base(dbContext)
+    {
     }
+
+    public async Task<RoleQr?> ExecuteAsync(GetRoleByIdQuery query)
+    => await _dbContext.Roles.Select(c => new RoleQr()
+    {
+        Id = c.Id,
+        Name = c.Name,
+    }).FirstOrDefaultAsync(c => c.Id.Equals(query.RoleId));
 }

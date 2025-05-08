@@ -3,6 +3,7 @@ using AccountManagement.Core.Domain.Accounts.Entities;
 using AccountManagement.Core.Domain.Permissions.Entities;
 using AccountManagement.Core.Domain.Roles.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 using Zamin.Extensions.Events.Outbox.Dal.EF;
 
 namespace AccountManagement.Infra.Data.Sql.Commands.Common
@@ -19,9 +20,11 @@ namespace AccountManagement.Infra.Data.Sql.Commands.Common
             DbContextOptions<AccountManagementCommandDbContext> options) : base(options)
         {
         }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+
+        protected override void OnModelCreating(ModelBuilder builder)
         {
-            base.OnConfiguring(optionsBuilder);
+            base.OnModelCreating(builder);
+            builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
     }
 }
