@@ -42,7 +42,7 @@ public static class HostingExtensions
 
         builder.Services.AddZaminInMemoryCaching();
 
-        builder.Services.AddDbContext<InventoryCommandDbContext>(
+        builder.Services.AddDbContext<InventoryManagementCommandDbContext>(
             c => c.UseSqlServer(configuration.GetConnectionString("CommandDb_ConnectionString"))
             .AddInterceptors(new SetPersianYeKeInterceptor(),
                              new AddAuditDataInterceptor()));

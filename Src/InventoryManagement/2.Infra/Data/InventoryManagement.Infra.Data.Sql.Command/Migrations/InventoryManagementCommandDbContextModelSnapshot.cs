@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace InventoryManagement.Infra.Data.Sql.Command.Migrations
 {
-    [DbContext(typeof(InventoryCommandDbContext))]
-    partial class InventoryCommandDbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(InventoryManagementCommandDbContext))]
+    partial class InventoryManagementCommandDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -87,7 +87,8 @@ namespace InventoryManagement.Infra.Data.Sql.Command.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<long>("InventoryId")
                         .HasColumnType("bigint");

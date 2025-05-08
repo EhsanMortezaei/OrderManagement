@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace InventoryManagement.Infra.Data.Sql.Command.Migrations
 {
-    [DbContext(typeof(InventoryCommandDbContext))]
-    [Migration("20250506075414_InitialCreate")]
+    [DbContext(typeof(InventoryManagementCommandDbContext))]
+    [Migration("20250508190509_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -90,7 +90,8 @@ namespace InventoryManagement.Infra.Data.Sql.Command.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<long>("InventoryId")
                         .HasColumnType("bigint");

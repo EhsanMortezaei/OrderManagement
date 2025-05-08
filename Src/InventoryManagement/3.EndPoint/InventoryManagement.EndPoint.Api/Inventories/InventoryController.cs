@@ -29,7 +29,7 @@ namespace InventoryManagement.EndPoint.Api.Inventories
         public async Task<IActionResult> IncreaseInventory([FromBody] IncreaseInventoryCommand command) => await Create<IncreaseInventoryCommand, Guid>(command);
 
         [HttpPost("ReduceInventory")]
-        public async Task<IActionResult> ReduceInventory([FromBody] ReduceInventoryCommand command) => await ReduceInventory(command);
+        public async Task<IActionResult> ReduceInventory([FromBody] ReduceInventoryCommand command) => await Create<ReduceInventoryCommand, Guid>(command);
 
         [HttpPost("CreateInventoryOperation")]
         public async Task<IActionResult> CreateInventoryOperation([FromBody] CreateInventoryOperationCommand command) => await Create<CreateInventoryOperationCommand, Guid>(command);

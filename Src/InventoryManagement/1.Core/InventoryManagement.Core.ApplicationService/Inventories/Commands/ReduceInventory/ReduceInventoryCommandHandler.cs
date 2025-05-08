@@ -21,7 +21,7 @@ namespace InventoryManagement.Core.ApplicationService.Inventories.Commands.Reduc
 
         public override async Task<CommandResult<Guid>> Handle(ReduceInventoryCommand command)
         {
-            var inventory = await _inventoryCommandRepository.GetAsync(command.InventoryId);
+            var inventory = await _inventoryCommandRepository.GetGraphAsync(command.InventoryId);
 
             var operatorId = _authHelper.CurrentAccountId();
             inventory.Reduce(command.Count, operatorId, command.Description, 0);

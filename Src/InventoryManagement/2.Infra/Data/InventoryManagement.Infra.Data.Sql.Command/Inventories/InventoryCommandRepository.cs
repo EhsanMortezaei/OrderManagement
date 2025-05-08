@@ -6,10 +6,10 @@ using Zamin.Infra.Data.Sql.Commands;
 namespace InventoryManagement.Infra.Data.Sql.Command.Inventories
 {
     public class InventoryCommandRepository :
-        BaseCommandRepository<Inventory, InventoryCommandDbContext, int>,
+        BaseCommandRepository<Inventory, InventoryManagementCommandDbContext, int>,
         IInventoryCommandRepository
     {
-        public InventoryCommandRepository(InventoryCommandDbContext dbContext) : base(dbContext)
+        public InventoryCommandRepository(InventoryManagementCommandDbContext dbContext) : base(dbContext)
         {
         }
     }

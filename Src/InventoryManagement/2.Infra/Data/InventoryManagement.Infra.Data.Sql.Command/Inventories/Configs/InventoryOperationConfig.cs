@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace InventoryManagement.Infra.Data.Sql.Command.InventoryOperations.Configs
+namespace InventoryManagement.Infra.Data.Sql.Command.Inventories.Configs
 {
     public class InventoryOperationConfig : IEntityTypeConfiguration<InventoryOperation>
     {

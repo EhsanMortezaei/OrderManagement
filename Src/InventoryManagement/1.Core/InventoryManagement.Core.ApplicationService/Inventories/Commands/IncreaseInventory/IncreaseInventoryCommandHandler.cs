@@ -23,7 +23,7 @@ namespace InventoryManagement.Core.ApplicationService.Inventories.Commands.Incre
 
         public override async Task<CommandResult<Guid>> Handle(IncreaseInventoryCommand command)
         {
-            var inventory = await _inventoryCommandRepository.GetAsync(command.InventoryId);
+            var inventory = await _inventoryCommandRepository.GetGraphAsync(command.InventoryId);
 
             var operatorId = _authHelper.CurrentAccountId();
             //const long operatorId = 1;

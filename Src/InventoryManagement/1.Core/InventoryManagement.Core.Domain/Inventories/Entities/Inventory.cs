@@ -12,12 +12,12 @@ namespace InventoryManagement.Core.Domain.Inventories.Entities
 
         protected Inventory() { }
 
-        public Inventory(int productId, double unitPrice, List<InventoryOperation> operations)
+        public Inventory(int productId, double unitPrice, bool inStock, List<InventoryOperation> operations)
         {
             ProductId = productId;
             UnitPrice = unitPrice;
             Operations = operations;
-            InStock = false;
+            InStock = inStock;
         }
 
         public void Edit(int productId, double unitPrice, List<InventoryOperation> operations)
