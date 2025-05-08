@@ -2,6 +2,7 @@
 using ShopManagement.Core.Domain.Orders.Entities;
 using ShopManagement.Core.Domain.ProductCategories.Entities;
 using ShopManagement.Core.Domain.Products.Entities;
+using System.Reflection;
 using Zamin.Extensions.Events.Outbox.Dal.EF;
 
 namespace ShopManagement.Infra.Data.Sql.Commands.Common
@@ -16,9 +17,11 @@ namespace ShopManagement.Infra.Data.Sql.Commands.Common
         public ShopManagementCommandDbContext(DbContextOptions<ShopManagementCommandDbContext> options) : base(options)
         {
         }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+
+        protected override void OnModelCreating(ModelBuilder builder)
         {
-            base.OnConfiguring(optionsBuilder);
+            base.OnModelCreating(builder);
+            builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
     }
 }
