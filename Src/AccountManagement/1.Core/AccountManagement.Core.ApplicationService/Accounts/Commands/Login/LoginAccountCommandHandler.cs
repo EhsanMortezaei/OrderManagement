@@ -55,14 +55,9 @@ namespace AccountManagement.Core.ApplicationService.Accounts.Commands.Login
             var accountRoles = await _accountRoleCommandRepository.GetByAccountId(account.Id);
             var roleIds = accountRoles.Select(x => x.RoleId).ToList();
 
-
-            var permissions = await _permissionCommandRepository.GetByRoleIds(roleIds);
-            var permissionCodes = permissions.Select(x => x.Code).ToList();
-
             var authModel = new AuthViewModel(account.Id,
                                               account.Fullname,
-                                              account.Username,
-                                              permissionCodes);
+                                              account.Username);
 
             _authHelper.Signin(authModel);
 

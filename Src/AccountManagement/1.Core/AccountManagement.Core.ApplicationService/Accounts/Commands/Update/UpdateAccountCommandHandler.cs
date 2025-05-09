@@ -26,7 +26,6 @@ namespace AccountManagement.Core.ApplicationService.Accounts.Commands.Update
             account.Edit(command.Fullname,
                          command.Username,
                          command.Mobile,
-                         command.RoleId,
                          command.ProfilePhoto);
             await _accountCommandRepository.CommitAsync();
             return Ok();

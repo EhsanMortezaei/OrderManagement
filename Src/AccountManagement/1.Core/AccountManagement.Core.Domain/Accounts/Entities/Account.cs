@@ -35,7 +35,6 @@ namespace AccountManagement.Core.Domain.Accounts.Entities
         public void Edit(string fullname,
                          string username,
                          string mobile,
-                         int roleId,
                          string profilePhoto)
         {
             Fullname = fullname;

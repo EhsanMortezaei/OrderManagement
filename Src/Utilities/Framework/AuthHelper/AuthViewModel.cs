@@ -15,12 +15,11 @@ namespace Framework.AuthHelper
         {
         }
 
-        public AuthViewModel(long id, string fullname, string username, List<int> permissions)
+        public AuthViewModel(long id, string fullname, string username)
         {
             Id = id;
             Fullname = fullname;
             Username = username;
-            Permissions = permissions;
         }
     }
 }
