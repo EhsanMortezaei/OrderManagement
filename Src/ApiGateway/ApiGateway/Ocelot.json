@@ -6,7 +6,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5298
+          "Port": 7070
         }
       ],
       "UpstreamPathTemplate": "/ApiGateway/swagger.json",
