@@ -8,7 +8,6 @@ namespace AccountManagement.Core.RequestResponse.Roles.Commands.Update
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public List<Permission> Permissions { get; set; }
         public string Path => "/api/Role/Update";
     }
 }

@@ -38,7 +38,7 @@ namespace AccountManagement.EndPoint.Api.Accounts
 
 
         [HttpPost("CreateRole")]
-        public async Task<IActionResult> DeleteRole([FromBody] CreateRoleCommand command) => await Create<CreateRoleCommand, Guid>(command);
+        public async Task<IActionResult> CreateRole([FromBody] CreateRoleCommand command) => await Create<CreateRoleCommand, Guid>(command);
 
         [HttpPut("UpdateRole")]
         public async Task<IActionResult> UpdateRole([FromBody] UpdateRoleCommand command) => await Edit(command);
