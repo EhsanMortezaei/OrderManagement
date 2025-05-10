@@ -28,6 +28,7 @@ public class Order : AggregateRoot<int>
                  double totalAmount,
                  double discountAmount,
                  double payAmount,
+                 string issueTrackingNo,
                  List<OrderItem> items)
     {
         AccountId = accountId;
@@ -35,6 +36,7 @@ public class Order : AggregateRoot<int>
         DiscountAmount = discountAmount;
         PayAmount = payAmount;
         PaymentMethod = paymentMethod;
+        IssueTrackingNo = issueTrackingNo;
         IsPaid = false;
         IsCanceled = false;
         RefId = 0;

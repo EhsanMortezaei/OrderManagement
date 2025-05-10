@@ -24,6 +24,7 @@ namespace ShopManagement.Core.ApplicationService.Orders.Commands.Create
                                   command.TotalAmount,
                                   command.DiscountAmount,
                                   command.PayAmount,
+                                  command.IssueTrackingNo,
                                   command.Items);
 
             await _orderCommandRepository.InsertAsync(order);
