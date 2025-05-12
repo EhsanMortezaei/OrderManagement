@@ -5,28 +5,27 @@ using Zamin.Core.ApplicationServices.Commands;
 using Zamin.Core.RequestResponse.Commands;
 using Zamin.Utilities;
 
-namespace InventoryManagement.Core.ApplicationService.Inventories.Commands.ReduceInventory
+namespace InventoryManagement.Core.ApplicationService.Inventories.Commands.ReduceInventory;
+
+public sealed class ReduceInventoryCommandHandler : CommandHandler<ReduceInventoryCommand, Guid>
 {
-    public class ReduceInventoryCommandHandler : CommandHandler<ReduceInventoryCommand, Guid>
+     readonly IInventoryCommandRepository _inventoryCommandRepository;
+     readonly IAuthHelper _authHelper;
+
+    public ReduceInventoryCommandHandler(ZaminServices zaminServices,
+        IInventoryCommandRepository inventoryCommandRepository, IAuthHelper authHelper) : base(zaminServices)
     {
-        private readonly IInventoryCommandRepository _inventoryCommandRepository;
-        private readonly IAuthHelper _authHelper;
+        _inventoryCommandRepository = inventoryCommandRepository;
+        _authHelper = authHelper;
+    }
 
-        public ReduceInventoryCommandHandler(ZaminServices zaminServices,
-            IInventoryCommandRepository inventoryCommandRepository, IAuthHelper authHelper) : base(zaminServices)
-        {
-            _inventoryCommandRepository = inventoryCommandRepository;
-            _authHelper = authHelper;
-        }
+    public override async Task<CommandResult<Guid>> Handle(ReduceInventoryCommand command)
+    {
+        var inventory = await _inventoryCommandRepository.GetGraphAsync(command.InventoryId);
 
-        public override async Task<CommandResult<Guid>> Handle(ReduceInventoryCommand command)
-        {
-            var inventory = await _inventoryCommandRepository.GetGraphAsync(command.InventoryId);
-
-            var operatorId = _authHelper.CurrentAccountId();
-            inventory.Reduce(command.Count, operatorId, command.Description, 0);
-            _inventoryCommandRepository.Commit();
-            return Ok(inventory.BusinessId.Value);
-        }
+        var operatorId = _authHelper.CurrentAccountId();
+        inventory.Reduce(command.Count, operatorId, command.Description, 0);
+        _inventoryCommandRepository.Commit();
+        return Ok(inventory.BusinessId.Value);
     }
 }

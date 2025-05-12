@@ -1,11 +1,10 @@
 ﻿using Zamin.Core.RequestResponse.Commands;
-using Zamin.Core.RequestResponse.Endpoints;
 
-namespace AccountManagement.Core.RequestResponse.Accounts.Commands.Delete
+namespace AccountManagement.Core.RequestResponse.Accounts.Commands.Delete;
+
+// sealed record
+// Path, IWebRequest hazf shavad
+public sealed record DeleteAccountCommand : ICommand
 {
-    public class DeleteAccountCommand :ICommand,IWebRequest
-    {
-        public int Id { get; set; }
-        public string Path => "/api/Account/Delete";
-    }
+    public int Id { get; set; }
 }

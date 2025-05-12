@@ -20,7 +20,7 @@ public static class HostingExtensions
     public static WebApplication ConfigureServices(this WebApplicationBuilder builder)
     {
         IConfiguration configuration = builder.Configuration;
-
+        // pak shavad
         builder.Services.AddSingleton<CommandDispatcherDecorator, CustomCommandDecorator>();
         builder.Services.AddSingleton<QueryDispatcherDecorator, CustomQueryDecorator>();
         builder.Services.AddSingleton<EventDispatcherDecorator, CustomEventDecorator>();

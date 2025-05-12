@@ -1,25 +1,23 @@
-﻿using System.Collections.Generic;
+﻿namespace Framework.AuthHelper;
 
-namespace Framework.AuthHelper
+public sealed class AuthViewModel
 {
-    public class AuthViewModel
+    public long Id { get; set; }
+    public long RoleId { get; set; }
+    public string Role { get; set; } = string.Empty;
+    public string Fullname { get; set; } = string.Empty;
+    public string Username { get; set; } = string.Empty;
+    public List<int>? Permissions { get; set; }
+
+    // nuull bodan ha check shavad
+    public AuthViewModel()
     {
-        public long Id { get; set; }
-        public long RoleId { get; set; }
-        public string Role { get; set; }
-        public string Fullname { get; set; }
-        public string Username { get; set; }
-        public List<int> Permissions { get; set; }
+    }
 
-        public AuthViewModel()
-        {
-        }
-
-        public AuthViewModel(long id, string fullname, string username)
-        {
-            Id = id;
-            Fullname = fullname;
-            Username = username;
-        }
+    public AuthViewModel(long id, string fullname, string username)
+    {
+        Id = id;
+        Fullname = fullname;
+        Username = username;
     }
 }

@@ -1,12 +1,8 @@
-﻿using AccountManagement.Core.Domain.Permissions.Entities;
-using Zamin.Core.RequestResponse.Commands;
-using Zamin.Core.RequestResponse.Endpoints;
+﻿using Zamin.Core.RequestResponse.Commands;
 
-namespace AccountManagement.Core.RequestResponse.Roles.Commands.Create
+namespace AccountManagement.Core.RequestResponse.Roles.Commands.Create;
+
+public sealed class CreateRoleCommand : ICommand<Guid>
 {
-    public class CreateRoleCommand : ICommand<Guid>, IWebRequest
-    {
-        public string Name { get; set; }
-        public string Path => "/api/Role/Create";
-    }
+    public string Name { get; set; } = string.Empty;
 }

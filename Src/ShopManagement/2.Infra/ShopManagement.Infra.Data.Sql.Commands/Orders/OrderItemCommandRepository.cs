@@ -1,6 +1,6 @@
 ﻿namespace ShopManagement.Infra.Data.Sql.Commands.Orders
 {
-    public class OrderItemCommandRepository
+    public sealed class OrderItemCommandRepository
     {
     }
 }

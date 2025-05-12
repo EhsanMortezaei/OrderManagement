@@ -1,11 +1,8 @@
-﻿using Zamin.Core.RequestResponse.Endpoints;
-using Zamin.Core.RequestResponse.Queries;
+﻿using Zamin.Core.RequestResponse.Queries;
 
-namespace InventoryManagement.Core.RequestResponse.InventoryOperations.Queries
+namespace InventoryManagement.Core.RequestResponse.InventoryOperations.Queries;
+
+public sealed class GetInventoryOperationByIdQuery : IQuery<InventoryOperationQr?>
 {
-    public class GetInventoryOperationByIdQuery : IQuery<InventoryOperationQr?>, IWebRequest
-    {
-        public int InventoryOperationId { get; set; }
-        public string Path => "/api/InventoryOperation/GetById";
-    }
+    public int InventoryOperationId { get; set; }
 }

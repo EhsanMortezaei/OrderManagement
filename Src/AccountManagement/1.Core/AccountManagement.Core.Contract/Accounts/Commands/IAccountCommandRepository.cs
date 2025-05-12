@@ -1,10 +1,9 @@
 ﻿using AccountManagement.Core.Domain.Accounts.Entities;
 using Zamin.Core.Contracts.Data.Commands;
 
-namespace AccountManagement.Core.Contract.Accounts.Commands
+namespace AccountManagement.Core.Contract.Accounts.Commands;
+
+public interface IAccountCommandRepository : ICommandRepository<Account, int>
 {
-    public interface IAccountCommandRepository : ICommandRepository<Account, int>
-    {
-        Account GetBy(string username);
-    }
+    Task<Account> GetByUserName(string username);
 }

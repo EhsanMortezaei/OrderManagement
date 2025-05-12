@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace AccountManagement.Infra.Data.Sql.Queries.Models;
+﻿namespace AccountManagement.Infra.Data.Sql.Queries.Models;
 
 public partial class Order
 {

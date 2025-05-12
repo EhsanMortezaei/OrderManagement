@@ -1,9 +1,8 @@
-﻿using AccountManagement.Core.Domain.Permissions.Event;
-using AccountManagement.Core.RequestResponse.Accounts.Commands.Create;
+﻿using AccountManagement.Core.RequestResponse.Accounts.Commands.Create;
 using AccountManagement.Core.RequestResponse.Accounts.Commands.Delete;
 using AccountManagement.Core.RequestResponse.Accounts.Commands.Login;
 using AccountManagement.Core.RequestResponse.Accounts.Commands.Update;
-using AccountManagement.Core.RequestResponse.Accounts.Queries;
+using AccountManagement.Core.RequestResponse.Accounts.Queries.GetAccountById;
 using AccountManagement.Core.RequestResponse.Permissions.Commands.Create;
 using AccountManagement.Core.RequestResponse.Permissions.Commands.Delete;
 using AccountManagement.Core.RequestResponse.Permissions.Commands.Update;
@@ -15,58 +14,59 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Zamin.EndPoints.Web.Controllers;
 
-namespace AccountManagement.EndPoint.Api.Accounts
+namespace AccountManagement.EndPoint.Api.Accounts;
+
+// name action eslah shavad
+// har aggregate yek controller darad
+[Route("api/AccountManagement/[controller]/[action]")]
+public sealed class AccountController : BaseController
 {
-    [Route("api/AccountManagement/[controller]")]
-    public class AccountController : BaseController
+     readonly IMediator _mediator;
+
+    public AccountController(IMediator mediator)
     {
-        private readonly IMediator _mediator;
-
-        public AccountController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
-
-        [HttpPost("CreateAccount")]
-        public async Task<IActionResult> CreateAccount([FromBody] CreateAccountCommand command) => await Create<CreateAccountCommand, Guid>(command);
-
-        [HttpPut("UpdateAccount")]
-        public async Task<IActionResult> UpdateAccount([FromBody] UpdateAccountCommand command) => await Edit(command);
-
-        [HttpDelete("DeleteAccount")]
-        public async Task<IActionResult> DeleteAccount([FromBody] DeleteAccountCommand command) => await Delete(command);
-
-
-        [HttpPost("CreateRole")]
-        public async Task<IActionResult> CreateRole([FromBody] CreateRoleCommand command) => await Create<CreateRoleCommand, Guid>(command);
-
-        [HttpPut("UpdateRole")]
-        public async Task<IActionResult> UpdateRole([FromBody] UpdateRoleCommand command) => await Edit(command);
-
-        [HttpDelete("DeleteRole")]
-        public async Task<IActionResult> DeleteRole([FromBody] DeleteRoleCommand command) => await Delete(command);
-
-        [HttpPost("Login")]
-        public async Task<IActionResult> Login([FromBody] LoginAccountCommand command) => await Edit<LoginAccountCommand, Guid>(command);
-        //public async Task<IActionResult> Login([FromBody] LoginAccountCommand command)
-        //{
-        //    var result = await _mediator.Send(command);
-        //    return Ok(result);
-        //}
-
-        [HttpPost("CreatePermission")]
-        public async Task<IActionResult> CreatePermission([FromBody] CreatePermissionCommand command) => await Create<CreatePermissionCommand, Guid>(command);
-
-        [HttpPut("UpdatePermission")]
-        public async Task<IActionResult> UpdeatePermission([FromBody] UpdatePermissionCommand command) => await Edit(command);
-
-        [HttpDelete("DeletePermission")]
-        public async Task<IActionResult> DeletePermission([FromBody] DeletePermissionCommand command) => await Delete(command);
-
-        [HttpGet("GetByIdAccount")]
-        public async Task<IActionResult> GetByIdAccount(GetAccountByIdQuery query) => await Query<GetAccountByIdQuery, AccountQr?>(query);
-
-        [HttpGet("GetByIdRole")]
-        public async Task<IActionResult> GetByIdRole(GetRoleByIdQuery query) => await Query<GetRoleByIdQuery, RoleQr?>(query);
+        _mediator = mediator;
     }
+
+    [HttpPost]
+    public async Task<IActionResult> Create([FromBody] CreateAccountCommand command) => await Create<CreateAccountCommand, Guid>(command);
+
+    [HttpPut("UpdateAccount")]
+    public async Task<IActionResult> Update([FromBody] UpdateAccountCommand command) => await Edit(command);
+
+    [HttpDelete("DeleteAccount")]
+    public async Task<IActionResult> Delete([FromBody] DeleteAccountCommand command) => await Delete(command);
+
+
+    [HttpPost("CreateRole")]
+    public async Task<IActionResult> CreateRole([FromBody] CreateRoleCommand command) => await Create<CreateRoleCommand, Guid>(command);
+
+    [HttpPut("UpdateRole")]
+    public async Task<IActionResult> UpdateRole([FromBody] UpdateRoleCommand command) => await Edit(command);
+
+    [HttpDelete("DeleteRole")]
+    public async Task<IActionResult> DeleteRole([FromBody] DeleteRoleCommand command) => await Delete(command);
+
+    [HttpPost("Login")]
+    public async Task<IActionResult> Login([FromBody] LoginAccountCommand command) => await Edit<LoginAccountCommand, LoginAccountCommandResult>(command);
+    //public async Task<IActionResult> Login([FromBody] LoginAccountCommand command)
+    //{
+    //    var result = await _mediator.Send(command);
+    //    return Ok(result);
+    //}
+
+    [HttpPost("CreatePermission")]
+    public async Task<IActionResult> CreatePermission([FromBody] CreatePermissionCommand command) => await Create<CreatePermissionCommand, Guid>(command);
+
+    [HttpPut("UpdatePermission")]
+    public async Task<IActionResult> UpdeatePermission([FromBody] UpdatePermissionCommand command) => await Edit(command);
+
+    [HttpDelete("DeletePermission")]
+    public async Task<IActionResult> DeletePermission([FromBody] DeletePermissionCommand command) => await Delete(command);
+
+    [HttpGet("GetByIdAccount")]
+    public async Task<IActionResult> GetByIdAccount(GetAccountByIdQuery query) => await Query<GetAccountByIdQuery, AccountQr?>(query);
+
+    [HttpGet("GetByIdRole")]
+    public async Task<IActionResult> GetByIdRole([FromQuery] GetRoleByIdQuery query) => await Query<GetRoleByIdQuery, RoleQr?>(query);
 }

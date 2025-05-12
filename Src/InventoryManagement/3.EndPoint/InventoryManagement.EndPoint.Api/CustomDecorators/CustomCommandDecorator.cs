@@ -1,10 +1,10 @@
 ﻿using Zamin.Core.ApplicationServices.Commands;
-using Zamin.Core.Contracts.ApplicationServices.Commands;
 using Zamin.Core.RequestResponse.Commands;
 
 namespace InventoryManagement.EndPoint.Api.CustomDecorators;
 
-public class CustomCommandDecorator : CommandDispatcherDecorator
+// pak shavad
+public sealed class CustomCommandDecorator : CommandDispatcherDecorator
 {
     public override int Order => 0;
 

@@ -1,13 +1,9 @@
-﻿using AccountManagement.Core.Domain.Permissions.Entities;
-using Zamin.Core.RequestResponse.Commands;
-using Zamin.Core.RequestResponse.Endpoints;
+﻿using Zamin.Core.RequestResponse.Commands;
 
-namespace AccountManagement.Core.RequestResponse.Roles.Commands.Update
+namespace AccountManagement.Core.RequestResponse.Roles.Commands.Update;
+
+public sealed class UpdateRoleCommand : ICommand
 {
-    public class UpdateRoleCommand : ICommand, IWebRequest
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Path => "/api/Role/Update";
-    }
+    public int Id { get; set; }
+    public string Name { get; set; } = string.Empty;
 }

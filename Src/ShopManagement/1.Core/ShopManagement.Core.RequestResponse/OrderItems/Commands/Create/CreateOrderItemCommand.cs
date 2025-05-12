@@ -1,21 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Zamin.Core.RequestResponse.Commands;
-using Zamin.Core.RequestResponse.Endpoints;
+﻿using Zamin.Core.RequestResponse.Commands;
 
-namespace ShopManagement.Core.RequestResponse.OrderItems.Commands.Create
+namespace ShopManagement.Core.RequestResponse.OrderItems.Commands.Create;
+
+public sealed class CreateOrderItemCommand : ICommand<Guid>
 {
-    public class CreateOrderItemCommand : ICommand<Guid>, IWebRequest
-    {
-        public int Id { get; set; }
-        public long ProductId { get; set; }
-        public int Count { get; set; }
-        public double UnitPrice { get; set; }
-        public int DiscountRate { get; set; }
-        public long OrderId { get; set; }
-        public string Path => "/api/OrderItem/Create";
-    }
+    public int Id { get; set; }
+    public long ProductId { get; set; }
+    public int Count { get; set; }
+    public double UnitPrice { get; set; }
+    public int DiscountRate { get; set; }
+    public long OrderId { get; set; }
 }

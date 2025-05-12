@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="OrderItem\Command\**" />
+    <EmbeddedResource Remove="OrderItem\Command\**" />
+    <None Remove="OrderItem\Command\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Zamin.Core.Contracts" Version="9.0.0" />
     <PackageReference Include="Zamin.Core.Domain" Version="9.0.0" />
     <PackageReference Include="Zamin.Core.RequestResponse" Version="9.0.0" />
@@ -15,10 +21,6 @@
   <ItemGroup>
     <ProjectReference Include="..\ShopManagement.Core.Domain\ShopManagement.Core.Domain.csproj" />
     <ProjectReference Include="..\ShopManagement.Core.RequestResponse\ShopManagement.Core.RequestResponse.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="OrderItem\Command\" />
   </ItemGroup>
 
 </Project>

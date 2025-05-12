@@ -1,11 +1,9 @@
-﻿using AccountManagement.Core.Domain.Accounts.Entities;
-using AccountManagement.Core.Domain.Permissions.Entities;
-using Zamin.Core.Domain.Events;
+﻿using Zamin.Core.Domain.Events;
 
-namespace AccountManagement.Core.Domain.Roles.Events
-{
-    public class RoleCreated(Guid BusinessId,
-                             string name) : IDomainEvent
-    {
-    }
-}
+namespace AccountManagement.Core.Domain.Roles.Events;
+
+// agar estefade nemishavad az event hazf shavad
+
+
+// sealed record 
+public sealed record RoleCreated(Guid BusinessId, string name) : IDomainEvent;

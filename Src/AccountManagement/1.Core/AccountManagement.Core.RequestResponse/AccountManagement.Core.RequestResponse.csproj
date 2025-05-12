@@ -6,6 +6,12 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="AccountRole\Command\**" />
+    <EmbeddedResource Remove="AccountRole\Command\**" />
+    <None Remove="AccountRole\Command\**" />
+  </ItemGroup>
+
 	<ItemGroup>
 		<PackageReference Include="MediatR" Version="12.5.0" />
 		<PackageReference Include="Zamin.Core.RequestResponse" Version="9.0.0" />
@@ -14,10 +20,6 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\AccountManagement.Core.Domain\AccountManagement.Core.Domain.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="AccountRole\Command\Create\" />
 	</ItemGroup>
 
 

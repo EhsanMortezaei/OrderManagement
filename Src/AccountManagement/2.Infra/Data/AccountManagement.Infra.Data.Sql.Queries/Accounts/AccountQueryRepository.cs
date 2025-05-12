@@ -1,5 +1,5 @@
 ﻿using AccountManagement.Core.Contract.Accounts.Queries;
-using AccountManagement.Core.RequestResponse.Accounts.Queries;
+using AccountManagement.Core.RequestResponse.Accounts.Queries.GetAccountById;
 using AccountManagement.Infra.Data.Sql.Queries.Common;
 using Microsoft.EntityFrameworkCore;
 using Zamin.Infra.Data.Sql.Queries;
@@ -7,7 +7,7 @@ using Zamin.Infra.Data.Sql.Queries;
 
 namespace AccountManagement.Infra.Data.Sql.Queries.Accounts;
 
-public class AccountQueryRepository : BaseQueryRepository<AccountManagementQueryDbContext>, IAccountQueryRepository
+public sealed class AccountQueryRepository : BaseQueryRepository<AccountManagementQueryDbContext>, IAccountQueryRepository
 {
     public AccountQueryRepository(AccountManagementQueryDbContext dbContext) : base(dbContext)
     {

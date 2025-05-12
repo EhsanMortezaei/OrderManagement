@@ -1,26 +1,25 @@
 ﻿using Zamin.Core.Domain.Entities;
 
-namespace ShopManagement.Core.Domain.Orders.Entities
+namespace ShopManagement.Core.Domain.Orders.Entities;
+
+public sealed class OrderItem : Entity<int>
 {
-    public class OrderItem : Entity<int>
+    public long ProductId { get;  set; }
+    public int Count { get;  set; }
+    public double UnitPrice { get;  set; }
+    public int DiscountRate { get;  set; }
+    public long OrderId { get;  set; }
+
+     OrderItem() { }
+
+    public OrderItem(long productId,
+                     int count,
+                     double unitPrice,
+                     int discountRate)
     {
-        public long ProductId { get; private set; }
-        public int Count { get; private set; }
-        public double UnitPrice { get; private set; }
-        public int DiscountRate { get; private set; }
-        public long OrderId { get; private set; }
-
-        protected OrderItem() { }
-
-        public OrderItem(long productId,
-                         int count,
-                         double unitPrice,
-                         int discountRate)
-        {
-            ProductId = productId;
-            Count = count;
-            UnitPrice = unitPrice;
-            DiscountRate = discountRate;
-        }
+        ProductId = productId;
+        Count = count;
+        UnitPrice = unitPrice;
+        DiscountRate = discountRate;
     }
 }

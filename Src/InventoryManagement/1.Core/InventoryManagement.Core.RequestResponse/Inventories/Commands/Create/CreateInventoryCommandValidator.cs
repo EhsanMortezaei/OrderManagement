@@ -1,12 +1,11 @@
 ﻿using FluentValidation;
 using Zamin.Extensions.Translations.Abstractions;
 
-namespace InventoryManagement.Core.RequestResponse.Inventories.Commands.Create
+namespace InventoryManagement.Core.RequestResponse.Inventories.Commands.Create;
+
+public sealed class CreateInventoryCommandValidator : AbstractValidator<CreateInventoryCommand>
 {
-    public class CreateInventoryCommandValidator : AbstractValidator<CreateInventoryCommand>
+    public CreateInventoryCommandValidator(ITranslator translator)
     {
-        public CreateInventoryCommandValidator(ITranslator translator)
-        {
-        }
     }
 }

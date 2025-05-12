@@ -2,14 +2,12 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace InventoryManagement.Infra.Data.Sql.Command.Inventories.Configs
+namespace InventoryManagement.Infra.Data.Sql.Command.Inventories.Configs;
+
+public sealed class InventoryOperationConfig : IEntityTypeConfiguration<InventoryOperation>
 {
-    public class InventoryOperationConfig : IEntityTypeConfiguration<InventoryOperation>
+    public void Configure(EntityTypeBuilder<InventoryOperation> builder)
     {
-        public void Configure(EntityTypeBuilder<InventoryOperation> builder)
-        {
-            builder.HasKey(x => x.Id);
-            builder.Property(x => x.Description).HasMaxLength(1000).IsRequired();
-        }
+        builder.Property(x => x.Description).HasMaxLength(1000).IsRequired();
     }
 }

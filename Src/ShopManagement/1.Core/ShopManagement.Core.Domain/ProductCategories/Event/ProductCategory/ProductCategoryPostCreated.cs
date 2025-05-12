@@ -1,22 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Zamin.Core.Domain.Events;
+﻿using Zamin.Core.Domain.Events;
 
-namespace ShopManagement.Core.Domain.ProductCategories.Event.ProductCategory
-{
-    public record ProductCategoryPostCreated(Guid BusinessId,
-                                             string name,
-                                             string code,
-                                             string shortDescription,
-                                             string descrption,
-                                             string picture,
-                                             string pictureAlt,
-                                             string pictureTitle,
-                                             long categoryId,
-                                             string slug,
-                                             string keywords,
-                                             string metaDescription) : IDomainEvent;
-}
+namespace ShopManagement.Core.Domain.ProductCategories.Event.ProductCategory;
+
+public record ProductCategoryPostCreated(Guid BusinessId,
+                                         string name,
+                                         string code,
+                                         string shortDescription,
+                                         string descrption,
+                                         string picture,
+                                         string pictureAlt,
+                                         string pictureTitle,
+                                         long categoryId,
+                                         string slug,
+                                         string keywords,
+                                         string metaDescription) : IDomainEvent;

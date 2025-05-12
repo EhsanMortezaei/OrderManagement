@@ -5,27 +5,26 @@ using Zamin.Core.Domain.Exceptions;
 using Zamin.Core.RequestResponse.Commands;
 using Zamin.Utilities;
 
-namespace AccountManagement.Core.ApplicationService.Roles.Commands.Update
+namespace AccountManagement.Core.ApplicationService.Roles.Commands.Update;
+
+public sealed class UpdateRoleCommandHandler : CommandHandler<UpdateRoleCommand>
 {
-    public class UpdateRoleCommandHandler : CommandHandler<UpdateRoleCommand>
+     readonly IRoleCommandRepository _roleCommandRepository;
+
+    public UpdateRoleCommandHandler(ZaminServices zaminServices,
+        IRoleCommandRepository roleCommandRepository) : base(zaminServices)
     {
-        private readonly IRoleCommandRepository _roleCommandRepository;
+        _roleCommandRepository = roleCommandRepository;
+    }
 
-        public UpdateRoleCommandHandler(ZaminServices zaminServices,
-            IRoleCommandRepository roleCommandRepository) : base(zaminServices)
-        {
-            _roleCommandRepository = roleCommandRepository;
-        }
+    public override async Task<CommandResult> Handle(UpdateRoleCommand command)
+    {
+        var role = await _roleCommandRepository.GetAsync(command.Id);
+        if (role is null)
+            throw new InvalidEntityStateException("کاربر یافت نشد");
 
-        public override async Task<CommandResult> Handle(UpdateRoleCommand command)
-        {
-            var role = await _roleCommandRepository.GetAsync(command.Id);
-            if (role is null)
-                throw new InvalidEntityStateException("کاربر یافت نشد");
-
-            role.Edite(command.Name);
-            await _roleCommandRepository.CommitAsync();
-            return Ok();
-        }
+        role.Edite(command.Name);
+        await _roleCommandRepository.CommitAsync();
+        return Ok();
     }
 }

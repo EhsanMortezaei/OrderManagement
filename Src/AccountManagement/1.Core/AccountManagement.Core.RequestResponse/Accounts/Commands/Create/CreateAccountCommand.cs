@@ -1,15 +1,14 @@
 ﻿using Zamin.Core.RequestResponse.Commands;
-using Zamin.Core.RequestResponse.Endpoints;
 
-namespace AccountManagement.Core.RequestResponse.Accounts.Commands.Create
+namespace AccountManagement.Core.RequestResponse.Accounts.Commands.Create;
+
+public sealed class CreateAccountCommand : ICommand<Guid>
 {
-    public class CreateAccountCommand : ICommand<Guid>, IWebRequest
-    {
-        public string Fullname { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public string Mobile { get; set; }
-        public string ProfilePhoto { get; set; }
-        public string Path => "/api/Account/Create";
-    }
+    // null check shavad
+    public string Fullname { get; set; } = string.Empty;
+    public string Username { get; set; } = string.Empty;
+    public string Password { get; set; } = string.Empty;
+    public string ConfirmPassword { get; set; } = string.Empty;
+    public string Mobile { get; set; } = string.Empty;
+    public string ProfilePhoto { get; set; } = string.Empty;
 }

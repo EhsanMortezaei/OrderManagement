@@ -1,12 +1,8 @@
-﻿using Zamin.Core.RequestResponse.Endpoints;
-using Zamin.Core.RequestResponse.Queries;
+﻿using Zamin.Core.RequestResponse.Queries;
 
-namespace ShopManagement.Core.RequestResponse.ProductCategories.Query
+namespace ShopManagement.Core.RequestResponse.ProductCategories.Query;
+
+public sealed class GetProductCategoryByIdQuery : IQuery<ProductCategoryQr?>
 {
-    public class GetProductCategoryByIdQuery : IQuery<ProductCategoryQr?>, IWebRequest
-    {
-        public int ProductCategoryId { get; set; }
-
-        public string Path => "/api/Product/GetById";
-    }
+    public int ProductCategoryId { get; set; }
 }

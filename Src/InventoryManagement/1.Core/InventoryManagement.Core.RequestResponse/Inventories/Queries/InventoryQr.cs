@@ -1,10 +1,9 @@
-﻿namespace InventoryManagement.Core.RequestResponse.Inventories.Queries
+﻿namespace InventoryManagement.Core.RequestResponse.Inventories.Queries;
+
+public sealed class InventoryQr
 {
-    public class InventoryQr
-    {
-        public int Id { get; set; }
-        public int ProductId { get; set; }
-        public double UnitPrice { get; set; }
-        public bool InStock { get; set; }
-    }
+    public int Id { get; set; }
+    public int ProductId { get; set; }
+    public double UnitPrice { get; set; }
+    public bool InStock { get; set; }
 }

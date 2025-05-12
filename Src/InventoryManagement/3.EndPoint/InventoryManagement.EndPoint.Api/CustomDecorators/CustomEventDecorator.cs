@@ -1,8 +1,8 @@
 ﻿using Zamin.Core.ApplicationServices.Events;
 
 namespace InventoryManagement.EndPoint.Api.CustomDecorators;
-
-public class CustomEventDecorator : EventDispatcherDecorator
+// pak shavad
+public sealed class CustomEventDecorator : EventDispatcherDecorator
 {
     public override int Order => 0;
 

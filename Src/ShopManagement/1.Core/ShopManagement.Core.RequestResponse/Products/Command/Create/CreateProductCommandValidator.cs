@@ -1,21 +1,20 @@
 ﻿using FluentValidation;
 using Zamin.Extensions.Translations.Abstractions;
 
-namespace ShopManagement.Core.RequestResponse.Products.Command.Create
-{
-    public class CreateProductCommandValidator : AbstractValidator<CreateProductCommand>
-    {
-        public CreateProductCommandValidator(ITranslator translator)
-        {
-            RuleFor(c => c.Name)
-                .NotNull().WithMessage(translator["Required", "Title"])
-                .MinimumLength(2).WithMessage(translator["MinimumLength", "Title", "2"])
-                .MaximumLength(100).WithMessage(translator["MaximumLength", "Title", "100"]);
+namespace ShopManagement.Core.RequestResponse.Products.Command.Create;
 
-            RuleFor(c => c.Descrption)
-                .NotNull().WithMessage(translator["Required", "Description"]).WithErrorCode("1")
-                .MinimumLength(10).WithMessage(translator["MinimumLength", "Description", "10"]).WithErrorCode("2")
-                .MaximumLength(500).WithMessage(translator["MaximumLength", "Description", "500"]).WithErrorCode("3");
-        }
+public sealed class CreateProductCommandValidator : AbstractValidator<CreateProductCommand>
+{
+    public CreateProductCommandValidator(ITranslator translator)
+    {
+        RuleFor(c => c.Name)
+            .NotNull().WithMessage(translator["Required", "Title"])
+            .MinimumLength(2).WithMessage(translator["MinimumLength", "Title", "2"])
+            .MaximumLength(100).WithMessage(translator["MaximumLength", "Title", "100"]);
+
+        RuleFor(c => c.Descrption)
+            .NotNull().WithMessage(translator["Required", "Description"]).WithErrorCode("1")
+            .MinimumLength(10).WithMessage(translator["MinimumLength", "Description", "10"]).WithErrorCode("2")
+            .MaximumLength(500).WithMessage(translator["MaximumLength", "Description", "500"]).WithErrorCode("3");
     }
 }

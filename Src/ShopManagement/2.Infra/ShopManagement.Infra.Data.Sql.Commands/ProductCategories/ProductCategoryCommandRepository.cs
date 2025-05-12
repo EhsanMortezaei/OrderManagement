@@ -5,7 +5,7 @@ using Zamin.Infra.Data.Sql.Commands;
 
 namespace ShopManagement.Infra.Data.Sql.Commands.ProductCategories;
 
-public class ProductCategoryCommandRepository :
+public sealed class ProductCategoryCommandRepository :
     BaseCommandRepository<ProductCategory, ShopManagementCommandDbContext, int>,
     IProductCategoryCommandRepository
 {

@@ -2,7 +2,7 @@
 
 namespace InventoryManagement.Core.Domain.Inventories.Events
 {
-    public class InventoryCreated(long count,
+    public sealed record InventoryCreated(long count,
                                   long operatorId,
                                   string description) : IDomainEvent
     {

@@ -1,14 +1,11 @@
 ﻿using Zamin.Core.RequestResponse.Commands;
-using Zamin.Core.RequestResponse.Endpoints;
 
-namespace InventoryManagement.Core.RequestResponse.Inventories.Commands.IncreaseInventory
+namespace InventoryManagement.Core.RequestResponse.Inventories.Commands.IncreaseInventory;
+
+public sealed class IncreaseInventoryCommand : ICommand<Guid>
 {
-    public class IncreaseInventoryCommand : ICommand<Guid>, IWebRequest
-    {
-        public int InventoryId { get; set; }
-        public long Count { get; set; }
-        public string Description { get; set; }
-        public string Path => "/api/Inventory/Increase";
+    public int InventoryId { get; set; }
+    public long Count { get; set; }
+    public string Description { get; set; } = string.Empty;
 
-    }
 }

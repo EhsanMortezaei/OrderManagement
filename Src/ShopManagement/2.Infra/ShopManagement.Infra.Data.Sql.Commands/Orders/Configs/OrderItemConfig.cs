@@ -2,13 +2,12 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using ShopManagement.Core.Domain.Orders.Entities;
 
-namespace ShopManagement.Infra.Data.Sql.Commands.Orders.Configs
+namespace ShopManagement.Infra.Data.Sql.Commands.Orders.Configs;
+
+public sealed class OrderItemConfig : IEntityTypeConfiguration<OrderItem>
 {
-    public class OrderItemConfig : IEntityTypeConfiguration<OrderItem>
+    public void Configure(EntityTypeBuilder<OrderItem> builder)
     {
-        public void Configure(EntityTypeBuilder<OrderItem> builder)
-        {
-            builder.HasKey(x => x.Id);
-        }
+        builder.HasKey(x => x.Id);
     }
 }

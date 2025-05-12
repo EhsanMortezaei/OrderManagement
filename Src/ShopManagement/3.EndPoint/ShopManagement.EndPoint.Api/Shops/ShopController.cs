@@ -15,8 +15,8 @@ using Zamin.EndPoints.Web.Controllers;
 
 namespace ShopManagement.EndPoint.Api.Shops
 {
-    [Route("api/ShopManagement/[Controller]")]
-    public class ShopController : BaseController
+    [Route("api/ShopManagement/[controller]/[action]")]
+    public sealed class ShopController : BaseController
     {
         [HttpPost("CreateOrder")]
         public async Task<IActionResult> CreateOrder([FromBody] CreateOrderCommand command) => await Create<CreateOrderCommand, Guid>(command);

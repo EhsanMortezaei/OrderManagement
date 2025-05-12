@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace InventoryManagement.Infra.Data.Sql.Queries.Models;
+﻿namespace InventoryManagement.Infra.Data.Sql.Queries.Models;
 
 public partial class Inventory
 {

@@ -1,92 +1,142 @@
-﻿using System.Security.Claims;
-using Microsoft.AspNetCore.Authentication;
+﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
+using System.Security.Claims;
 
-namespace Framework.AuthHelper
+namespace Framework.AuthHelper;
+
+public sealed class AuthHelper : IAuthHelper
 {
-    public class AuthHelper : IAuthHelper
+     readonly IHttpContextAccessor _contextAccessor;
+
+    public AuthHelper(IHttpContextAccessor contextAccessor)
     {
-        private readonly IHttpContextAccessor _contextAccessor;
+        _contextAccessor = contextAccessor;
+    }
 
-        public AuthHelper(IHttpContextAccessor contextAccessor)
-        {
-            _contextAccessor = contextAccessor;
-        }
+    public AuthViewModel CurrentAccountInfo()
+    {
+        //var result = new AuthViewModel();
+        //if (!IsAuthenticated())
+        //    return result;
 
-        public AuthViewModel CurrentAccountInfo()
-        {
-            var result = new AuthViewModel();
-            if (!IsAuthenticated())
-                return result;
-
-            var claims = _contextAccessor.HttpContext.User.Claims.ToList();
-            result.Id = long.Parse(claims.FirstOrDefault(x => x.Type == "AccountId").Value);
-            result.Username = claims.FirstOrDefault(x => x.Type == "Username").Value;
-            result.RoleId = long.Parse(claims.FirstOrDefault(x => x.Type == ClaimTypes.Role).Value);
-            result.Fullname = claims.FirstOrDefault(x => x.Type == ClaimTypes.Name).Value;
-            result.Role = Roles.GetRoleBy(result.RoleId);
+        //var claims = _contextAccessor.HttpContext.User.Claims.ToList();
+        //result.Id = long.Parse(claims.FirstOrDefault(x => x.Type == "AccountId").Value);
+        //result.Username = claims.FirstOrDefault(x => x.Type == "Username").Value;
+        //result.RoleId = long.Parse(claims.FirstOrDefault(x => x.Type == ClaimTypes.Role).Value);
+        //result.Fullname = claims.FirstOrDefault(x => x.Type == ClaimTypes.Name).Value;
+        //result.Role = Roles.GetRoleBy(result.RoleId);
+        //return result;
+        var result = new AuthViewModel();
+        if (!IsAuthenticated())
             return result;
-        }
 
-        public List<int> GetPermissions()
+        var claims = _contextAccessor.HttpContext?.User?.Claims?.ToList();
+        if (claims == null)
+            return result;
+
+        var accountIdClaim = claims.FirstOrDefault(x => x.Type == "AccountId");
+        var usernameClaim = claims.FirstOrDefault(x => x.Type == ClaimTypes.Name);
+        var roleIdClaim = claims.FirstOrDefault(x => x.Type == ClaimTypes.Role);
+        var fullnameClaim = claims.FirstOrDefault(x => x.Type == "FullName");
+
+        if (accountIdClaim != null && long.TryParse(accountIdClaim.Value, out var accountId))
+            result.Id = accountId;
+
+        if (usernameClaim != null)
+            result.Username = usernameClaim.Value;
+
+        if (roleIdClaim != null && long.TryParse(roleIdClaim.Value, out var roleId))
+            result.RoleId = roleId;
+
+        if (fullnameClaim != null)
+            result.Fullname = fullnameClaim.Value;
+
+        return result;
+
+    }
+
+    //public List<int> GetPermissions()
+    //{
+    //    if (!IsAuthenticated())
+    //        return new List<int>();
+
+    //    var permissions = _contextAccessor.HttpContext.User.Claims.FirstOrDefault(x => x.Type == "permissions")
+    //        ?.Value;
+    //    return JsonConvert.DeserializeObject<List<int>>(permissions);
+    //}
+
+    public List<int> GetPermissions()
+    {
+        if (!IsAuthenticated())
+            return new List<int>();
+
+        var permissions = _contextAccessor.HttpContext.User.Claims
+            .FirstOrDefault(x => x.Type == "permissions")?.Value;
+
+        return permissions != null
+            ? JsonConvert.DeserializeObject<List<int>>(permissions) ?? new List<int>()
+            : new List<int>();
+    }
+
+
+    public long CurrentAccountId()
+    {
+        if (IsAuthenticated())
         {
-            if (!IsAuthenticated())
-                return new List<int>();
+            var accountIdClaim = _contextAccessor.HttpContext?.User?.Claims
+                .FirstOrDefault(x => x.Type == "AccountId")?.Value;
 
-            var permissions = _contextAccessor.HttpContext.User.Claims.FirstOrDefault(x => x.Type == "permissions")
-                ?.Value;
-            return JsonConvert.DeserializeObject<List<int>>(permissions);
+            if (!string.IsNullOrWhiteSpace(accountIdClaim) && long.TryParse(accountIdClaim, out var accountId))
+                return accountId;
         }
 
-        public long CurrentAccountId()
+        return 0;
+    }
+
+
+    public string? CurrentAccountRole()
+    {
+        if (IsAuthenticated())
+            return _contextAccessor.HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Role)?.Value;
+        return null;
+    }
+
+    public bool IsAuthenticated()
+    {
+        return _contextAccessor.HttpContext?.User?.Identity?.IsAuthenticated ?? false;
+    }
+
+
+    public void Signin(AuthViewModel account)
+    {
+        var permissions = JsonConvert.SerializeObject(account.Permissions);
+        var claims = new List<Claim>
         {
-            return IsAuthenticated()
-                ? long.Parse(_contextAccessor.HttpContext.User.Claims.First(x => x.Type == "AccountId")?.Value)
-                : 0;
-        }
+            new("AccountId", account.Id.ToString()),
+            new Claim(ClaimTypes.Name, account.Fullname),
+            new Claim(ClaimTypes.Role, account.RoleId.ToString()),
+            new Claim(ClaimTypes.Role, account.RoleId.ToString()),
+            new Claim("Username", account.Username), // Or Use ClaimTypes.NameIdentifier
+            new Claim("permissions", permissions),
+            //new Claim("Mobile", account.Mobile)
+        };
 
-        public string CurrentAccountRole()
+        var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+        var authProperties = new AuthenticationProperties
         {
-            if (IsAuthenticated())
-                return _contextAccessor.HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Role)?.Value;
-            return null;
-        }
+            ExpiresUtc = DateTimeOffset.UtcNow.AddDays(1)
+        };
 
-        public bool IsAuthenticated()
-        {
-            return _contextAccessor.HttpContext.User.Identity.IsAuthenticated;
-        }
+        _contextAccessor.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
+            new ClaimsPrincipal(claimsIdentity),
+            authProperties);
+    }
 
-        public void Signin(AuthViewModel account)
-        {
-            var permissions = JsonConvert.SerializeObject(account.Permissions);
-            var claims = new List<Claim>
-            {
-                new Claim("AccountId", account.Id.ToString()),
-                new Claim(ClaimTypes.Name, account.Fullname),
-                new Claim(ClaimTypes.Role, account.RoleId.ToString()),
-                new Claim("Username", account.Username), // Or Use ClaimTypes.NameIdentifier
-                new Claim("permissions", permissions),
-                //new Claim("Mobile", account.Mobile)
-            };
-
-            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-
-            var authProperties = new AuthenticationProperties
-            {
-                ExpiresUtc = DateTimeOffset.UtcNow.AddDays(1)
-            };
-
-            _contextAccessor.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
-                new ClaimsPrincipal(claimsIdentity),
-                authProperties);
-        }
-
-        public void SignOut()
-        {
-            _contextAccessor.HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-        }
+    public void SignOut()
+    {
+        _contextAccessor.HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
     }
 }

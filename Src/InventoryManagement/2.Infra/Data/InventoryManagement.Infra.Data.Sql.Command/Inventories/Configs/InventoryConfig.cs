@@ -1,15 +1,13 @@
 ﻿using InventoryManagement.Core.Domain.Inventories.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System.Reflection.Emit;
 
-namespace InventoryManagement.Infra.Data.Sql.Command.Inventories.Configs
+namespace InventoryManagement.Infra.Data.Sql.Command.Inventories.Configs;
+
+public sealed class InventoryConfig : IEntityTypeConfiguration<Inventory>
 {
-    public class InventoryConfig : IEntityTypeConfiguration<Inventory>
+    public void Configure(EntityTypeBuilder<Inventory> builder)
     {
-        public void Configure(EntityTypeBuilder<Inventory> builder)
-        {
-            builder.HasKey(x => x.Id);
-        }
+        builder.HasKey(x => x.Id);
     }
 }

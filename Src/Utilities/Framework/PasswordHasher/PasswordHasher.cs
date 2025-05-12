@@ -1,52 +1,44 @@
-﻿using System;
-using System.Linq;
+﻿using Microsoft.Extensions.Options;
 using System.Security.Cryptography;
-using Microsoft.Extensions.Options;
 
-namespace Framework.PasswordHasher
+namespace Framework.PasswordHasher;
+
+public sealed class PasswordHasher(IOptions<HashingOptions> options) : IPasswordHasher
 {
-    public class PasswordHasher : IPasswordHasher
+     const int SaltSize = 16; // 128 bit 
+     const int KeySize = 32; // 256 bit
+
+     HashingOptions Options { get; } = options.Value;
+
+    public string Hash(string password)
     {
-        private const int SaltSize = 16; // 128 bit 
-        private const int KeySize = 32; // 256 bit
+        using var algorithm = new Rfc2898DeriveBytes(password, SaltSize, Options.Iterations, HashAlgorithmName.SHA256);
+        var key = Convert.ToBase64String(algorithm.GetBytes(KeySize));
+        var salt = Convert.ToBase64String(algorithm.Salt);
 
-        public PasswordHasher(IOptions<HashingOptions> options)
+        return $"{Options.Iterations}.{salt}.{key}";
+    }
+
+    public (bool Verified, bool NeedsUpgrade) Check(string hash, string password)
+    {
+        var parts = hash.Split('.', 3);
+
+        if (parts.Length != 3)
         {
-            Options = options.Value;
+            return (false, false);
         }
 
-        private HashingOptions Options { get; }
+        var iterations = Convert.ToInt32(parts[0]);
+        var salt = Convert.FromBase64String(parts[1]);
+        var key = Convert.FromBase64String(parts[2]);
 
-        public string Hash(string password)
-        {
-            using var algorithm = new Rfc2898DeriveBytes(password, SaltSize, Options.Iterations, HashAlgorithmName.SHA256);
-            var key = Convert.ToBase64String(algorithm.GetBytes(KeySize));
-            var salt = Convert.ToBase64String(algorithm.Salt);
+        var needsUpgrade = iterations != Options.Iterations;
 
-            return $"{Options.Iterations}.{salt}.{key}";
-        }
+        using var algorithm = new Rfc2898DeriveBytes(password, salt, iterations, HashAlgorithmName.SHA256);
+        var keyToCheck = algorithm.GetBytes(KeySize);
 
-        public (bool Verified, bool NeedsUpgrade) Check(string hash, string password)
-        {
-            var parts = hash.Split('.', 3);
+        var verified = keyToCheck.SequenceEqual(key);
 
-            if (parts.Length != 3)
-            {
-                return (false, false);
-            }
-
-            var iterations = Convert.ToInt32(parts[0]);
-            var salt = Convert.FromBase64String(parts[1]);
-            var key = Convert.FromBase64String(parts[2]);
-
-            var needsUpgrade = iterations != Options.Iterations;
-
-            using var algorithm = new Rfc2898DeriveBytes(password, salt, iterations, HashAlgorithmName.SHA256);
-            var keyToCheck = algorithm.GetBytes(KeySize);
-
-            var verified = keyToCheck.SequenceEqual(key);
-
-            return (verified, needsUpgrade);
-        }
+        return (verified, needsUpgrade);
     }
 }

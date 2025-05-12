@@ -1,9 +1,8 @@
-﻿using AccountManagement.Core.RequestResponse.Accounts.Queries;
+﻿using AccountManagement.Core.RequestResponse.Accounts.Queries.GetAccountById;
 
-namespace AccountManagement.Core.Contract.Accounts.Queries
+namespace AccountManagement.Core.Contract.Accounts.Queries;
+
+public interface IAccountQueryRepository
 {
-    public interface IAccountQueryRepository
-    {
-        public Task<AccountQr> ExecuteAsync(GetAccountByIdQuery query);
-    }
+    public Task<AccountQr?> ExecuteAsync(GetAccountByIdQuery query);
 }

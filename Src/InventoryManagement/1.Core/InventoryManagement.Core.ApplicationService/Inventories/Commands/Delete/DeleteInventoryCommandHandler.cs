@@ -6,23 +6,22 @@ using Zamin.Core.Domain.Exceptions;
 using Zamin.Core.RequestResponse.Commands;
 using Zamin.Utilities;
 
-namespace InventoryManagement.Core.ApplicationService.Inventories.Commands.Delete
+namespace InventoryManagement.Core.ApplicationService.Inventories.Commands.Delete;
+
+public sealed class DeleteInventoryCommandHandler(ZaminServices zaminServices,
+    IInventoryCommandRepository inventoryCommandRepository,
+    IUnitOfWork inventoryUnitOfWork) : CommandHandler<DeleteInventoryCommand>(zaminServices)
 {
-    public class DeleteInventoryCommandHandler(ZaminServices zaminServices,
-        IInventoryCommandRepository inventoryCommandRepository,
-        IUnitOfWork inventoryUnitOfWork) : CommandHandler<DeleteInventoryCommand>(zaminServices)
+     readonly IUnitOfWork _inventoryUnitOfWork = inventoryUnitOfWork;
+     readonly IInventoryCommandRepository _inventoryCommandRepository = inventoryCommandRepository;
+
+    public override async Task<CommandResult> Handle(DeleteInventoryCommand command)
     {
-        private readonly IUnitOfWork _inventoryUnitOfWork = inventoryUnitOfWork;
-        private readonly IInventoryCommandRepository _inventoryCommandRepository = inventoryCommandRepository;
+        var inventory = await _inventoryCommandRepository.GetGraphAsync(command.Id) ?? throw new InvalidEntityStateException("در انبار یافت نشد");
 
-        public override async Task<CommandResult> Handle(DeleteInventoryCommand command)
-        {
-            var inventory = await _inventoryCommandRepository.GetGraphAsync(command.Id) ?? throw new InvalidEntityStateException("در انبار یافت نشد");
+        _inventoryCommandRepository.Delete(inventory);
+        await _inventoryCommandRepository.CommitAsync();
 
-            _inventoryCommandRepository.Delete(inventory);
-            await _inventoryCommandRepository.CommitAsync();
-
-            return Ok();
-        }
+        return Ok();
     }
 }

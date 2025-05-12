@@ -1,11 +1,8 @@
 ﻿using Zamin.Core.RequestResponse.Commands;
-using Zamin.Core.RequestResponse.Endpoints;
 
-namespace AccountManagement.Core.RequestResponse.Permissions.Commands.Delete
+namespace AccountManagement.Core.RequestResponse.Permissions.Commands.Delete;
+
+public sealed class DeletePermissionCommand : ICommand
 {
-    public class DeletePermissionCommand : ICommand, IWebRequest
-    {
-        public int Id { get; set; }
-        public string Path => "/api/Permission/Delete";
-    }
+    public int Id { get; set; }
 }

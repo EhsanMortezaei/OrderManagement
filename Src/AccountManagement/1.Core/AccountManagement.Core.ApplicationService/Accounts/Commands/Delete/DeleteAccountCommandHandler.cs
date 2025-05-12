@@ -12,8 +12,8 @@ public class DeleteAccountCommandHandler(ZaminServices zaminServices,
     IAccountCommandRepository accountCommandRepository,
     IUnitOfWork accountUnitOfWork) : CommandHandler<DeleteAccountCommand>(zaminServices)
 {
-    private readonly IAccountCommandRepository _accountCommandRepository = accountCommandRepository;
-    private readonly IUnitOfWork _accountUnitOfWork = accountUnitOfWork;
+     readonly IAccountCommandRepository _accountCommandRepository = accountCommandRepository;
+     readonly IUnitOfWork _accountUnitOfWork = accountUnitOfWork;
 
     public override async Task<CommandResult> Handle(DeleteAccountCommand command)
     {

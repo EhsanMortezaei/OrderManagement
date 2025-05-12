@@ -5,33 +5,32 @@ using Zamin.Core.ApplicationServices.Commands;
 using Zamin.Core.RequestResponse.Commands;
 using Zamin.Utilities;
 
-namespace ShopManagement.Core.ApplicationService.ProductCategories.Command.Create
+namespace ShopManagement.Core.ApplicationService.ProductCategories.Command.Create;
+
+public sealed class CreateProductCategoryCommandHandler : CommandHandler<CreateProductCategoryCommand, Guid>
 {
-    public class CreateProductCategoryCommandHandler : CommandHandler<CreateProductCategoryCommand, Guid>
+     readonly IProductCategoryCommandRepository _productCategoryCommandRepository;
+
+    public CreateProductCategoryCommandHandler(ZaminServices zaminServices,
+        IProductCategoryCommandRepository productCategoryCommandRepository) : base(zaminServices)
     {
-        private readonly IProductCategoryCommandRepository _productCategoryCommandRepository;
+        _productCategoryCommandRepository = productCategoryCommandRepository;
+    }
 
-        public CreateProductCategoryCommandHandler(ZaminServices zaminServices,
-            IProductCategoryCommandRepository productCategoryCommandRepository) : base(zaminServices)
-        {
-            _productCategoryCommandRepository = productCategoryCommandRepository;
-        }
+    public override async Task<CommandResult<Guid>> Handle(CreateProductCategoryCommand command)
+    {
+        var productCategory = new ProductCategory(command.Name,
+                                                  command.Description,
+                                                  command.Picture,
+                                                  command.PictureAlt,
+                                                  command.PictureTitle,
+                                                  command.KeyWords,
+                                                  command.MetaDescription,
+                                                  command.Slug);
 
-        public override async Task<CommandResult<Guid>> Handle(CreateProductCategoryCommand command)
-        {
-            var productCategory = new ProductCategory(command.Name,
-                                                      command.Description,
-                                                      command.Picture,
-                                                      command.PictureAlt,
-                                                      command.PictureTitle,
-                                                      command.KeyWords,
-                                                      command.MetaDescription,
-                                                      command.Slug);
+        await _productCategoryCommandRepository.InsertAsync(productCategory);
+        await _productCategoryCommandRepository.CommitAsync();
 
-            await _productCategoryCommandRepository.InsertAsync(productCategory);
-            await _productCategoryCommandRepository.CommitAsync();
-
-            return Ok(productCategory.BusinessId.Value);
-        }
+        return Ok(productCategory.BusinessId.Value);
     }
 }

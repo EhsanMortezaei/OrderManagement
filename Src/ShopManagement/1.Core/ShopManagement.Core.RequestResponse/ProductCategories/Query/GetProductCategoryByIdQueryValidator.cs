@@ -1,16 +1,14 @@
 ﻿using FluentValidation;
-using ShopManagement.Core.RequestResponse.ProductCategories.Command.Create;
 using Zamin.Extensions.Translations.Abstractions;
 
-namespace ShopManagement.Core.RequestResponse.ProductCategories.Query
+namespace ShopManagement.Core.RequestResponse.ProductCategories.Query;
+
+public sealed class GetProductCategoryByIdQueryValidator : AbstractValidator<GetProductCategoryByIdQuery>
 {
-    public class GetProductCategoryByIdQueryValidator : AbstractValidator<GetProductCategoryByIdQuery>
+    public GetProductCategoryByIdQueryValidator(ITranslator translator)
     {
-        public GetProductCategoryByIdQueryValidator(ITranslator translator)
-        {
-            RuleFor(query => query.ProductCategoryId)
-                .NotEmpty()
-                .WithMessage(translator["Required", nameof(GetProductCategoryByIdQuery.ProductCategoryId)]);
-        }
+        RuleFor(query => query.ProductCategoryId)
+            .NotEmpty()
+            .WithMessage(translator["Required", nameof(GetProductCategoryByIdQuery.ProductCategoryId)]);
     }
 }

@@ -6,9 +6,9 @@ using Zamin.Utilities;
 
 namespace ShopManagement.Core.ApplicationService.Products.Queries.GetById
 {
-    public class GetProductByIdQueryHandler : QueryHandler<GetProductByIdQuery, ProductQr>
+    public sealed class GetProductByIdQueryHandler : QueryHandler<GetProductByIdQuery, ProductQr?>
     {
-        private readonly IProductQueryRepository _productQueryRepository;
+         readonly IProductQueryRepository _productQueryRepository;
 
         public GetProductByIdQueryHandler(ZaminServices zainServices,
                                           IProductQueryRepository productQueryRepository) : base(zainServices)
@@ -16,7 +16,7 @@ namespace ShopManagement.Core.ApplicationService.Products.Queries.GetById
             _productQueryRepository = productQueryRepository;
         }
 
-        public override async Task<QueryResult<ProductQr>> Handle(GetProductByIdQuery query)
+        public override async Task<QueryResult<ProductQr?>> Handle(GetProductByIdQuery query)
         {
             var product = await _productQueryRepository.ExecuteAsync(query);
 

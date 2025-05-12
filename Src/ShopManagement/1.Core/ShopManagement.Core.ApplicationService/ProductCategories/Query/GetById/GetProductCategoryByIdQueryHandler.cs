@@ -4,23 +4,22 @@ using Zamin.Core.ApplicationServices.Queries;
 using Zamin.Core.RequestResponse.Queries;
 using Zamin.Utilities;
 
-namespace ShopManagement.Core.ApplicationService.ProductCategories.Query.GetById
+namespace ShopManagement.Core.ApplicationService.ProductCategories.Query.GetById;
+
+public sealed class GetProductCategoryByIdQueryHandler : QueryHandler<GetProductCategoryByIdQuery, ProductCategoryQr?>
 {
-    public class GetProductCategoryByIdQueryHandler : QueryHandler<GetProductCategoryByIdQuery, ProductCategoryQr>
+     readonly IProductCategoryQueryRepository _productCategoryQueryRepository;
+
+    public GetProductCategoryByIdQueryHandler(ZaminServices zaminServices,
+        IProductCategoryQueryRepository productCategoryQueryRepository) : base(zaminServices)
     {
-        private readonly IProductCategoryQueryRepository _productCategoryQueryRepository;
+        _productCategoryQueryRepository = productCategoryQueryRepository;
+    }
 
-        public GetProductCategoryByIdQueryHandler(ZaminServices zaminServices,
-            IProductCategoryQueryRepository productCategoryQueryRepository) : base(zaminServices)
-        {
-            _productCategoryQueryRepository = productCategoryQueryRepository;
-        }
+    public override async Task<QueryResult<ProductCategoryQr?>> Handle(GetProductCategoryByIdQuery query)
+    {
+        var productCategory = await _productCategoryQueryRepository.ExecuteAsync(query);
 
-        public override async Task<QueryResult<ProductCategoryQr>> Handle(GetProductCategoryByIdQuery query)
-        {
-            var productCategory = await _productCategoryQueryRepository.ExecuteAsync(query);
-
-            return Result(productCategory);
-        }
+        return Result(productCategory);
     }
 }

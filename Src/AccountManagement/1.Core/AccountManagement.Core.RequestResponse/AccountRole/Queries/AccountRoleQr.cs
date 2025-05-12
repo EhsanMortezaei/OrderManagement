@@ -1,8 +1,7 @@
-﻿namespace AccountManagement.Core.RequestResponse.AccountRole.Queries
+﻿namespace AccountManagement.Core.RequestResponse.AccountRole.Queries;
+
+public sealed class AccountRoleQr
 {
-    public class AccountRoleQr
-    {
-        public int AccountId { get; set; }
-        public int RoleId { get; set; }
-    }
+    public int AccountId { get; set; }
+    public int RoleId { get; set; }
 }

@@ -1,12 +1,8 @@
-﻿using Zamin.Core.RequestResponse.Endpoints;
-using Zamin.Core.RequestResponse.Queries;
+﻿using Zamin.Core.RequestResponse.Queries;
 
-namespace ShopManagement.Core.RequestResponse.Orders.Queries
+namespace ShopManagement.Core.RequestResponse.Orders.Queries;
+
+public sealed class GetOrderByIdQuery : IQuery<OrderQr?>
 {
-    public class GetOrderByIdQuery : IQuery<OrderQr?>, IWebRequest
-    {
-        public int OrderId { get; set; }
-        public string Path => "/api/Order/GetById";
-
-    }
+    public int OrderId { get; set; }
 }

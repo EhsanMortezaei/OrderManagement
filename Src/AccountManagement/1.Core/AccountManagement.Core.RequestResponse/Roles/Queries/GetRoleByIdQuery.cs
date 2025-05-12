@@ -1,11 +1,8 @@
-﻿using Zamin.Core.RequestResponse.Endpoints;
-using Zamin.Core.RequestResponse.Queries;
+﻿using Zamin.Core.RequestResponse.Queries;
 
-namespace AccountManagement.Core.RequestResponse.Roles.Queries
+namespace AccountManagement.Core.RequestResponse.Roles.Queries;
+
+public sealed class GetRoleByIdQuery : IQuery<RoleQr?>
 {
-    public class GetRoleByIdQuery : IQuery<RoleQr?>, IWebRequest
-    {
-        public int RoleId { get; set; }
-        public string Path => "/api/Role/GetById";
-    }
+    public int RoleId { get; set; }
 }

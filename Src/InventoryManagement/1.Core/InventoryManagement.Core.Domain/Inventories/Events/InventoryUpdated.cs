@@ -2,7 +2,7 @@
 
 namespace InventoryManagement.Core.Domain.Inventories.Events
 {
-    public class InventoryUpdated(long count,
+    public sealed record InventoryUpdated(long count,
                                   long operatorId,
                                   string description) : IDomainEvent
     {

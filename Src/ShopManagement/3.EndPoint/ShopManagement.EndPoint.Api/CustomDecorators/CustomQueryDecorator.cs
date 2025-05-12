@@ -1,10 +1,9 @@
 ﻿using Zamin.Core.ApplicationServices.Queries;
-using Zamin.Core.Contracts.ApplicationServices.Queries;
 using Zamin.Core.RequestResponse.Queries;
 
 namespace ShopManagement.EndPoint.Api.CustomDecorators;
 
-public class CustomQueryDecorator : QueryDispatcherDecorator
+public sealed class CustomQueryDecorator : QueryDispatcherDecorator
 {
     public override int Order => 0;
 

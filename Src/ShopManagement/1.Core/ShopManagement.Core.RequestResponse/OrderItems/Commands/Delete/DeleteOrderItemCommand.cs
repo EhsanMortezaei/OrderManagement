@@ -1,12 +1,9 @@
 ﻿using Zamin.Core.RequestResponse.Commands;
-using Zamin.Core.RequestResponse.Endpoints;
 
-namespace ShopManagement.Core.RequestResponse.OrderItems.Commands.Delete
+namespace ShopManagement.Core.RequestResponse.OrderItems.Commands.Delete;
+
+public sealed class DeleteOrderItemCommand : ICommand
 {
-    public class DeleteOrderItemCommand : ICommand, IWebRequest
-    {
-        public int Id { get; set; }
+    public int Id { get; set; }
 
-        public string Path => "/api/OrderItem/Delete";
-    }
 }
