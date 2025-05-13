@@ -8,11 +8,11 @@ namespace AccountManagement.Core.Domain.Accounts.Entities;
 // null check beshe
 public sealed class Account : AggregateRoot<int>
 {
-    public string FullName { get; set; } = null!;
-    public string Username { get; set; } = null!;
-    public string Password { get; set; } = null!;
-    public string? Mobile { get; set; }
-    public string? ProfilePhoto { get; set; }
+    public string FullName { get; private set; } = null!;
+    public string Username { get; private set; } = null!;
+    public string Password { get; private set; } = null!;
+    public string? Mobile { get; private set; }
+    public string? ProfilePhoto { get;private set; }
 
     List<AccountRole> _accountRoles = [];
     public IReadOnlyList<AccountRole> AccountRoles => _accountRoles;

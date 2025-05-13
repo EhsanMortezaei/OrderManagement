@@ -5,18 +5,18 @@ namespace ShopManagement.Core.Domain.Orders.Entities;
 
 public sealed class Order : AggregateRoot<int>
 {
-    public long AccountId { get;  set; }
-    public int PaymentMethod { get;  set; }
-    public double TotalAmount { get;  set; }
-    public double DiscountAmount { get;  set; }
-    public double PayAmount { get;  set; }
-    public bool IsPaid { get;  set; }
-    public bool IsCanceled { get;  set; }
-    public string IssueTrackingNo { get;  set; } = string.Empty;
-    public long RefId { get;  set; }
-    public List<OrderItem> Items { get;  set; } = new List<OrderItem>();
+    public long AccountId { get; private set; }
+    public int PaymentMethod { get; private set; }
+    public double TotalAmount { get; private set; }
+    public double DiscountAmount { get; private set; }
+    public double PayAmount { get; private set; }
+    public bool IsPaid { get; private set; }
+    public bool IsCanceled { get; private set; }
+    public string IssueTrackingNo { get; private set; } = string.Empty;
+    public long RefId { get; private set; }
+    public List<OrderItem> Items { get; private set; } = new List<OrderItem>();
 
-     Order() { }
+    Order() { }
 
     public Order(List<OrderItem> items)
     {

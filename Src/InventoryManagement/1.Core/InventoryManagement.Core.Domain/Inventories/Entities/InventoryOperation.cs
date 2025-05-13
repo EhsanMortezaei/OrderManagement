@@ -4,16 +4,16 @@ namespace InventoryManagement.Core.Domain.Inventories.Entities;
 
 public sealed class InventoryOperation : Entity<int>
 {
-    public bool Operation { get;  set; }
-    public long Count { get;  set; }
-    public long OperatorId { get;  set; }
-    public DateTime OperationDate { get;  set; }
-    public long CurrentCount { get;  set; }
-    public string Description { get;  set; } = string.Empty;
-    public long OrderId { get;  set; }
-    public long InventoryId { get;  set; }
+    public bool Operation { get; private set; }
+    public long Count { get; private set; }
+    public long OperatorId { get; private set; }
+    public DateTime OperationDate { get; private set; }
+    public long CurrentCount { get; private set; }
+    public string Description { get; private set; } = string.Empty;
+    public long OrderId { get; private set; }
+    public long InventoryId { get; private set; }
 
-     InventoryOperation() { }
+    InventoryOperation() { }
 
     public InventoryOperation(bool operation,
                               long count,

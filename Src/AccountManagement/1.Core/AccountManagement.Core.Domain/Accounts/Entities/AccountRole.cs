@@ -4,10 +4,10 @@ namespace AccountManagement.Core.Domain.Accounts.Entities;
 
 public sealed class AccountRole : Entity<int>
 {
-    public int AccountId { get;  set; }
-    public int RoleId { get;  set; }
+    public int AccountId { get; private set; }
+    public int RoleId { get; private set; }
 
-     AccountRole() { }
+    AccountRole() { }
 
     public AccountRole(int roleId)
     {

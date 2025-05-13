@@ -5,21 +5,21 @@ namespace ShopManagement.Core.Domain.Products.Entities;
 
 public sealed class Product : AggregateRoot<int>
 {
-    public string Name { get;  set; } = null!;
-    public string Code { get;  set; } = null!;
-    public string ShortDescription { get;  set; } = null!;
-    public string Descrption { get;  set; } = null!;
-    public string Picture { get;  set; } = null!;
-    public string PictureAlt { get;  set; } = null!;
-    public string PictureTitle { get;  set; } = null!;
+    public string Name { get; private set; } = null!;
+    public string Code { get; private set; } = null!;
+    public string ShortDescription { get; private set; } = null!;
+    public string Descrption { get; private set; } = null!;
+    public string Picture { get; private set; } = null!;
+    public string PictureAlt { get; private set; } = null!;
+    public string PictureTitle { get; private set; } = null!;
 
-    public int ProductCategoryId { get;  set; }
+    public int ProductCategoryId { get; private set; }
 
-    public string Slug { get;  set; } = null!;
-    public string Keywords { get;  set; } = null!;
-    public string MetaDescription { get;  set; } = null!;
+    public string Slug { get; private set; } = null!;
+    public string Keywords { get; private set; } = null!;
+    public string MetaDescription { get; private set; } = null!;
 
-     Product() { }
+    Product() { }
 
     public Product(string name,
                    string code,

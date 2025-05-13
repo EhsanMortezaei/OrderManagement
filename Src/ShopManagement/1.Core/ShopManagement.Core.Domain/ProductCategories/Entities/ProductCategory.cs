@@ -4,16 +4,16 @@ namespace ShopManagement.Core.Domain.ProductCategories.Entities;
 
 public sealed class ProductCategory : AggregateRoot<int>
 {
-    public string Name { get;  set; } = null!;
-    public string Description { get;  set; } = null!;
-    public string Picture { get;  set; } = string.Empty;
-    public string PictureAlt { get;  set; } = string.Empty;
-    public string PictureTitle { get;  set; } = string.Empty;
-    public string KeyWords { get;  set; } = string.Empty;
-    public string MetaDescription { get;  set; } = string.Empty;
-    public string Slug { get;  set; } = string.Empty;
+    public string Name { get; private set; } = null!;
+    public string Description { get; private set; } = null!;
+    public string Picture { get; private set; } = string.Empty;
+    public string PictureAlt { get; private set; } = string.Empty;
+    public string PictureTitle { get; private set; } = string.Empty;
+    public string KeyWords { get; private set; } = string.Empty;
+    public string MetaDescription { get; private set; } = string.Empty;
+    public string Slug { get; private set; } = string.Empty;
 
-     ProductCategory() { }
+    ProductCategory() { }
 
     public ProductCategory(string name,
                            string description,

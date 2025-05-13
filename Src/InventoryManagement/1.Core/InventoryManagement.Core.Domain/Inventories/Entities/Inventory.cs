@@ -4,12 +4,12 @@ namespace InventoryManagement.Core.Domain.Inventories.Entities;
 
 public sealed class Inventory : AggregateRoot<int>
 {
-    public int ProductId { get;  set; }
-    public double UnitPrice { get;  set; }
-    public bool InStock { get;  set; }
-    public List<InventoryOperation> Operations { get;  set; } = new List<InventoryOperation>();
+    public int ProductId { get; private set; }
+    public double UnitPrice { get; private set; }
+    public bool InStock { get; private set; }
+    public List<InventoryOperation> Operations { get; private set; } = new List<InventoryOperation>();
 
-     Inventory() { }
+    Inventory() { }
 
     public Inventory(int productId, double unitPrice, bool inStock, List<InventoryOperation> operations)
     {

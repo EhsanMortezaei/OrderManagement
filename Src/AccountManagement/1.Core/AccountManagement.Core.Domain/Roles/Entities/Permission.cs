@@ -7,9 +7,9 @@ namespace AccountManagement.Core.Domain.Roles.Entities;
 /// </summary>
 public sealed class Permission : Entity<int>
 {
-    public int Code { get; set; }
-    public string Name { get; set; } = null!;
-    public int RoleId { get; set; }
+    public int Code { get; private set; }
+    public string Name { get; private set; } = null!;
+    public int RoleId { get; private set; }
 
     Permission() { }
 

@@ -7,7 +7,7 @@ namespace AccountManagement.Core.Domain.Roles.Entities;
 
 public sealed class Role : AggregateRoot<int>
 {
-    public string Name { get; set; } = null!;
+    public string Name { get; private set; } = null!;
     List<Permission> _permissions = [];
     public IReadOnlyList<Permission> Permissions => _permissions;
 

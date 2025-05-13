@@ -4,13 +4,13 @@ namespace ShopManagement.Core.Domain.Orders.Entities;
 
 public sealed class OrderItem : Entity<int>
 {
-    public long ProductId { get;  set; }
-    public int Count { get;  set; }
-    public double UnitPrice { get;  set; }
-    public int DiscountRate { get;  set; }
-    public long OrderId { get;  set; }
+    public long ProductId { get; private set; }
+    public int Count { get; private set; }
+    public double UnitPrice { get; private set; }
+    public int DiscountRate { get; private set; }
+    public long OrderId { get; private set; }
 
-     OrderItem() { }
+    OrderItem() { }
 
     public OrderItem(long productId,
                      int count,
