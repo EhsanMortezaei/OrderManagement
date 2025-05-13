@@ -4,20 +4,12 @@ using Zamin.Infra.Data.Sql.Queries;
 
 namespace InventoryManagement.Infra.Data.Sql.Queries.Common;
 
-public partial class InventoryManagementQueryDbContext : BaseQueryDbContext
+public class InventoryManagementQueryDbContext(DbContextOptions<InventoryManagementQueryDbContext> options)
+    : BaseQueryDbContext(options)
 {
-    public InventoryManagementQueryDbContext(DbContextOptions<InventoryManagementQueryDbContext> options)
-        : base(options)
-    {
-    }
-
     public virtual DbSet<Inventory> Inventories { get; set; }
 
     public virtual DbSet<InventoryOperation> InventoryOperations { get; set; }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=.; Initial Catalog=Order; Integrated Security=True;TrustServerCertificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -37,9 +29,5 @@ public partial class InventoryManagementQueryDbContext : BaseQueryDbContext
 
             entity.HasOne(d => d.InventoryId1Navigation).WithMany(p => p.InventoryOperations).HasForeignKey(d => d.InventoryId1);
         });
-
-        OnModelCreatingPartial(modelBuilder);
     }
-
-    partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
