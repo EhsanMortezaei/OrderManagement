@@ -9,7 +9,7 @@ namespace ShopManagement.Core.ApplicationService.Orders.Commands.Create;
 
 public sealed class CreateOrderCommandHandler : CommandHandler<CreateOrderCommand, Guid>
 {
-     readonly IOrderCommandRepository _orderCommandRepository;
+    readonly IOrderCommandRepository _orderCommandRepository;
 
     public CreateOrderCommandHandler(ZaminServices zaminServices,
         IOrderCommandRepository orderCommandRepository) : base(zaminServices)

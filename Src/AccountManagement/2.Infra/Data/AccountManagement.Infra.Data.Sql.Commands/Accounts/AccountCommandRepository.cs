@@ -10,7 +10,7 @@ public sealed class AccountCommandRepository :
     BaseCommandRepository<Account, AccountManagementCommandDbContext, int>,
     IAccountCommandRepository
 {
-     readonly AccountManagementCommandDbContext _context;
+    readonly AccountManagementCommandDbContext _context;
     public AccountCommandRepository(AccountManagementCommandDbContext dbContext, AccountManagementCommandDbContext context) : base(dbContext)
     {
         _context = context;

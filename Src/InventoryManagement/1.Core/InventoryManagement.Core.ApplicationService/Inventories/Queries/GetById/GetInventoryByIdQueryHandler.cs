@@ -8,7 +8,7 @@ namespace InventoryManagement.Core.ApplicationService.Inventories.Queries.GetByI
 
 public sealed class GetInventoryByIdQueryHandler : QueryHandler<GetInventoryByIdQuery, InventoryQr?>
 {
-     readonly IInventoryQueryRepository _inventoryQueryRepository;
+    readonly IInventoryQueryRepository _inventoryQueryRepository;
 
     public GetInventoryByIdQueryHandler(ZaminServices zainServices,
         IInventoryQueryRepository inventoryQueryRepository) : base(zainServices)

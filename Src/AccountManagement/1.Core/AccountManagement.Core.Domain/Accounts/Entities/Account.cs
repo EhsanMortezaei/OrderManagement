@@ -12,7 +12,7 @@ public sealed class Account : AggregateRoot<int>
     public string Username { get; private set; } = null!;
     public string Password { get; private set; } = null!;
     public string? Mobile { get; private set; }
-    public string? ProfilePhoto { get;private set; }
+    public string? ProfilePhoto { get; private set; }
 
     List<AccountRole> _accountRoles = [];
     public IReadOnlyList<AccountRole> AccountRoles => _accountRoles;
@@ -61,7 +61,7 @@ public sealed class Account : AggregateRoot<int>
     void ThrowIfMobileIsInvalid(string mobile)
     {
         if (false)
-            throw new InvalidEntityStateException("موبایل ولید نیست");
+            throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.MobileError));
     }
 
     public void ChangePassword(string password)
@@ -73,7 +73,7 @@ public sealed class Account : AggregateRoot<int>
     public void AddRole(int roleId)
     {
         if (_accountRoles.Exists(c => c.RoleId == roleId))
-            throw new InvalidEntityStateException("رول ولید نیست");
+            throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.RoleError));
 
         _accountRoles.Add(new AccountRole(roleId));
     }
@@ -82,7 +82,7 @@ public sealed class Account : AggregateRoot<int>
         var accountRole = _accountRoles.FirstOrDefault(x => x.RoleId == roleId);
         if (accountRole is null)
         {
-            throw new InvalidEntityStateException("رول اکانت پیدا نشد");
+            throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.RoleError));
         }
 
         _accountRoles.Remove(accountRole);

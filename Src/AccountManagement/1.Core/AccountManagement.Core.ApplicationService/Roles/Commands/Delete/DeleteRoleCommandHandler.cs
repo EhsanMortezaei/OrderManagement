@@ -1,5 +1,6 @@
 ﻿using AccountManagement.Core.Contract.Roles.Commands;
 using AccountManagement.Core.RequestResponse.Roles.Commands.Delete;
+using Framework.Enums.Validation;
 using Zamin.Core.ApplicationServices.Commands;
 using Zamin.Core.Contracts.Data.Commands;
 using Zamin.Core.Domain.Exceptions;
@@ -12,11 +13,11 @@ public sealed class DeleteRoleCommandHandler(ZaminServices zaminServices,
     IRoleCommandRepository roleCommandRepository,
     IUnitOfWork roleUnitOfWork) : CommandHandler<DeleteRoleCommand>(zaminServices)
 {
-     readonly IRoleCommandRepository _roleCommandRepository = roleCommandRepository;
-     readonly IUnitOfWork _roleUnitOfWork = roleUnitOfWork;
+    readonly IRoleCommandRepository _roleCommandRepository = roleCommandRepository;
+    readonly IUnitOfWork _roleUnitOfWork = roleUnitOfWork;
     public override async Task<CommandResult> Handle(DeleteRoleCommand command)
     {
-        var role = await _roleCommandRepository.GetGraphAsync(command.Id) ?? throw new InvalidEntityStateException("حساب یافت نشد");
+        var role = await _roleCommandRepository.GetGraphAsync(command.Id) ?? throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.NotAccount));
 
         _roleCommandRepository.Delete(role);
         await _roleCommandRepository.CommitAsync();

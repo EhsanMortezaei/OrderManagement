@@ -8,7 +8,7 @@ namespace Framework.AuthHelper;
 
 public sealed class AuthHelper : IAuthHelper
 {
-     readonly IHttpContextAccessor _contextAccessor;
+    readonly IHttpContextAccessor _contextAccessor;
 
     public AuthHelper(IHttpContextAccessor contextAccessor)
     {

@@ -1,5 +1,6 @@
 ﻿using AccountManagement.Core.Contract.Accounts.Commands;
 using AccountManagement.Core.RequestResponse.Accounts.Commands.Update;
+using Framework.Enums.Validation;
 using Zamin.Core.ApplicationServices.Commands;
 using Zamin.Core.Domain.Exceptions;
 using Zamin.Core.RequestResponse.Commands;
@@ -9,7 +10,7 @@ namespace AccountManagement.Core.ApplicationService.Accounts.Commands.Update;
 
 public sealed class UpdateAccountCommandHandler : CommandHandler<UpdateAccountCommand>
 {
-     readonly IAccountCommandRepository _accountCommandRepository;
+    readonly IAccountCommandRepository _accountCommandRepository;
 
     public UpdateAccountCommandHandler(ZaminServices zainServices,
         IAccountCommandRepository accountCommandRepository) : base(zainServices)
@@ -21,7 +22,7 @@ public sealed class UpdateAccountCommandHandler : CommandHandler<UpdateAccountCo
     {
         var account = await _accountCommandRepository.GetAsync(command.Id);
         if (account is null)
-            throw new InvalidEntityStateException("کاربر یافت نشد");
+            throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.NotAccount));
 
         account.Edit(command.Fullname,
                      command.Username,

@@ -1,4 +1,5 @@
-﻿using ShopManagement.Core.Contracts.ProductCategories.Command;
+﻿using Framework.Enums.Validation;
+using ShopManagement.Core.Contracts.ProductCategories.Command;
 using ShopManagement.Core.RequestResponse.ProductCategories.Command.Update;
 using Zamin.Core.ApplicationServices.Commands;
 using Zamin.Core.Domain.Exceptions;
@@ -9,7 +10,7 @@ namespace ShopManagement.Core.ApplicationService.ProductCategories.Command.Updat
 
 public sealed class UpdateProductCategoryCommandHandler : CommandHandler<UpdateProductCategoryCommand>
 {
-     readonly IProductCategoryCommandRepository _productCategoryCommandRepository;
+    readonly IProductCategoryCommandRepository _productCategoryCommandRepository;
 
     public UpdateProductCategoryCommandHandler(ZaminServices zaminServices,
                                                IProductCategoryCommandRepository productCategoryCommandRepository) : base(zaminServices)
@@ -21,7 +22,7 @@ public sealed class UpdateProductCategoryCommandHandler : CommandHandler<UpdateP
     {
         var productCategory = await _productCategoryCommandRepository.GetAsync(command.Id);
         if (productCategory is null)
-            throw new InvalidEntityStateException("گروه محصولی یافت نشد");
+            throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.ProductCategoryError));
         productCategory.Edit(command.Name,
                              command.Description,
                              command.Picture,

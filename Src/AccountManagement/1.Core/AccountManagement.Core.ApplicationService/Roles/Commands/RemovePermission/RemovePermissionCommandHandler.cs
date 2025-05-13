@@ -1,5 +1,6 @@
 ﻿using AccountManagement.Core.Contract.Roles.Commands;
 using AccountManagement.Core.RequestResponse.Roles.Commands.RemovePermission;
+using Framework.Enums.Validation;
 using Zamin.Core.ApplicationServices.Commands;
 using Zamin.Core.Domain.Exceptions;
 using Zamin.Core.RequestResponse.Commands;
@@ -17,7 +18,7 @@ public sealed class RemovePermissionCommandHandler(ZaminServices zaminServices,
         var role = await _roleCommandRepository.GetGraphAsync(command.RoleId);
 
         if (role is null)
-            throw new InvalidEntityStateException("یافت نشد permission");
+            throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.NotAccount));
 
         role.RemovePermission(command.PermissionId);
         return Ok();

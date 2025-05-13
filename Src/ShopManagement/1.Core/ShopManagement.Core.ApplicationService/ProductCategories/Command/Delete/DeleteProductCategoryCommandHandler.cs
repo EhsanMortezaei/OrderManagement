@@ -1,4 +1,5 @@
-﻿using ShopManagement.Core.Contracts.ProductCategories.Command;
+﻿using Framework.Enums.Validation;
+using ShopManagement.Core.Contracts.ProductCategories.Command;
 using ShopManagement.Core.RequestResponse.ProductCategories.Command.Delete;
 using Zamin.Core.ApplicationServices.Commands;
 using Zamin.Core.Domain.Exceptions;
@@ -9,7 +10,7 @@ namespace ShopManagement.Core.ApplicationService.ProductCategories.Command.Delet
 
 public sealed class DeleteProductCategoryCommandHandler : CommandHandler<DeleteProductCategoryCommand>
 {
-     readonly IProductCategoryCommandRepository _productCategoryCommandRepository;
+    readonly IProductCategoryCommandRepository _productCategoryCommandRepository;
 
     public DeleteProductCategoryCommandHandler(ZaminServices zaminServices,
                                                IProductCategoryCommandRepository productCategoryCommandRepository) : base(zaminServices)
@@ -20,7 +21,8 @@ public sealed class DeleteProductCategoryCommandHandler : CommandHandler<DeleteP
 
     public override async Task<CommandResult> Handle(DeleteProductCategoryCommand command)
     {
-        var productCategory = await _productCategoryCommandRepository.GetGraphAsync(command.Id) ?? throw new InvalidEntityStateException("گروه محصولی یافت نشد");
+        var productCategory = await _productCategoryCommandRepository.GetGraphAsync(command.Id)
+            ?? throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.ProductCategoryError));
 
         _productCategoryCommandRepository.Delete(productCategory);
 

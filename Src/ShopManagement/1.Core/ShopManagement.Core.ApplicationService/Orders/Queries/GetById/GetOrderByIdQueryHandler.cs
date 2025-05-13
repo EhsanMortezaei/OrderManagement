@@ -9,7 +9,7 @@ namespace ShopManagement.Core.ApplicationService.Orders.Queries.GetById;
 // query handler ha sade shavad
 public sealed class GetOrderByIdQueryHandler : QueryHandler<GetOrderByIdQuery, OrderQr?>
 {
-     readonly IOrderQueryRepository _orderQueryRepository;
+    readonly IOrderQueryRepository _orderQueryRepository;
 
     public GetOrderByIdQueryHandler(ZaminServices zaminServices
         , IOrderQueryRepository orderQueryRepository) : base(zaminServices)

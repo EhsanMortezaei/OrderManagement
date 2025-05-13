@@ -1,5 +1,6 @@
 ﻿using AccountManagement.Core.Contract.Roles.Commands;
 using AccountManagement.Core.RequestResponse.Roles.Commands.Update;
+using Framework.Enums.Validation;
 using Zamin.Core.ApplicationServices.Commands;
 using Zamin.Core.Domain.Exceptions;
 using Zamin.Core.RequestResponse.Commands;
@@ -9,7 +10,7 @@ namespace AccountManagement.Core.ApplicationService.Roles.Commands.Update;
 
 public sealed class UpdateRoleCommandHandler : CommandHandler<UpdateRoleCommand>
 {
-     readonly IRoleCommandRepository _roleCommandRepository;
+    readonly IRoleCommandRepository _roleCommandRepository;
 
     public UpdateRoleCommandHandler(ZaminServices zaminServices,
         IRoleCommandRepository roleCommandRepository) : base(zaminServices)
@@ -21,7 +22,7 @@ public sealed class UpdateRoleCommandHandler : CommandHandler<UpdateRoleCommand>
     {
         var role = await _roleCommandRepository.GetAsync(command.Id);
         if (role is null)
-            throw new InvalidEntityStateException("کاربر یافت نشد");
+            throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.NotAccount));
 
         role.Edite(command.Name);
         await _roleCommandRepository.CommitAsync();

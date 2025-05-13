@@ -8,7 +8,7 @@ namespace AccountManagement.Core.ApplicationService.Permissions.Queries.GetById;
 
 public sealed class GetAccountByIdQueryHandler : QueryHandler<GetPermissionByIdQuery, PermissionQr?>
 {
-     readonly IPermissionQueryRepository _permissionQueryRepository;
+    readonly IPermissionQueryRepository _permissionQueryRepository;
 
     public GetAccountByIdQueryHandler(ZaminServices zaminServices,
         IPermissionQueryRepository permissionQueryRepository) : base(zaminServices)

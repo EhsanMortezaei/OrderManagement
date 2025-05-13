@@ -9,7 +9,7 @@ namespace AccountManagement.Core.ApplicationService.Roles.Commands.Create;
 
 public sealed class CreateRoleCommandHandler : CommandHandler<CreateRoleCommand, Guid>
 {
-     readonly IRoleCommandRepository _roleCommandRepository;
+    readonly IRoleCommandRepository _roleCommandRepository;
 
     public CreateRoleCommandHandler(ZaminServices zaminServices,
         IRoleCommandRepository roleCommandRepository) : base(zaminServices)

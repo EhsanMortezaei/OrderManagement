@@ -5,10 +5,10 @@ namespace Framework.PasswordHasher;
 
 public sealed class PasswordHasher(IOptions<HashingOptions> options) : IPasswordHasher
 {
-     const int SaltSize = 16; // 128 bit 
-     const int KeySize = 32; // 256 bit
+    const int SaltSize = 16; // 128 bit 
+    const int KeySize = 32; // 256 bit
 
-     HashingOptions Options { get; } = options.Value;
+    HashingOptions Options { get; } = options.Value;
 
     public string Hash(string password)
     {

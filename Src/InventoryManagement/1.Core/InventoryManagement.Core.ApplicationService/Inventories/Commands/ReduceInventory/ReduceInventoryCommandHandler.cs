@@ -9,8 +9,8 @@ namespace InventoryManagement.Core.ApplicationService.Inventories.Commands.Reduc
 
 public sealed class ReduceInventoryCommandHandler : CommandHandler<ReduceInventoryCommand, Guid>
 {
-     readonly IInventoryCommandRepository _inventoryCommandRepository;
-     readonly IAuthHelper _authHelper;
+    readonly IInventoryCommandRepository _inventoryCommandRepository;
+    readonly IAuthHelper _authHelper;
 
     public ReduceInventoryCommandHandler(ZaminServices zaminServices,
         IInventoryCommandRepository inventoryCommandRepository, IAuthHelper authHelper) : base(zaminServices)

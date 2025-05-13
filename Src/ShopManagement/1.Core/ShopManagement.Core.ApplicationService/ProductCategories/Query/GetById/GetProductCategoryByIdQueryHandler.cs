@@ -8,7 +8,7 @@ namespace ShopManagement.Core.ApplicationService.ProductCategories.Query.GetById
 
 public sealed class GetProductCategoryByIdQueryHandler : QueryHandler<GetProductCategoryByIdQuery, ProductCategoryQr?>
 {
-     readonly IProductCategoryQueryRepository _productCategoryQueryRepository;
+    readonly IProductCategoryQueryRepository _productCategoryQueryRepository;
 
     public GetProductCategoryByIdQueryHandler(ZaminServices zaminServices,
         IProductCategoryQueryRepository productCategoryQueryRepository) : base(zaminServices)

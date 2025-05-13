@@ -1,4 +1,5 @@
-﻿using ShopManagement.Core.Contracts.Products.Command;
+﻿using Framework.Enums.Validation;
+using ShopManagement.Core.Contracts.Products.Command;
 using ShopManagement.Core.RequestResponse.Products.Command.Update;
 using Zamin.Core.ApplicationServices.Commands;
 using Zamin.Core.Domain.Exceptions;
@@ -9,7 +10,7 @@ namespace ShopManagement.Core.ApplicationService.Products.Commands.Update;
 
 public sealed class UpdateProductCommandHandler : CommandHandler<UpdateProductCommand>
 {
-     readonly IProductCommandRepository _productCommandRepository;
+    readonly IProductCommandRepository _productCommandRepository;
 
     public UpdateProductCommandHandler(ZaminServices zaminServices,
         IProductCommandRepository productCommandRepository) : base(zaminServices)
@@ -21,7 +22,7 @@ public sealed class UpdateProductCommandHandler : CommandHandler<UpdateProductCo
     {
         var product = await _productCommandRepository.GetAsync(command.Id);
         if (product is null)
-            throw new InvalidEntityStateException("محصول یافت نشد");
+            throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.ProductError));
         product.Edit(command.Name,
                      command.Code,
                      command.ShortDescription,

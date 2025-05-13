@@ -9,8 +9,8 @@ namespace InventoryManagement.Core.ApplicationService.Inventories.Commands.Incre
 
 public sealed class IncreaseInventoryCommandHandler : CommandHandler<IncreaseInventoryCommand, Guid>
 {
-     IInventoryCommandRepository _inventoryCommandRepository;
-     readonly IAuthHelper _authHelper;
+    IInventoryCommandRepository _inventoryCommandRepository;
+    readonly IAuthHelper _authHelper;
 
     public IncreaseInventoryCommandHandler(ZaminServices zaminServices,
                                            IAuthHelper authHelper,

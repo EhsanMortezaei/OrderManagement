@@ -1,7 +1,7 @@
 ﻿public class CustomExceptionHandlerMiddleware
 {
-     readonly RequestDelegate _next;
-     readonly ILogger<CustomExceptionHandlerMiddleware> _logger;
+    readonly RequestDelegate _next;
+    readonly ILogger<CustomExceptionHandlerMiddleware> _logger;
 
     public CustomExceptionHandlerMiddleware(RequestDelegate next, ILogger<CustomExceptionHandlerMiddleware> logger)
     {

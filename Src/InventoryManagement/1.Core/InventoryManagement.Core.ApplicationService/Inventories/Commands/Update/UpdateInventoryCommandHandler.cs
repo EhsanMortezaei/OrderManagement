@@ -1,4 +1,5 @@
-﻿using InventoryManagement.Core.Contracts.Inventories.Commands;
+﻿using Framework.Enums.Validation;
+using InventoryManagement.Core.Contracts.Inventories.Commands;
 using InventoryManagement.Core.RequestResponse.Inventories.Commands.Update;
 using Zamin.Core.ApplicationServices.Commands;
 using Zamin.Core.Domain.Exceptions;
@@ -9,7 +10,7 @@ namespace InventoryManagement.Core.ApplicationService.Inventories.Commands.Updat
 
 public sealed class UpdateInventoryCommandHandler : CommandHandler<UpdateInventoryCommand>
 {
-     readonly IInventoryCommandRepository _inventoryCommandRepository;
+    readonly IInventoryCommandRepository _inventoryCommandRepository;
     public UpdateInventoryCommandHandler(ZaminServices zaminServices,
         IInventoryCommandRepository inventoryCommandRepository) : base(zaminServices)
     {
@@ -20,7 +21,7 @@ public sealed class UpdateInventoryCommandHandler : CommandHandler<UpdateInvento
     {
         var inventory = await _inventoryCommandRepository.GetAsync(command.Id);
         if (inventory is null)
-            throw new InvalidEntityStateException("در انبار یافت نشد");
+            throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.InventoyError));
 
         inventory.Edit(command.ProductId, command.UnitPrice, command.Operations);
         await _inventoryCommandRepository.CommitAsync();

@@ -1,4 +1,5 @@
-﻿using ShopManagement.Core.Contracts.Orders.Commands;
+﻿using Framework.Enums.Validation;
+using ShopManagement.Core.Contracts.Orders.Commands;
 using ShopManagement.Core.RequestResponse.Orders.Command.Update;
 using Zamin.Core.ApplicationServices.Commands;
 using Zamin.Core.Domain.Exceptions;
@@ -9,7 +10,7 @@ namespace ShopManagement.Core.ApplicationService.Orders.Commands.Update;
 
 public sealed class UpdateOrderCommandHandler : CommandHandler<UpdateOrderCommand>
 {
-     readonly IOrderCommandRepository _orderCommandRepository;
+    readonly IOrderCommandRepository _orderCommandRepository;
 
     // pimrry constructor
     public UpdateOrderCommandHandler(ZaminServices zaminServices,
@@ -23,7 +24,7 @@ public sealed class UpdateOrderCommandHandler : CommandHandler<UpdateOrderComman
         var order = await _orderCommandRepository.GetAsync(command.Id);
         // eslah shavad
         if (order is null)
-            throw new InvalidEntityStateException("سفارش یافت نشد");
+            throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.OrderError));
 
         order.Edit(command.AccountId,
                    command.PaymentMethod,

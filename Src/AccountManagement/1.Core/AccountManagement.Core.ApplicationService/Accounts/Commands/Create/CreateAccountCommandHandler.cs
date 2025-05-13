@@ -12,8 +12,8 @@ namespace AccountManagement.Core.ApplicationService.Accounts.Commands.Create;
 
 public sealed class CreateAccountCommandHandler : CommandHandler<CreateAccountCommand, Guid>
 {
-     readonly IPasswordHasher _passwordHasher;
-     readonly IAccountCommandRepository _accountCommandRepository;
+    readonly IPasswordHasher _passwordHasher;
+    readonly IAccountCommandRepository _accountCommandRepository;
 
     public CreateAccountCommandHandler(ZaminServices zaminServices,
         IAccountCommandRepository accountCommandRepository,

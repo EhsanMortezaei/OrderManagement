@@ -9,7 +9,7 @@ namespace ShopManagement.Core.ApplicationService.ProductCategories.Command.Creat
 
 public sealed class CreateProductCategoryCommandHandler : CommandHandler<CreateProductCategoryCommand, Guid>
 {
-     readonly IProductCategoryCommandRepository _productCategoryCommandRepository;
+    readonly IProductCategoryCommandRepository _productCategoryCommandRepository;
 
     public CreateProductCategoryCommandHandler(ZaminServices zaminServices,
         IProductCategoryCommandRepository productCategoryCommandRepository) : base(zaminServices)

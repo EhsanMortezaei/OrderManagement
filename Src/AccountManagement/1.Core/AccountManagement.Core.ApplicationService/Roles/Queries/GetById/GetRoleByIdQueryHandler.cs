@@ -8,7 +8,7 @@ namespace AccountManagement.Core.ApplicationService.Roles.Queries.GetById;
 
 public sealed class GetRoleByIdQueryHandler : QueryHandler<GetRoleByIdQuery, RoleQr?>
 {
-     readonly IRoleQueryRepository _roleQueryRepository;
+    readonly IRoleQueryRepository _roleQueryRepository;
 
     public GetRoleByIdQueryHandler(ZaminServices zaminServices,
         IRoleQueryRepository roleQueryRepository) : base(zaminServices)

@@ -1,5 +1,5 @@
-﻿using AccountManagement.Core.Domain.Accounts.Entities;
-using AccountManagement.Core.Domain.Roles.Events;
+﻿using AccountManagement.Core.Domain.Roles.Events;
+using Framework.Enums.Validation;
 using Zamin.Core.Domain.Entities;
 using Zamin.Core.Domain.Exceptions;
 
@@ -29,9 +29,7 @@ public sealed class Role : AggregateRoot<int>
     public void AddPermission(int permissionId)
     {
         if (_permissions.Any(p => p.Id == permissionId))
-            throw new InvalidEntityStateException("این پرمیشن قبلاً اضافه شده است");
-
-
+            throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.Permission));
 
         _permissions.Add(new Permission(permissionId));
     }
@@ -41,7 +39,7 @@ public sealed class Role : AggregateRoot<int>
         var permission = _permissions.FirstOrDefault(x => x.Id == permissionId);
 
         if (permission is null)
-            throw new InvalidEntityStateException("Permission پیدا نشد");
+            throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.Permission));
         _permissions.Remove(permission);
     }
 }

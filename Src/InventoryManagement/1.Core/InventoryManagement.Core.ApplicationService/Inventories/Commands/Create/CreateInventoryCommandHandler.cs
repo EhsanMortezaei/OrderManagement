@@ -11,7 +11,7 @@ namespace InventoryManagement.Core.ApplicationService.Inventories.Commands.Creat
 // sealed  /  primarry constructor
 public sealed class CreateInventoryCommandHandler : CommandHandler<CreateInventoryCommand, Guid>
 {
-     readonly IInventoryCommandRepository _inventoryCommandRepository;
+    readonly IInventoryCommandRepository _inventoryCommandRepository;
 
     public CreateInventoryCommandHandler(ZaminServices zaminServices,
         IInventoryCommandRepository inventoryCommandRepository,

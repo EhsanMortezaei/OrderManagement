@@ -1,5 +1,6 @@
 ﻿using AccountManagement.Core.Contract.Accounts.Commands;
 using AccountManagement.Core.RequestResponse.Accounts.Commands.RemoveAccountRole;
+using Framework.Enums.Validation;
 using Zamin.Core.ApplicationServices.Commands;
 using Zamin.Core.Domain.Exceptions;
 using Zamin.Core.RequestResponse.Commands;
@@ -20,8 +21,8 @@ public sealed class RemoveAccountRoleCommandHandler : CommandHandler<RemoveAccou
     public async override Task<CommandResult> Handle(RemoveAccountRoleCommand command)
     {
         var accountRole = await _accountCommandRepository.GetGraphAsync(command.AccountId);
-        if (accountRole is null || command.AccountId <= 0)
-            throw new InvalidEntityStateException("رول یا اکانت یافت نشد");
+        if (accountRole is null)
+            throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.RoleError));
 
         accountRole.RemoveRole(command.RoleId);
 
