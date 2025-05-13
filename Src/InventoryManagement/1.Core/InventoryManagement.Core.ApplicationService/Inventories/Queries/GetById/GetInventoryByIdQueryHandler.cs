@@ -6,16 +6,9 @@ using Zamin.Utilities;
 
 namespace InventoryManagement.Core.ApplicationService.Inventories.Queries.GetById;
 
-public sealed class GetInventoryByIdQueryHandler : QueryHandler<GetInventoryByIdQuery, InventoryQr?>
+public sealed class GetInventoryByIdQueryHandler(ZaminServices zainServices,
+    IInventoryQueryRepository inventoryQueryRepository) : QueryHandler<GetInventoryByIdQuery, InventoryQr?>(zainServices)
 {
-    readonly IInventoryQueryRepository _inventoryQueryRepository;
-
-    public GetInventoryByIdQueryHandler(ZaminServices zainServices,
-        IInventoryQueryRepository inventoryQueryRepository) : base(zainServices)
-    {
-        _inventoryQueryRepository = inventoryQueryRepository;
-    }
-
     public override async Task<QueryResult<InventoryQr?>> Handle(GetInventoryByIdQuery query)
-        => Result(await _inventoryQueryRepository.ExecuteAsync(query));
+        => Result(await inventoryQueryRepository.ExecuteAsync(query));
 }

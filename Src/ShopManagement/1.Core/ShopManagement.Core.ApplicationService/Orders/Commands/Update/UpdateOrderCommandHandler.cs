@@ -8,20 +8,12 @@ using Zamin.Utilities;
 
 namespace ShopManagement.Core.ApplicationService.Orders.Commands.Update;
 
-public sealed class UpdateOrderCommandHandler : CommandHandler<UpdateOrderCommand>
+public sealed class UpdateOrderCommandHandler(ZaminServices zaminServices,
+    IOrderCommandRepository orderCommandRepository) : CommandHandler<UpdateOrderCommand>(zaminServices)
 {
-    readonly IOrderCommandRepository _orderCommandRepository;
-
-    // pimrry constructor
-    public UpdateOrderCommandHandler(ZaminServices zaminServices,
-        IOrderCommandRepository orderCommandRepository) : base(zaminServices)
-    {
-        _orderCommandRepository = orderCommandRepository;
-    }
-
     public override async Task<CommandResult> Handle(UpdateOrderCommand command)
     {
-        var order = await _orderCommandRepository.GetAsync(command.Id);
+        var order = await orderCommandRepository.GetAsync(command.Id);
         // eslah shavad
         if (order is null)
             throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.OrderError));
@@ -32,7 +24,7 @@ public sealed class UpdateOrderCommandHandler : CommandHandler<UpdateOrderComman
                    command.DiscountAmount,
                    command.PayAmount);
 
-        await _orderCommandRepository.CommitAsync();
+        await orderCommandRepository.CommitAsync();
         return Ok();
     }
 }

@@ -6,16 +6,9 @@ using Zamin.Utilities;
 
 namespace AccountManagement.Core.ApplicationService.Permissions.Queries.GetById;
 
-public sealed class GetAccountByIdQueryHandler : QueryHandler<GetPermissionByIdQuery, PermissionQr?>
+public sealed class GetAccountByIdQueryHandler(ZaminServices zaminServices,
+    IPermissionQueryRepository permissionQueryRepository) : QueryHandler<GetPermissionByIdQuery, PermissionQr?>(zaminServices)
 {
-    readonly IPermissionQueryRepository _permissionQueryRepository;
-
-    public GetAccountByIdQueryHandler(ZaminServices zaminServices,
-        IPermissionQueryRepository permissionQueryRepository) : base(zaminServices)
-    {
-        _permissionQueryRepository = permissionQueryRepository;
-    }
-
     public override async Task<QueryResult<PermissionQr?>> Handle(GetPermissionByIdQuery query)
-         => Result(await _permissionQueryRepository.ExecuteAsync(query));
+         => Result(await permissionQueryRepository.ExecuteAsync(query));
 }

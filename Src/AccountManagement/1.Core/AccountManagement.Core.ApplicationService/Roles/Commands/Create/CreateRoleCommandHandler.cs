@@ -7,22 +7,15 @@ using Zamin.Utilities;
 
 namespace AccountManagement.Core.ApplicationService.Roles.Commands.Create;
 
-public sealed class CreateRoleCommandHandler : CommandHandler<CreateRoleCommand, Guid>
+public sealed class CreateRoleCommandHandler(ZaminServices zaminServices,
+    IRoleCommandRepository roleCommandRepository) : CommandHandler<CreateRoleCommand, Guid>(zaminServices)
 {
-    readonly IRoleCommandRepository _roleCommandRepository;
-
-    public CreateRoleCommandHandler(ZaminServices zaminServices,
-        IRoleCommandRepository roleCommandRepository) : base(zaminServices)
-    {
-        _roleCommandRepository = roleCommandRepository;
-    }
-
     public override async Task<CommandResult<Guid>> Handle(CreateRoleCommand command)
     {
         var role = new Role(command.Name);
 
-        await _roleCommandRepository.InsertAsync(role);
-        await _roleCommandRepository.CommitAsync();
+        await roleCommandRepository.InsertAsync(role);
+        await roleCommandRepository.CommitAsync();
 
         return Ok(role.BusinessId.Value);
     }

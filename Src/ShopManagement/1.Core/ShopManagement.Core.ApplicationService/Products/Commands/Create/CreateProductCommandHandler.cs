@@ -7,16 +7,9 @@ using Zamin.Utilities;
 
 namespace ShopManagement.Core.ApplicationService.Products.Commands.Create;
 
-public sealed class CreateProductCommandHandler : CommandHandler<CreateProductCommand, Guid>
+public sealed class CreateProductCommandHandler(ZaminServices zaminServices,
+    IProductCommandRepository productCommandRepository) : CommandHandler<CreateProductCommand, Guid>(zaminServices)
 {
-    readonly IProductCommandRepository _productCommandRepository;
-
-    public CreateProductCommandHandler(ZaminServices zaminServices,
-        IProductCommandRepository productCommandRepository) : base(zaminServices)
-    {
-        _productCommandRepository = productCommandRepository;
-    }
-
     public override async Task<CommandResult<Guid>> Handle(CreateProductCommand command)
     {
         //var entity = await _productCommandRepository.GetAsync(command.Id);
@@ -35,8 +28,8 @@ public sealed class CreateProductCommandHandler : CommandHandler<CreateProductCo
                                   command.Slug,
                                   command.Keywords,
                                   command.MetaDescription);
-        await _productCommandRepository.InsertAsync(product);
-        await _productCommandRepository.CommitAsync();
+        await productCommandRepository.InsertAsync(product);
+        await productCommandRepository.CommitAsync();
 
         return Ok(product.BusinessId.Value);
     }

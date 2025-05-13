@@ -8,19 +8,12 @@ using Zamin.Utilities;
 
 namespace AccountManagement.Core.ApplicationService.Accounts.Commands.Update;
 
-public sealed class UpdateAccountCommandHandler : CommandHandler<UpdateAccountCommand>
+public sealed class UpdateAccountCommandHandler(ZaminServices zainServices,
+    IAccountCommandRepository accountCommandRepository) : CommandHandler<UpdateAccountCommand>(zainServices)
 {
-    readonly IAccountCommandRepository _accountCommandRepository;
-
-    public UpdateAccountCommandHandler(ZaminServices zainServices,
-        IAccountCommandRepository accountCommandRepository) : base(zainServices)
-    {
-        _accountCommandRepository = accountCommandRepository;
-    }
-
     public override async Task<CommandResult> Handle(UpdateAccountCommand command)
     {
-        var account = await _accountCommandRepository.GetAsync(command.Id);
+        var account = await accountCommandRepository.GetAsync(command.Id);
         if (account is null)
             throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.NotAccount));
 
@@ -28,7 +21,7 @@ public sealed class UpdateAccountCommandHandler : CommandHandler<UpdateAccountCo
                      command.Username,
                      command.Mobile,
                      command.ProfilePhoto);
-        await _accountCommandRepository.CommitAsync();
+        await accountCommandRepository.CommitAsync();
         return Ok();
     }
 }

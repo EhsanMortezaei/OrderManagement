@@ -7,16 +7,9 @@ using Zamin.Utilities;
 
 namespace ShopManagement.Core.ApplicationService.Orders.Commands.Create;
 
-public sealed class CreateOrderCommandHandler : CommandHandler<CreateOrderCommand, Guid>
+public sealed class CreateOrderCommandHandler(ZaminServices zaminServices,
+    IOrderCommandRepository orderCommandRepository) : CommandHandler<CreateOrderCommand, Guid>(zaminServices)
 {
-    readonly IOrderCommandRepository _orderCommandRepository;
-
-    public CreateOrderCommandHandler(ZaminServices zaminServices,
-        IOrderCommandRepository orderCommandRepository) : base(zaminServices)
-    {
-        _orderCommandRepository = orderCommandRepository;
-    }
-
     public override async Task<CommandResult<Guid>> Handle(CreateOrderCommand command)
     {
         var order = new Order(command.AccountId,
@@ -27,8 +20,8 @@ public sealed class CreateOrderCommandHandler : CommandHandler<CreateOrderComman
                               command.IssueTrackingNo,
                               command.Items);
 
-        await _orderCommandRepository.InsertAsync(order);
-        await _orderCommandRepository.CommitAsync();
+        await orderCommandRepository.InsertAsync(order);
+        await orderCommandRepository.CommitAsync();
 
         return Ok(order.BusinessId.Value);
     }

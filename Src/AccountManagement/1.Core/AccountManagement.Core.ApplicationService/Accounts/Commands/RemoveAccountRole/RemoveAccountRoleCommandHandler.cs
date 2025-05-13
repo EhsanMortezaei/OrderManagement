@@ -8,25 +8,18 @@ using Zamin.Utilities;
 
 namespace AccountManagement.Core.ApplicationService.Accounts.Commands.RemoveAccountRole;
 
-public sealed class RemoveAccountRoleCommandHandler : CommandHandler<RemoveAccountRoleCommand>
+public sealed class RemoveAccountRoleCommandHandler(ZaminServices zaminServices,
+    IAccountCommandRepository accountCommandRepository) : CommandHandler<RemoveAccountRoleCommand>(zaminServices)
 {
-    private readonly IAccountCommandRepository _accountCommandRepository;
-
-    public RemoveAccountRoleCommandHandler(ZaminServices zaminServices,
-        IAccountCommandRepository accountCommandRepository) : base(zaminServices)
-    {
-        _accountCommandRepository = accountCommandRepository;
-    }
-
     public async override Task<CommandResult> Handle(RemoveAccountRoleCommand command)
     {
-        var accountRole = await _accountCommandRepository.GetGraphAsync(command.AccountId);
+        var accountRole = await accountCommandRepository.GetGraphAsync(command.AccountId);
         if (accountRole is null)
             throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.RoleError));
 
         accountRole.RemoveRole(command.RoleId);
 
-        await _accountCommandRepository.CommitAsync();
+        await accountCommandRepository.CommitAsync();
         return Ok();
     }
 }

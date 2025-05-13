@@ -3,7 +3,6 @@ using Zamin.Core.RequestResponse.Commands;
 
 namespace AccountManagement.EndPoint.Api.CustomDecorators;
 
-//
 public sealed class CustomCommandDecorator : CommandDispatcherDecorator
 {
     public override int Order => 0;

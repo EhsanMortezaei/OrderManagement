@@ -9,23 +9,15 @@ using Zamin.Utilities;
 namespace InventoryManagement.Core.ApplicationService.Inventories.Commands.Create;
 
 // sealed  /  primarry constructor
-public sealed class CreateInventoryCommandHandler : CommandHandler<CreateInventoryCommand, Guid>
+public sealed class CreateInventoryCommandHandler(ZaminServices zaminServices,
+    IInventoryCommandRepository inventoryCommandRepository) : CommandHandler<CreateInventoryCommand, Guid>(zaminServices)
 {
-    readonly IInventoryCommandRepository _inventoryCommandRepository;
-
-    public CreateInventoryCommandHandler(ZaminServices zaminServices,
-        IInventoryCommandRepository inventoryCommandRepository,
-        IUserInfoService userInfoService) : base(zaminServices)
-    {
-        _inventoryCommandRepository = inventoryCommandRepository;
-    }
-
     public override async Task<CommandResult<Guid>> Handle(CreateInventoryCommand command)
     {
         var inventory = new Inventory(command.ProductId, command.UnitPrice, command.InStock, command.Operations);
 
-        await _inventoryCommandRepository.InsertAsync(inventory);
-        await _inventoryCommandRepository.CommitAsync();
+        await inventoryCommandRepository.InsertAsync(inventory);
+        await inventoryCommandRepository.CommitAsync();
 
         return Ok(inventory.BusinessId.Value);
     }

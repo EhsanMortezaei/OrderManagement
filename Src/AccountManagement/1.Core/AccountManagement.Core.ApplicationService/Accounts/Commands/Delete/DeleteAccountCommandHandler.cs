@@ -10,11 +10,9 @@ using Zamin.Utilities;
 namespace AccountManagement.Core.ApplicationService.Accounts.Commands.Delete;
 
 public class DeleteAccountCommandHandler(ZaminServices zaminServices,
-    IAccountCommandRepository accountCommandRepository,
-    IUnitOfWork accountUnitOfWork) : CommandHandler<DeleteAccountCommand>(zaminServices)
+    IAccountCommandRepository accountCommandRepository) : CommandHandler<DeleteAccountCommand>(zaminServices)
 {
     readonly IAccountCommandRepository _accountCommandRepository = accountCommandRepository;
-    readonly IUnitOfWork _accountUnitOfWork = accountUnitOfWork;
 
     public override async Task<CommandResult> Handle(DeleteAccountCommand command)
     {

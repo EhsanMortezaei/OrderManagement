@@ -10,34 +10,25 @@ using Zamin.Utilities;
 
 namespace AccountManagement.Core.ApplicationService.Accounts.Commands.Create;
 
-public sealed class CreateAccountCommandHandler : CommandHandler<CreateAccountCommand, Guid>
+public sealed class CreateAccountCommandHandler(ZaminServices zaminServices,
+    IAccountCommandRepository accountCommandRepository,
+    IPasswordHasher passwordHasher) : CommandHandler<CreateAccountCommand, Guid>(zaminServices)
 {
-    readonly IPasswordHasher _passwordHasher;
-    readonly IAccountCommandRepository _accountCommandRepository;
-
-    public CreateAccountCommandHandler(ZaminServices zaminServices,
-        IAccountCommandRepository accountCommandRepository,
-        IPasswordHasher passwordHasher) : base(zaminServices)
-    {
-        _accountCommandRepository = accountCommandRepository;
-        _passwordHasher = passwordHasher;
-    }
-
     public override async Task<CommandResult<Guid>> Handle(CreateAccountCommand command)
     {
         // validation hai ke niaz be check db darad dakhele command handler check shavad
-        if (_accountCommandRepository.Exists(c => c.Username == command.Username))
+        if (accountCommandRepository.Exists(c => c.Username == command.Username))
             throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.UsernameAlreadyExists));
 
-        var passwordHasher = _passwordHasher.Hash(command.Password);
+        var hashedPassword = passwordHasher.Hash(command.Password);
         var account = new Account(command.Fullname,
                                   command.Username,
-                                  passwordHasher,
+                                  hashedPassword,
                                   command.Mobile,
                                   command.ProfilePhoto);
 
-        await _accountCommandRepository.InsertAsync(account);
-        await _accountCommandRepository.CommitAsync();
+        await accountCommandRepository.InsertAsync(account);
+        await accountCommandRepository.CommitAsync();
 
         return Ok(account.BusinessId.Value);
     }

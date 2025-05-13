@@ -10,18 +10,14 @@ using Zamin.Utilities;
 namespace ShopManagement.Core.ApplicationService.Orders.Commands.Delete;
 
 public sealed class DeleteOrderCommandHandler(ZaminServices zaminServices,
-    IOrderCommandRepository orderCommandRepository,
-    IUnitOfWork orderUnitOfWork) : CommandHandler<DeleteOrderCommand>(zaminServices)
+    IOrderCommandRepository orderCommandRepository) : CommandHandler<DeleteOrderCommand>(zaminServices)
 {
-    readonly IUnitOfWork _orderUnitOfWork = orderUnitOfWork;
-    readonly IOrderCommandRepository _orderCommandRepository = orderCommandRepository;
-
     public override async Task<CommandResult> Handle(DeleteOrderCommand command)
     {
-        var order = await _orderCommandRepository.GetGraphAsync(command.Id) ?? throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.InventoyError));
+        var order = await orderCommandRepository.GetGraphAsync(command.Id) ?? throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.InventoyError));
 
-        _orderCommandRepository.Delete(order);
-        await _orderCommandRepository.CommitAsync();
+        orderCommandRepository.Delete(order);
+        await orderCommandRepository.CommitAsync();
 
         return Ok();
     }

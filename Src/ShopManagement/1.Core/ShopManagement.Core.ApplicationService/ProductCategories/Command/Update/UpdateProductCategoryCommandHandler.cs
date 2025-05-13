@@ -8,19 +8,12 @@ using Zamin.Utilities;
 
 namespace ShopManagement.Core.ApplicationService.ProductCategories.Command.Update;
 
-public sealed class UpdateProductCategoryCommandHandler : CommandHandler<UpdateProductCategoryCommand>
+public sealed class UpdateProductCategoryCommandHandler(ZaminServices zaminServices,
+                                           IProductCategoryCommandRepository productCategoryCommandRepository) : CommandHandler<UpdateProductCategoryCommand>(zaminServices)
 {
-    readonly IProductCategoryCommandRepository _productCategoryCommandRepository;
-
-    public UpdateProductCategoryCommandHandler(ZaminServices zaminServices,
-                                               IProductCategoryCommandRepository productCategoryCommandRepository) : base(zaminServices)
-    {
-        _productCategoryCommandRepository = productCategoryCommandRepository;
-    }
-
     public override async Task<CommandResult> Handle(UpdateProductCategoryCommand command)
     {
-        var productCategory = await _productCategoryCommandRepository.GetAsync(command.Id);
+        var productCategory = await productCategoryCommandRepository.GetAsync(command.Id);
         if (productCategory is null)
             throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.ProductCategoryError));
         productCategory.Edit(command.Name,
@@ -32,7 +25,7 @@ public sealed class UpdateProductCategoryCommandHandler : CommandHandler<UpdateP
                              command.MetaDescription,
                              command.Slug);
 
-        await _productCategoryCommandRepository.CommitAsync();
+        await productCategoryCommandRepository.CommitAsync();
 
         return Ok();
     }

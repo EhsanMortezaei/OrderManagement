@@ -10,18 +10,14 @@ using Zamin.Utilities;
 namespace InventoryManagement.Core.ApplicationService.Inventories.Commands.Delete;
 
 public sealed class DeleteInventoryCommandHandler(ZaminServices zaminServices,
-    IInventoryCommandRepository inventoryCommandRepository,
-    IUnitOfWork inventoryUnitOfWork) : CommandHandler<DeleteInventoryCommand>(zaminServices)
+    IInventoryCommandRepository inventoryCommandRepository) : CommandHandler<DeleteInventoryCommand>(zaminServices)
 {
-    readonly IUnitOfWork _inventoryUnitOfWork = inventoryUnitOfWork;
-    readonly IInventoryCommandRepository _inventoryCommandRepository = inventoryCommandRepository;
-
     public override async Task<CommandResult> Handle(DeleteInventoryCommand command)
     {
-        var inventory = await _inventoryCommandRepository.GetGraphAsync(command.Id) ?? throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.InventoyError));
+        var inventory = await inventoryCommandRepository.GetGraphAsync(command.Id) ?? throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.InventoyError));
 
-        _inventoryCommandRepository.Delete(inventory);
-        await _inventoryCommandRepository.CommitAsync();
+        inventoryCommandRepository.Delete(inventory);
+        await inventoryCommandRepository.CommitAsync();
 
         return Ok();
     }

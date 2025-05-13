@@ -6,19 +6,12 @@ using Zamin.Utilities;
 
 namespace ShopManagement.Core.ApplicationService.Products.Queries.GetById
 {
-    public sealed class GetProductByIdQueryHandler : QueryHandler<GetProductByIdQuery, ProductQr?>
+    public sealed class GetProductByIdQueryHandler(ZaminServices zainServices,
+                                      IProductQueryRepository productQueryRepository) : QueryHandler<GetProductByIdQuery, ProductQr?>(zainServices)
     {
-        readonly IProductQueryRepository _productQueryRepository;
-
-        public GetProductByIdQueryHandler(ZaminServices zainServices,
-                                          IProductQueryRepository productQueryRepository) : base(zainServices)
-        {
-            _productQueryRepository = productQueryRepository;
-        }
-
         public override async Task<QueryResult<ProductQr?>> Handle(GetProductByIdQuery query)
         {
-            var product = await _productQueryRepository.ExecuteAsync(query);
+            var product = await productQueryRepository.ExecuteAsync(query);
 
             return Result(product);
         }

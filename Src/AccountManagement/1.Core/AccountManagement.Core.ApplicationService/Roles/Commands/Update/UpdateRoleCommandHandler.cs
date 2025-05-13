@@ -8,24 +8,17 @@ using Zamin.Utilities;
 
 namespace AccountManagement.Core.ApplicationService.Roles.Commands.Update;
 
-public sealed class UpdateRoleCommandHandler : CommandHandler<UpdateRoleCommand>
+public sealed class UpdateRoleCommandHandler(ZaminServices zaminServices,
+    IRoleCommandRepository roleCommandRepository) : CommandHandler<UpdateRoleCommand>(zaminServices)
 {
-    readonly IRoleCommandRepository _roleCommandRepository;
-
-    public UpdateRoleCommandHandler(ZaminServices zaminServices,
-        IRoleCommandRepository roleCommandRepository) : base(zaminServices)
-    {
-        _roleCommandRepository = roleCommandRepository;
-    }
-
     public override async Task<CommandResult> Handle(UpdateRoleCommand command)
     {
-        var role = await _roleCommandRepository.GetAsync(command.Id);
+        var role = await roleCommandRepository.GetAsync(command.Id);
         if (role is null)
             throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.NotAccount));
 
         role.Edite(command.Name);
-        await _roleCommandRepository.CommitAsync();
+        await roleCommandRepository.CommitAsync();
         return Ok();
     }
 }

@@ -9,15 +9,13 @@ namespace AccountManagement.Core.ApplicationService.Accounts.Commands.AddAccount
 public sealed class AddAccountRoleCommandHandler(ZaminServices zaminServices,
     IAccountCommandRepository accountCommandRepository) : CommandHandler<AddAccountRoleCommand>(zaminServices)
 {
-    private readonly IAccountCommandRepository _accountCommandRepository = accountCommandRepository;
-
     public override async Task<CommandResult> Handle(AddAccountRoleCommand command)
     {
-        var accountRole = await _accountCommandRepository.GetGraphAsync(command.AccountId);
+        var accountRole = await accountCommandRepository.GetGraphAsync(command.AccountId);
 
         accountRole.AddRole(command.RoleId);
 
-        await _accountCommandRepository.CommitAsync();
+        await accountCommandRepository.CommitAsync();
 
         return Ok();
 

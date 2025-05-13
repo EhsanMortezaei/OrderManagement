@@ -8,23 +8,17 @@ using Zamin.Utilities;
 
 namespace InventoryManagement.Core.ApplicationService.Inventories.Commands.Update;
 
-public sealed class UpdateInventoryCommandHandler : CommandHandler<UpdateInventoryCommand>
+public sealed class UpdateInventoryCommandHandler(ZaminServices zaminServices,
+    IInventoryCommandRepository inventoryCommandRepository) : CommandHandler<UpdateInventoryCommand>(zaminServices)
 {
-    readonly IInventoryCommandRepository _inventoryCommandRepository;
-    public UpdateInventoryCommandHandler(ZaminServices zaminServices,
-        IInventoryCommandRepository inventoryCommandRepository) : base(zaminServices)
-    {
-        _inventoryCommandRepository = inventoryCommandRepository;
-    }
-
     public override async Task<CommandResult> Handle(UpdateInventoryCommand command)
     {
-        var inventory = await _inventoryCommandRepository.GetAsync(command.Id);
+        var inventory = await inventoryCommandRepository.GetAsync(command.Id);
         if (inventory is null)
             throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.InventoyError));
 
         inventory.Edit(command.ProductId, command.UnitPrice, command.Operations);
-        await _inventoryCommandRepository.CommitAsync();
+        await inventoryCommandRepository.CommitAsync();
         return Ok();
     }
 }

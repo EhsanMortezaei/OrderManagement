@@ -11,11 +11,9 @@ namespace AccountManagement.Core.ApplicationService.Roles.Commands.RemovePermiss
 public sealed class RemovePermissionCommandHandler(ZaminServices zaminServices,
     IRoleCommandRepository roleCommandRepository) : CommandHandler<RemovePermissionCommand>(zaminServices)
 {
-    private readonly IRoleCommandRepository _roleCommandRepository = roleCommandRepository;
-
     public override async Task<CommandResult> Handle(RemovePermissionCommand command)
     {
-        var role = await _roleCommandRepository.GetGraphAsync(command.RoleId);
+        var role = await roleCommandRepository.GetGraphAsync(command.RoleId);
 
         if (role is null)
             throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.NotAccount));

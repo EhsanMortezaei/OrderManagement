@@ -6,21 +6,14 @@ using Zamin.Utilities;
 
 namespace AccountManagement.Core.ApplicationService.Roles.Commands.AddPermission;
 
-public sealed class AddPermissionCommandHandler : CommandHandler<AddPermissionCommand>
+public sealed class AddPermissionCommandHandler(ZaminServices zaminServices,
+    IRoleCommandRepository roleCommandRepository) : CommandHandler<AddPermissionCommand>(zaminServices)
 {
-    private readonly IRoleCommandRepository _roleCommandRepository;
-
-    public AddPermissionCommandHandler(ZaminServices zaminServices,
-        IRoleCommandRepository roleCommandRepository) : base(zaminServices)
-    {
-        _roleCommandRepository = roleCommandRepository;
-    }
-
     public override async Task<CommandResult> Handle(AddPermissionCommand command)
     {
-        var permission = await _roleCommandRepository.GetGraphAsync(command.RoleId);
+        var permission = await roleCommandRepository.GetGraphAsync(command.RoleId);
         permission.AddPermission(command.Code);
-        await _roleCommandRepository.CommitAsync();
+        await roleCommandRepository.CommitAsync();
         return Ok();
     }
 }

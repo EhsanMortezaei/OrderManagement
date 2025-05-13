@@ -10,17 +10,14 @@ using Zamin.Utilities;
 namespace AccountManagement.Core.ApplicationService.Roles.Commands.Delete;
 
 public sealed class DeleteRoleCommandHandler(ZaminServices zaminServices,
-    IRoleCommandRepository roleCommandRepository,
-    IUnitOfWork roleUnitOfWork) : CommandHandler<DeleteRoleCommand>(zaminServices)
+    IRoleCommandRepository roleCommandRepository) : CommandHandler<DeleteRoleCommand>(zaminServices)
 {
-    readonly IRoleCommandRepository _roleCommandRepository = roleCommandRepository;
-    readonly IUnitOfWork _roleUnitOfWork = roleUnitOfWork;
     public override async Task<CommandResult> Handle(DeleteRoleCommand command)
     {
-        var role = await _roleCommandRepository.GetGraphAsync(command.Id) ?? throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.NotAccount));
+        var role = await roleCommandRepository.GetGraphAsync(command.Id) ?? throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.NotAccount));
 
-        _roleCommandRepository.Delete(role);
-        await _roleCommandRepository.CommitAsync();
+        roleCommandRepository.Delete(role);
+        await roleCommandRepository.CommitAsync();
 
         return Ok();
     }

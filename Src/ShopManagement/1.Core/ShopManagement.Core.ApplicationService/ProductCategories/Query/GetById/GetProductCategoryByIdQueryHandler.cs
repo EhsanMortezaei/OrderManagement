@@ -6,19 +6,12 @@ using Zamin.Utilities;
 
 namespace ShopManagement.Core.ApplicationService.ProductCategories.Query.GetById;
 
-public sealed class GetProductCategoryByIdQueryHandler : QueryHandler<GetProductCategoryByIdQuery, ProductCategoryQr?>
+public sealed class GetProductCategoryByIdQueryHandler(ZaminServices zaminServices,
+    IProductCategoryQueryRepository productCategoryQueryRepository) : QueryHandler<GetProductCategoryByIdQuery, ProductCategoryQr?>(zaminServices)
 {
-    readonly IProductCategoryQueryRepository _productCategoryQueryRepository;
-
-    public GetProductCategoryByIdQueryHandler(ZaminServices zaminServices,
-        IProductCategoryQueryRepository productCategoryQueryRepository) : base(zaminServices)
-    {
-        _productCategoryQueryRepository = productCategoryQueryRepository;
-    }
-
     public override async Task<QueryResult<ProductCategoryQr?>> Handle(GetProductCategoryByIdQuery query)
     {
-        var productCategory = await _productCategoryQueryRepository.ExecuteAsync(query);
+        var productCategory = await productCategoryQueryRepository.ExecuteAsync(query);
 
         return Result(productCategory);
     }

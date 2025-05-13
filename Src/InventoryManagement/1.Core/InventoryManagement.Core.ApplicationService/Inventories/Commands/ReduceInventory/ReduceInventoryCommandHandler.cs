@@ -7,25 +7,16 @@ using Zamin.Utilities;
 
 namespace InventoryManagement.Core.ApplicationService.Inventories.Commands.ReduceInventory;
 
-public sealed class ReduceInventoryCommandHandler : CommandHandler<ReduceInventoryCommand, Guid>
+public sealed class ReduceInventoryCommandHandler(ZaminServices zaminServices,
+    IInventoryCommandRepository inventoryCommandRepository, IAuthHelper authHelper) : CommandHandler<ReduceInventoryCommand, Guid>(zaminServices)
 {
-    readonly IInventoryCommandRepository _inventoryCommandRepository;
-    readonly IAuthHelper _authHelper;
-
-    public ReduceInventoryCommandHandler(ZaminServices zaminServices,
-        IInventoryCommandRepository inventoryCommandRepository, IAuthHelper authHelper) : base(zaminServices)
-    {
-        _inventoryCommandRepository = inventoryCommandRepository;
-        _authHelper = authHelper;
-    }
-
     public override async Task<CommandResult<Guid>> Handle(ReduceInventoryCommand command)
     {
-        var inventory = await _inventoryCommandRepository.GetGraphAsync(command.InventoryId);
+        var inventory = await inventoryCommandRepository.GetGraphAsync(command.InventoryId);
 
-        var operatorId = _authHelper.CurrentAccountId();
+        var operatorId = authHelper.CurrentAccountId();
         inventory.Reduce(command.Count, operatorId, command.Description, 0);
-        _inventoryCommandRepository.Commit();
+        inventoryCommandRepository.Commit();
         return Ok(inventory.BusinessId.Value);
     }
 }

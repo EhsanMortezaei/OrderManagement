@@ -8,25 +8,17 @@ using Zamin.Utilities;
 
 namespace ShopManagement.Core.ApplicationService.ProductCategories.Command.Delete;
 
-public sealed class DeleteProductCategoryCommandHandler : CommandHandler<DeleteProductCategoryCommand>
+public sealed class DeleteProductCategoryCommandHandler(ZaminServices zaminServices,
+                                           IProductCategoryCommandRepository productCategoryCommandRepository) : CommandHandler<DeleteProductCategoryCommand>(zaminServices)
 {
-    readonly IProductCategoryCommandRepository _productCategoryCommandRepository;
-
-    public DeleteProductCategoryCommandHandler(ZaminServices zaminServices,
-                                               IProductCategoryCommandRepository productCategoryCommandRepository) : base(zaminServices)
-    {
-        _productCategoryCommandRepository = productCategoryCommandRepository;
-    }
-
-
     public override async Task<CommandResult> Handle(DeleteProductCategoryCommand command)
     {
-        var productCategory = await _productCategoryCommandRepository.GetGraphAsync(command.Id)
+        var productCategory = await productCategoryCommandRepository.GetGraphAsync(command.Id)
             ?? throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.ProductCategoryError));
 
-        _productCategoryCommandRepository.Delete(productCategory);
+        productCategoryCommandRepository.Delete(productCategory);
 
-        await _productCategoryCommandRepository.CommitAsync();
+        await productCategoryCommandRepository.CommitAsync();
 
         return Ok();
     }

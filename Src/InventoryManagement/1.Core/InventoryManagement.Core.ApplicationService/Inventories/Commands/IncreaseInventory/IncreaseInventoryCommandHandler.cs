@@ -7,27 +7,18 @@ using Zamin.Utilities;
 
 namespace InventoryManagement.Core.ApplicationService.Inventories.Commands.IncreaseInventory;
 
-public sealed class IncreaseInventoryCommandHandler : CommandHandler<IncreaseInventoryCommand, Guid>
+public sealed class IncreaseInventoryCommandHandler(ZaminServices zaminServices,
+                                       IAuthHelper authHelper,
+                                       IInventoryCommandRepository inventoryCommandRepository) : CommandHandler<IncreaseInventoryCommand, Guid>(zaminServices)
 {
-    IInventoryCommandRepository _inventoryCommandRepository;
-    readonly IAuthHelper _authHelper;
-
-    public IncreaseInventoryCommandHandler(ZaminServices zaminServices,
-                                           IAuthHelper authHelper,
-                                           IInventoryCommandRepository inventoryCommandRepository) : base(zaminServices)
-    {
-        _authHelper = authHelper;
-        _inventoryCommandRepository = inventoryCommandRepository;
-    }
-
     public override async Task<CommandResult<Guid>> Handle(IncreaseInventoryCommand command)
     {
-        var inventory = await _inventoryCommandRepository.GetGraphAsync(command.InventoryId);
+        var inventory = await inventoryCommandRepository.GetGraphAsync(command.InventoryId);
 
-        var operatorId = _authHelper.CurrentAccountId();
+        var operatorId = authHelper.CurrentAccountId();
         //const long operatorId = 1;
         inventory.Increase(command.Count, operatorId, command.Description);
-        await _inventoryCommandRepository.CommitAsync();
+        await inventoryCommandRepository.CommitAsync();
 
         return Ok(inventory.BusinessId.Value);
     }

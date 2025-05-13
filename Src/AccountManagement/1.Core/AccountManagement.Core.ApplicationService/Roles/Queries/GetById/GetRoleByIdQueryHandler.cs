@@ -6,16 +6,9 @@ using Zamin.Utilities;
 
 namespace AccountManagement.Core.ApplicationService.Roles.Queries.GetById;
 
-public sealed class GetRoleByIdQueryHandler : QueryHandler<GetRoleByIdQuery, RoleQr?>
+public sealed class GetRoleByIdQueryHandler(ZaminServices zaminServices,
+    IRoleQueryRepository roleQueryRepository) : QueryHandler<GetRoleByIdQuery, RoleQr?>(zaminServices)
 {
-    readonly IRoleQueryRepository _roleQueryRepository;
-
-    public GetRoleByIdQueryHandler(ZaminServices zaminServices,
-        IRoleQueryRepository roleQueryRepository) : base(zaminServices)
-    {
-        _roleQueryRepository = roleQueryRepository;
-    }
-
     public override async Task<QueryResult<RoleQr?>> Handle(GetRoleByIdQuery query)
-         => Result(await _roleQueryRepository.ExecuteAsync(query));
+         => Result(await roleQueryRepository.ExecuteAsync(query));
 }
