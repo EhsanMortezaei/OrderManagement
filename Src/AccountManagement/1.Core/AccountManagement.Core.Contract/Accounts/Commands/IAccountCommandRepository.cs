@@ -5,5 +5,5 @@ namespace AccountManagement.Core.Contract.Accounts.Commands;
 
 public interface IAccountCommandRepository : ICommandRepository<Account, int>
 {
-    Task<Account> GetByUserName(string username);
+    Task<Account?> GetByUserName(string username);
 }

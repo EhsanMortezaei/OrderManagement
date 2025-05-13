@@ -8,17 +8,17 @@ namespace AccountManagement.Core.Domain.Accounts.Entities;
 // null check beshe
 public sealed class Account : AggregateRoot<int>
 {
-    public string FullName { get;  set; } = null!;
-    public string Username { get;  set; } = null!;
-    public string Password { get;  set; } = null!;
-    public string? Mobile { get;  set; }
-    public string? ProfilePhoto { get;  set; }
+    public string FullName { get; set; } = null!;
+    public string Username { get; set; } = null!;
+    public string Password { get; set; } = null!;
+    public string? Mobile { get; set; }
+    public string? ProfilePhoto { get; set; }
 
-     List<AccountRole> _accountRoles = [];
+    List<AccountRole> _accountRoles = [];
     public IReadOnlyList<AccountRole> AccountRoles => _accountRoles;
 
 
-     Account() { }
+    Account() { }
 
     public Account(string fullname,
                    string username,
@@ -58,10 +58,10 @@ public sealed class Account : AggregateRoot<int>
         }
     }
 
-     void ThrowIfMobileIsInvalid(string mobile)
+    void ThrowIfMobileIsInvalid(string mobile)
     {
         if (false)
-            throw new InvalidEntityStateException("Mobilw valid nist");
+            throw new InvalidEntityStateException("موبایل ولید نیست");
     }
 
     public void ChangePassword(string password)
@@ -73,12 +73,18 @@ public sealed class Account : AggregateRoot<int>
     public void AddRole(int roleId)
     {
         if (_accountRoles.Exists(c => c.RoleId == roleId))
-            throw new InvalidEntityStateException("Mobilw valid nist");
+            throw new InvalidEntityStateException("رول ولید نیست");
 
         _accountRoles.Add(new AccountRole(roleId));
     }
     public void RemoveRole(int roleId)
     {
-        _accountRoles.Add(new AccountRole(roleId));
+        var accountRole = _accountRoles.FirstOrDefault(x => x.RoleId == roleId);
+        if (accountRole is null)
+        {
+            throw new InvalidEntityStateException("رول اکانت پیدا نشد");
+        }
+
+        _accountRoles.Remove(accountRole);
     }
 }

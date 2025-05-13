@@ -7,16 +7,15 @@ namespace AccountManagement.Core.Domain.Roles.Entities;
 /// </summary>
 public sealed class Permission : Entity<int>
 {
-    public int Code { get;  set; }
-    public string Name { get;  set; } = null!;
-    public int RoleId { get;  set; }
+    public int Code { get; set; }
+    public string Name { get; set; } = null!;
+    public int RoleId { get; set; }
 
-     Permission() { }
+    Permission() { }
 
-    public Permission(int code, string name)
+    public Permission(int permissionId)
     {
-        Code = code;
-        Name = name;
+        Id = permissionId;
     }
 
     public Permission(int code, string name, int roleId)
