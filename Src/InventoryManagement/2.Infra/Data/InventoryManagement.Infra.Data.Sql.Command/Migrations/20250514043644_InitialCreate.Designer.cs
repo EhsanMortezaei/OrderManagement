@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InventoryManagement.Infra.Data.Sql.Command.Migrations
 {
     [DbContext(typeof(InventoryManagementCommandDbContext))]
-    [Migration("20250508190509_InitialCreate")]
+    [Migration("20250514043644_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -66,11 +66,11 @@ namespace InventoryManagement.Infra.Data.Sql.Command.Migrations
 
             modelBuilder.Entity("InventoryManagement.Core.Domain.Inventories.Entities.InventoryOperation", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<Guid>("BusinessId")
                         .HasColumnType("uniqueidentifier");

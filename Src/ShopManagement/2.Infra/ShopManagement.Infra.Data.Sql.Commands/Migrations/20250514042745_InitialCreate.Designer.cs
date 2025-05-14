@@ -12,7 +12,7 @@ using ShopManagement.Infra.Data.Sql.Commands.Common;
 namespace ShopManagement.Infra.Data.Sql.Commands.Migrations
 {
     [DbContext(typeof(ShopManagementCommandDbContext))]
-    [Migration("20250508193448_InitialCreate")]
+    [Migration("20250514042745_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />

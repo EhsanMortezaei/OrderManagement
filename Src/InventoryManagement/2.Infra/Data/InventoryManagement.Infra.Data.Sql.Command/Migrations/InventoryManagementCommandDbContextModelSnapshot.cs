@@ -63,11 +63,11 @@ namespace InventoryManagement.Infra.Data.Sql.Command.Migrations
 
             modelBuilder.Entity("InventoryManagement.Core.Domain.Inventories.Entities.InventoryOperation", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<Guid>("BusinessId")
                         .HasColumnType("uniqueidentifier");
