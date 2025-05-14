@@ -6,10 +6,10 @@ public static class ErrorMessages
 {
     static readonly Dictionary<ErrorMessageKey, string> _messages = new()
 {
-    { ErrorMessageKey.UsernameAlreadyExists, "نام کاربری وارد شده قبلاً ثبت شده است." },
-    { ErrorMessageKey.UserNameAndPassword, "نام کاربری یا کلمه عبور اشتباه است." },
-    { ErrorMessageKey.InvalidEmail, "ایمیل وارد شده معتبر نیست." },
-    { ErrorMessageKey.PasswordTooShort, "کلمه عبور خیلی کوتاه است." },
+    {ErrorMessageKey.UsernameAlreadyExists, "نام کاربری وارد شده قبلاً ثبت شده است." },
+    {ErrorMessageKey.UserNameAndPassword, "نام کاربری یا کلمه عبور اشتباه است." },
+    {ErrorMessageKey.InvalidEmail, "ایمیل وارد شده معتبر نیست." },
+    {ErrorMessageKey.PasswordTooShort, "کلمه عبور خیلی کوتاه است." },
     {ErrorMessageKey.MobileError,"شماره موبایل باید با 09 شروع شود و دقیقاً 11 رقم باشد." },
     {ErrorMessageKey.RoleError,"رول اکانت پیدا نشد" },
     {ErrorMessageKey.Permission,"این پرمیشن قبلاً اضافه شده است" },

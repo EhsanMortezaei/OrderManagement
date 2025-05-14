@@ -1,6 +1,4 @@
-﻿using System.Resources;
-
-namespace Framework.ValidationMessages
+﻿namespace Framework.ValidationMessages
 {
     public static class ValidationMessages
     {

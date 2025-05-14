@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using Framework.Enums.Validation;
 using Framework.ValidationMessages;
 using Zamin.Extensions.Translations.Abstractions;
 
