@@ -32,7 +32,7 @@ public sealed class Account : AggregateRoot<int>
         if (string.IsNullOrWhiteSpace(mobile) ||
             !Regex.IsMatch(mobile, @"^09\d{9}$"))
         {
-            throw new ArgumentException(ErrorMessages.Get(ErrorMessageKey.MobileError));
+            throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.MobileError));
         }
         Mobile = mobile;
 
@@ -47,21 +47,18 @@ public sealed class Account : AggregateRoot<int>
         FullName = fullname;
         Username = username;
 
-        // validation ha takmil beshe
 
-        ThrowIfMobileIsInvalid(mobile);
+        if (string.IsNullOrWhiteSpace(mobile) ||
+            !Regex.IsMatch(mobile, @"^09\d{9}$"))
+        {
+            throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.MobileError));
+        }
 
         Mobile = mobile;
         if (!string.IsNullOrEmpty(profilePhoto))
         {
             ProfilePhoto = profilePhoto;
         }
-    }
-
-    void ThrowIfMobileIsInvalid(string mobile)
-    {
-        if (false)
-            throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.MobileError));
     }
 
     public void ChangePassword(string password)
