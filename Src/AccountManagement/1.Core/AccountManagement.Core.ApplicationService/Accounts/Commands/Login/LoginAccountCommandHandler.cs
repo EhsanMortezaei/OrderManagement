@@ -22,7 +22,10 @@ public sealed class LoginAccountCommandHandler(ZaminServices zainServices,
             ?? throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.UsernameAlreadyExists));
 
         if (!passwordHasher.Check(account.Password, command.Password).Verified)
-            throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.UsernameAlreadyExists));
+            throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.UserNameAndPassword));
+
+        if (account == null! || account.Username != command.UserName)
+            throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.UserNameAndPassword));
 
         var authModel = new AuthViewModel(account.Id,
                                           account.FullName,

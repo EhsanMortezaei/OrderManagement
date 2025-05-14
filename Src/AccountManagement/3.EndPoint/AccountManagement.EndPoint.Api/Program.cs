@@ -1,10 +1,15 @@
 using AccountManagement.EndPoint.Api.Extentions;
+using Microsoft.AspNetCore.Identity;
 using Zamin.Extensions.DependencyInjection;
 using Zamin.Utilities.SerilogRegistration.Extensions;
 
 SerilogExtensions.RunWithSerilogExceptionHandling(() =>
 {
     var builder = WebApplication.CreateBuilder(args);
+
+    builder.Services.AddAuthorization();
+    builder.Services.AddAuthentication().AddCookie(IdentityConstants.ApplicationScheme);
+
     var app = builder.AddZaminSerilog(o =>
     {
         o.ApplicationName = builder.Configuration.GetValue<string>("ApplicationName");
