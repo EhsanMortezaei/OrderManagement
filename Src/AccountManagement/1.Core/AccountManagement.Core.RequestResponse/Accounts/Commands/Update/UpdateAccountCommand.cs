@@ -11,3 +11,4 @@ public sealed class UpdateAccountCommand : ICommand
     public string Mobile { get; set; } = string.Empty;
     public string ProfilePhoto { get; set; } = string.Empty;
 }
+

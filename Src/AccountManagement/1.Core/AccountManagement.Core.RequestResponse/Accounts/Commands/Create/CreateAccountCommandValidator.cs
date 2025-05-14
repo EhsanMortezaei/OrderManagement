@@ -1,4 +1,6 @@
 ﻿using FluentValidation;
+using Framework.Enums.Validation;
+using Framework.ValidationMessages;
 using Zamin.Extensions.Translations.Abstractions;
 
 namespace AccountManagement.Core.RequestResponse.Accounts.Commands.Create;
@@ -10,14 +12,14 @@ public sealed class CreateAccountCommandValidator : AbstractValidator<CreateAcco
     public CreateAccountCommandValidator(ITranslator translator)
     {
         RuleFor(c => c.Username)
-            .NotNull().WithMessage(translator["Required", "Title"])
-            .MinimumLength(2).WithMessage(translator["Minimum Length {0} meghdar {1} mi bashad", "Title", "2"])
-            .MinimumLength(2).WithMessage(string.Format(translator["Minimum Length {0} meghdar {1} mi bashad"], translator["Username"], 2))
-            .MaximumLength(100).WithMessage(translator["MaximumLength", "Title", "100"]);
+            .NotNull().WithMessage(translator[ValidationMessages.Required, "Username"])
+            .MinimumLength(2).WithMessage(translator[ValidationMessages.MinimumLength, "Username", "2"])
+            .MaximumLength(100).WithMessage(translator[ValidationMessages.MaximumLength, "Username", "100"]);
+
 
         RuleFor(c => c.Fullname)
-            .NotNull().WithMessage(translator["Required", "Fullname"]).WithErrorCode("1")
-            .MinimumLength(10).WithMessage(translator["MinimumLength", "Fullname", "10"]).WithErrorCode("2")
-            .MaximumLength(500).WithMessage(translator["MaximumLength", "Fullname", "500"]).WithErrorCode("3");
+            .NotNull().WithMessage(translator[ValidationMessages.Required, "Fullname"])
+            .MinimumLength(5).WithMessage(translator[ValidationMessages.Required, "Fullname", "5"])
+            .MaximumLength(30).WithMessage(translator[ValidationMessages.Required, "Fullname", "30"]);
     }
 }

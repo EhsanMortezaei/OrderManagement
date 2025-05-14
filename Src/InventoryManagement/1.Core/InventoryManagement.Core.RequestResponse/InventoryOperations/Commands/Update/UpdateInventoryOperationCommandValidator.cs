@@ -1,16 +1,19 @@
 ﻿using FluentValidation;
 using Framework.ValidationMessages;
-using Zamin.Extensions.Translations.Abstractions;
 
-namespace InventoryManagement.Core.RequestResponse.InventoryOperations.Commands.Create;
+namespace InventoryManagement.Core.RequestResponse.InventoryOperations.Commands.Update;
 
-public sealed class CreateInventoryOperationCommandValidator : AbstractValidator<CreateInventoryOperationCommand>
+public sealed class UpdateInventoryOperationCommandValidator : AbstractValidator<UpdateInventoryOperationCommand>
 {
-    public CreateInventoryOperationCommandValidator(ITranslator translator)
+    public UpdateInventoryOperationCommandValidator()
     {
+        RuleFor(x => x.Id)
+            .GreaterThan(0)
+            .WithMessage(ValidationMessages.IdGreaterThanZero);
+
         RuleFor(x => x.Operation)
             .NotNull()
-            .WithMessage(ValidationMessages.Required);
+            .WithMessage(ValidationMessages.NotNull);
 
         RuleFor(x => x.Count)
             .GreaterThan(0)
@@ -21,11 +24,12 @@ public sealed class CreateInventoryOperationCommandValidator : AbstractValidator
             .WithMessage(ValidationMessages.IdGreaterThanZero);
 
         RuleFor(x => x.OperationDate)
-            .LessThanOrEqualTo(DateTime.Now)
+            .NotEmpty()
+            .Must(date => date <= DateTime.Now)
             .WithMessage(ValidationMessages.InvalidDate);
 
         RuleFor(x => x.CurrentCount)
-            .GreaterThan(0)
+            .GreaterThanOrEqualTo(0)
             .WithMessage(ValidationMessages.CountGreaterThanZero);
 
         RuleFor(x => x.Description)
@@ -41,3 +45,4 @@ public sealed class CreateInventoryOperationCommandValidator : AbstractValidator
             .WithMessage(ValidationMessages.IdGreaterThanZero);
     }
 }
+

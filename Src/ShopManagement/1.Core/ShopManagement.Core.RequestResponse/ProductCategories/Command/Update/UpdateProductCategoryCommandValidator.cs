@@ -1,12 +1,16 @@
 ﻿using FluentValidation;
 using Framework.ValidationMessages;
 
-namespace ShopManagement.Core.RequestResponse.ProductCategories.Command.Create;
+namespace ShopManagement.Core.RequestResponse.ProductCategories.Command.Update;
 
-public sealed class CreateProductCategoryCommandValidator : AbstractValidator<CreateProductCategoryCommand>
+public sealed class UpdateProductCategoryCommandValidator : AbstractValidator<UpdateProductCategoryCommand>
 {
-    public CreateProductCategoryCommandValidator()
+    public UpdateProductCategoryCommandValidator()
     {
+        RuleFor(x => x.Id)
+            .GreaterThan(0)
+            .WithMessage(ValidationMessages.IdGreaterThanZero);
+
         RuleFor(x => x.Name)
             .NotEmpty()
             .WithMessage(ValidationMessages.Required)

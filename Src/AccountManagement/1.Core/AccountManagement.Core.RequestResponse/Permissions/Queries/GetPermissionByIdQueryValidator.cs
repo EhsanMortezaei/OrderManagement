@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using Framework.ValidationMessages;
 using Zamin.Extensions.Translations.Abstractions;
 
 namespace AccountManagement.Core.RequestResponse.Permissions.Queries;
@@ -7,8 +8,8 @@ public sealed class GetPermissionByIdQueryValidator : AbstractValidator<GetPermi
 {
     public GetPermissionByIdQueryValidator(ITranslator translator)
     {
-        RuleFor(query => query.PermissionId)
-            .NotEmpty()
-            .WithMessage(translator["Required", nameof(GetPermissionByIdQuery.PermissionId)]);
+        RuleFor(x => x.PermissionId)
+            .GreaterThan(0)
+            .WithMessage(ValidationMessages.IdGreaterThanZero);
     }
 }

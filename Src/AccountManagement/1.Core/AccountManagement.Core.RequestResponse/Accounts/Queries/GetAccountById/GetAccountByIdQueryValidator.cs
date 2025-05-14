@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using Framework.ValidationMessages;
 using Zamin.Extensions.Translations.Abstractions;
 
 namespace AccountManagement.Core.RequestResponse.Accounts.Queries.GetAccountById;
@@ -8,8 +9,8 @@ public sealed class GetAccountByIdQueryValidator : AbstractValidator<GetAccountB
 {
     public GetAccountByIdQueryValidator(ITranslator translator)
     {
-        RuleFor(query => query.AccountId)
-            .NotEmpty()
-            .WithMessage(translator["Required", nameof(GetAccountByIdQuery.AccountId)]);
+        RuleFor(x => x.AccountId)
+            .GreaterThan(0)
+            .WithMessage(ValidationMessages.IdGreaterThanZero);
     }
 }

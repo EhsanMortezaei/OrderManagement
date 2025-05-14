@@ -6,3 +6,4 @@ public sealed class DeleteInventoryOperationCommand : ICommand
 {
     public int Id { get; set; }
 }
+

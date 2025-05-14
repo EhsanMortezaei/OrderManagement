@@ -16,3 +16,4 @@ public sealed class UpdateOrderCommand : ICommand
     public long RefId { get; set; }
 
 }
+

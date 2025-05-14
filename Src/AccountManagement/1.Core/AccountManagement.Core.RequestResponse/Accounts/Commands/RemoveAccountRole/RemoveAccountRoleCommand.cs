@@ -7,3 +7,4 @@ public sealed class RemoveAccountRoleCommand : ICommand
     public int AccountId { get; set; }
     public int RoleId { get; set; }
 }
+
