@@ -1,6 +1,5 @@
 ﻿using AccountManagement.Infra.Data.Sql.Queries.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection;
 using Zamin.Infra.Data.Sql.Queries;
 
 namespace AccountManagement.Infra.Data.Sql.Queries.Common;
@@ -98,5 +97,5 @@ public class AccountManagementQueryDbContext(DbContextOptions<AccountManagementQ
 
 
     }
-   
+
 }

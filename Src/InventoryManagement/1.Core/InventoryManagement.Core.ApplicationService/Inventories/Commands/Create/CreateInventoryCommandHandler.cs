@@ -3,7 +3,6 @@ using InventoryManagement.Core.Domain.Inventories.Entities;
 using InventoryManagement.Core.RequestResponse.Inventories.Commands.Create;
 using Zamin.Core.ApplicationServices.Commands;
 using Zamin.Core.RequestResponse.Commands;
-using Zamin.Extensions.UsersManagement.Abstractions;
 using Zamin.Utilities;
 
 namespace InventoryManagement.Core.ApplicationService.Inventories.Commands.Create;

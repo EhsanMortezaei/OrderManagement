@@ -1,5 +1,4 @@
 ﻿using AccountManagement.Core.Contract.Accounts.Commands;
-using AccountManagement.Core.Contract.Roles.Commands;
 using AccountManagement.Core.RequestResponse.Accounts.Commands.Login;
 using Framework.AuthHelper;
 using Framework.Enums.Validation;

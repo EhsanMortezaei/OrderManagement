@@ -2,7 +2,6 @@
 using AccountManagement.Core.RequestResponse.Roles.Commands.Delete;
 using Framework.Enums.Validation;
 using Zamin.Core.ApplicationServices.Commands;
-using Zamin.Core.Contracts.Data.Commands;
 using Zamin.Core.Domain.Exceptions;
 using Zamin.Core.RequestResponse.Commands;
 using Zamin.Utilities;

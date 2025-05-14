@@ -2,7 +2,6 @@
 using ShopManagement.Core.Contracts.Orders.Commands;
 using ShopManagement.Core.RequestResponse.Orders.Command.Delete;
 using Zamin.Core.ApplicationServices.Commands;
-using Zamin.Core.Contracts.Data.Commands;
 using Zamin.Core.Domain.Exceptions;
 using Zamin.Core.RequestResponse.Commands;
 using Zamin.Utilities;

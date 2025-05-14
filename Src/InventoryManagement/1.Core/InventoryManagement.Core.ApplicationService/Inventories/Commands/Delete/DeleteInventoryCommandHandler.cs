@@ -2,7 +2,6 @@
 using InventoryManagement.Core.Contracts.Inventories.Commands;
 using InventoryManagement.Core.RequestResponse.Inventories.Commands.Delet;
 using Zamin.Core.ApplicationServices.Commands;
-using Zamin.Core.Contracts.Data.Commands;
 using Zamin.Core.Domain.Exceptions;
 using Zamin.Core.RequestResponse.Commands;
 using Zamin.Utilities;
