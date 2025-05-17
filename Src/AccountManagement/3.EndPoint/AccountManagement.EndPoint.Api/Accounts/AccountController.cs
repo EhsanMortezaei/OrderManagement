@@ -6,7 +6,10 @@ using AccountManagement.Core.RequestResponse.Accounts.Commands.RemoveAccountRole
 using AccountManagement.Core.RequestResponse.Accounts.Commands.Update;
 using AccountManagement.Core.RequestResponse.Accounts.Queries.GetAccountById;
 using AccountManagement.Core.RequestResponse.Roles.Commands.AddPermission;
+using AccountManagement.Core.RequestResponse.Roles.Commands.Create;
+using AccountManagement.Core.RequestResponse.Roles.Commands.Delete;
 using AccountManagement.Core.RequestResponse.Roles.Commands.RemovePermission;
+using AccountManagement.Core.RequestResponse.Roles.Commands.Update;
 using AccountManagement.Core.RequestResponse.Roles.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -42,14 +45,14 @@ public sealed class AccountController : BaseController
     [HttpDelete("RemoveAccountRole")]
     public async Task<IActionResult> RemoveAccountRole([FromBody] RemoveAccountRoleCommand command) => await Delete(command);
 
-    //[HttpPost("CreateRole")]
-    //public async Task<IActionResult> CreateRole([FromBody] CreateRoleCommand command) => await Create<CreateRoleCommand, Guid>(command);
+    [HttpPost("CreateRole")]
+    public async Task<IActionResult> CreateRole([FromBody] CreateRoleCommand command) => await Create<CreateRoleCommand, Guid>(command);
 
-    //[HttpPut("UpdateRole")]
-    //public async Task<IActionResult> UpdateRole([FromBody] UpdateRoleCommand command) => await Edit(command);
+    [HttpPut("UpdateRole")]
+    public async Task<IActionResult> UpdateRole([FromBody] UpdateRoleCommand command) => await Edit(command);
 
-    //[HttpDelete("DeleteRole")]
-    //public async Task<IActionResult> DeleteRole([FromBody] DeleteRoleCommand command) => await Delete(command);
+    [HttpDelete("DeleteRole")]
+    public async Task<IActionResult> DeleteRole([FromBody] DeleteRoleCommand command) => await Delete(command);
 
     [HttpPost("Login")]
     public async Task<IActionResult> Login([FromBody] LoginAccountCommand command)
@@ -76,7 +79,7 @@ public sealed class AccountController : BaseController
     public async Task<IActionResult> RemovePermission([FromBody] RemovePermissionCommand command) => await Delete(command);
 
     [HttpGet("GetByIdAccount")]
-    public async Task<IActionResult> GetByIdAccount(GetAccountByIdQuery query) => await Query<GetAccountByIdQuery, AccountQr?>(query);
+    public async Task<IActionResult> GetByIdAccount([FromQuery] GetAccountByIdQuery query) => await Query<GetAccountByIdQuery, AccountQr?>(query);
 
     [HttpGet("GetByIdRole")]
     public async Task<IActionResult> GetByIdRole([FromQuery] GetRoleByIdQuery query) => await Query<GetRoleByIdQuery, RoleQr?>(query);
