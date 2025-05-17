@@ -6,18 +6,14 @@ using Zamin.Extensions.Events.Outbox.Dal.EF;
 
 namespace AccountManagement.Infra.Data.Sql.Commands.Common;
 
-public sealed class AccountManagementCommandDbContext : BaseOutboxCommandDbContext
+public sealed class AccountManagementCommandDbContext(
+    DbContextOptions<AccountManagementCommandDbContext> options) : BaseOutboxCommandDbContext(options)
 {
     public DbSet<Account> Accounts { get; set; }
     public DbSet<Role> Roles { get; set; }
     public DbSet<AccountRole> AccountRoles { get; set; }
     public DbSet<Permission> Permissions { get; set; }
     public DbSet<AccountRole> RolesRoles { get; set; }
-
-    public AccountManagementCommandDbContext(
-        DbContextOptions<AccountManagementCommandDbContext> options) : base(options)
-    {
-    }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

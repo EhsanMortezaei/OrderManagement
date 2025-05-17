@@ -6,12 +6,8 @@ using Zamin.Infra.Data.Sql.Queries;
 
 namespace AccountManagement.Infra.Data.Sql.Queries.Permissions;
 
-public class PermissionQueryRepository : BaseQueryRepository<AccountManagementQueryDbContext>, IPermissionQueryRepository
+public class PermissionQueryRepository(AccountManagementQueryDbContext dbContext) : BaseQueryRepository<AccountManagementQueryDbContext>(dbContext), IPermissionQueryRepository
 {
-    public PermissionQueryRepository(AccountManagementQueryDbContext dbContext) : base(dbContext)
-    {
-    }
-
     public async Task<PermissionQr?> ExecuteAsync(GetPermissionByIdQuery query)
     => await _dbContext.Permissions.Select(c => new PermissionQr()
     {
