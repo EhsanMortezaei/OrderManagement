@@ -15,6 +15,12 @@ SerilogExtensions.RunWithSerilogExceptionHandling(() =>
         options.MinimumSameSitePolicy = SameSiteMode.Lax;
     });
 
+    var jwtKey = builder.Configuration["Jwt:Key"];
+    if (string.IsNullOrWhiteSpace(jwtKey))
+        throw new InvalidOperationException("JWT key is missing in configuration. Please set 'Jwt:Key' in appsettings.json");
+
+    var keyBytes = Encoding.UTF8.GetBytes(jwtKey);
+
     builder.Services.AddAuthentication("Bearer")
     .AddJwtBearer("Bearer", options =>
     {
@@ -26,21 +32,15 @@ SerilogExtensions.RunWithSerilogExceptionHandling(() =>
             ValidateIssuerSigningKey = true,
             ValidIssuer = builder.Configuration["Jwt:Issuer"],
             ValidAudience = builder.Configuration["Jwt:Audience"],
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+            IssuerSigningKey = new SymmetricSecurityKey(keyBytes)
+
         };
     });
 
-    builder.Services.AddAuthorization(options =>
-    {
-        options.AddPolicy("AdminArea",
-            builder => builder.RequireRole(new List<string> { Roles.Administator, Roles.ContentUploader }));
-
-        options.AddPolicy("Shop",
-            builde => builde.RequireRole(new List<string> { Roles.Administator }));
-
-        options.AddPolicy("Account",
-            builde => builde.RequireRole(new List<string> { Roles.Administator }));
-    });
+    builder.Services.AddAuthorizationBuilder()
+        .AddPolicy("AdminArea", builder => builder.RequireRole(new List<string> { Roles.Administator, Roles.ContentUploader }))
+        .AddPolicy("Shop", builde => builde.RequireRole(new List<string> { Roles.Administator }))
+        .AddPolicy("Account", builde => builde.RequireRole(new List<string> { Roles.Administator }));
 
     var app = builder.AddZaminSerilog(o =>
     {

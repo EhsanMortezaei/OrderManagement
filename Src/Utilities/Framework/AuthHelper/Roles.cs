@@ -10,14 +10,11 @@ public static class Roles
 
     public static string GetRoleBy(long id)
     {
-        switch (id)
+        return id switch
         {
-            case 1:
-                return "مدیر سیستم";
-            case 3:
-                return "محتوا گذار";
-            default:
-                return "";
-        }
+            1 => "مدیر سیستم",
+            3 => "محتوا گذار",
+            _ => "",
+        };
     }
 }

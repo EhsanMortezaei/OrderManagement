@@ -1,4 +1,5 @@
-﻿using Zamin.Core.RequestResponse.Commands;
+﻿using Microsoft.AspNetCore.Http;
+using Zamin.Core.RequestResponse.Commands;
 
 namespace AccountManagement.Core.RequestResponse.Accounts.Commands.Update;
 
@@ -9,6 +10,6 @@ public sealed class UpdateAccountCommand : ICommand
     public string Username { get; set; } = string.Empty;
     public string Password { get; set; } = string.Empty;
     public string Mobile { get; set; } = string.Empty;
-    public string ProfilePhoto { get; set; } = string.Empty;
+    public IFormFile ProfilePhoto { get; set; } = null!;
 }
 

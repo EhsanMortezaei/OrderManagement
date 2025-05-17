@@ -1,4 +1,5 @@
 ﻿using Framework.Enums.Validation;
+using Framework.FileUpload;
 using Framework.ValidationMessages;
 using ShopManagement.Core.Contracts.Products.Command;
 using ShopManagement.Core.RequestResponse.Products.Command.Update;
@@ -10,7 +11,8 @@ using Zamin.Utilities;
 namespace ShopManagement.Core.ApplicationService.Products.Commands.Update;
 
 public sealed class UpdateProductCommandHandler(ZaminServices zaminServices,
-    IProductCommandRepository productCommandRepository) : CommandHandler<UpdateProductCommand>(zaminServices)
+    IProductCommandRepository productCommandRepository,
+    IFileUploader fileUploader) : CommandHandler<UpdateProductCommand>(zaminServices)
 {
     public override async Task<CommandResult> Handle(UpdateProductCommand command)
     {
@@ -19,11 +21,15 @@ public sealed class UpdateProductCommandHandler(ZaminServices zaminServices,
 
         var product = await productCommandRepository.GetAsync(command.Id)
             ?? throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.ProductError));
+
+        var path = $"profilePhotos";
+        var picture = fileUploader.Upload(command.Picture, path);
+
         product.Edit(command.Name,
                      command.Code,
                      command.ShortDescription,
                      command.Descrption,
-                     command.Picture,
+                     picture,
                      command.PictureAlt,
                      command.PictureTitle,
                      command.CategoryId,
