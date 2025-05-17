@@ -5,11 +5,8 @@ using Zamin.Infra.Data.Sql.Commands;
 
 namespace InventoryManagement.Infra.Data.Sql.Command.Inventories;
 
-public sealed class InventoryCommandRepository :
-    BaseCommandRepository<Inventory, InventoryManagementCommandDbContext, int>,
+public sealed class InventoryCommandRepository(InventoryManagementCommandDbContext dbContext) :
+    BaseCommandRepository<Inventory, InventoryManagementCommandDbContext, int>(dbContext),
     IInventoryCommandRepository
 {
-    public InventoryCommandRepository(InventoryManagementCommandDbContext dbContext) : base(dbContext)
-    {
-    }
 }

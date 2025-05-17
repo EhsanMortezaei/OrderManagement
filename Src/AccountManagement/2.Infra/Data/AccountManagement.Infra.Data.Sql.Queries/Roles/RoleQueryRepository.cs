@@ -6,12 +6,8 @@ using Zamin.Infra.Data.Sql.Queries;
 
 namespace AccountManagement.Infra.Data.Sql.Queries.Roles;
 
-public class RoleQueryRepository : BaseQueryRepository<AccountManagementQueryDbContext>, IRoleQueryRepository
+public class RoleQueryRepository(AccountManagementQueryDbContext dbContext) : BaseQueryRepository<AccountManagementQueryDbContext>(dbContext), IRoleQueryRepository
 {
-    public RoleQueryRepository(AccountManagementQueryDbContext dbContext) : base(dbContext)
-    {
-    }
-
     public async Task<RoleQr?> ExecuteAsync(GetRoleByIdQuery query)
     => await _dbContext.Roles.Select(c => new RoleQr()
     {

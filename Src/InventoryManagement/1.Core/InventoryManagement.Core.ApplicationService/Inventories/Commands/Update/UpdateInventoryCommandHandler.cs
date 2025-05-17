@@ -1,4 +1,5 @@
 ﻿using Framework.Enums.Validation;
+using Framework.ValidationMessages;
 using InventoryManagement.Core.Contracts.Inventories.Commands;
 using InventoryManagement.Core.RequestResponse.Inventories.Commands.Update;
 using Zamin.Core.ApplicationServices.Commands;
@@ -13,9 +14,17 @@ public sealed class UpdateInventoryCommandHandler(ZaminServices zaminServices,
 {
     public override async Task<CommandResult> Handle(UpdateInventoryCommand command)
     {
-        var inventory = await inventoryCommandRepository.GetAsync(command.Id);
-        if (inventory is null)
-            throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.InventoyError));
+        if (inventoryCommandRepository.Exists(x => x.ProductId == command.ProductId))
+            throw new InvalidEntityStateException(ValidationMessages.DuplicateInventory);
+
+        if (command.UnitPrice < 0)
+            throw new InvalidEntityStateException(ValidationMessages.NegativePrice);
+
+        if (command.InStock == false)
+            throw new InvalidEntityStateException(ValidationMessages.NegativeStock);
+
+        var inventory = await inventoryCommandRepository.GetAsync(command.Id)
+            ?? throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.InventoyError));
 
         inventory.Edit(command.ProductId, command.UnitPrice, command.Operations);
         await inventoryCommandRepository.CommitAsync();

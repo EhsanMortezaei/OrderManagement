@@ -6,11 +6,9 @@ using Zamin.Infra.Data.Sql.Queries;
 
 namespace InventoryManagement.Infra.Data.Sql.Queries.InventoryOperations;
 
-public sealed class InventoryOperationQueryRepository : BaseQueryRepository<InventoryManagementQueryDbContext>, IInventoryOperationsQueryRepository
+public sealed class InventoryOperationQueryRepository(InventoryManagementQueryDbContext dbContext) :
+    BaseQueryRepository<InventoryManagementQueryDbContext>(dbContext), IInventoryOperationsQueryRepository
 {
-    public InventoryOperationQueryRepository(InventoryManagementQueryDbContext dbContext) : base(dbContext)
-    {
-    }
     public async Task<InventoryOperationQr?> ExecuteAsync(GetInventoryOperationByIdQuery query)
     => await _dbContext.InventoryOperations.Select(c => new InventoryOperationQr()
     {

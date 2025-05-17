@@ -5,11 +5,8 @@ using Zamin.Infra.Data.Sql.Commands;
 
 namespace ShopManagement.Infra.Data.Sql.Commands.Orders;
 
-public sealed class OrderCommandRepository :
-    BaseCommandRepository<Order, ShopManagementCommandDbContext, int>,
+public sealed class OrderCommandRepository(ShopManagementCommandDbContext dbContext) :
+    BaseCommandRepository<Order, ShopManagementCommandDbContext, int>(dbContext),
     IOrderCommandRepository
 {
-    public OrderCommandRepository(ShopManagementCommandDbContext dbContext) : base(dbContext)
-    {
-    }
 }

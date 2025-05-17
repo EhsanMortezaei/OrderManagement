@@ -5,11 +5,8 @@ using Zamin.Infra.Data.Sql.Commands;
 
 namespace AccountManagement.Infra.Data.Sql.Commands.Roles;
 
-public sealed class RoleCommandRepository :
-    BaseCommandRepository<Role, AccountManagementCommandDbContext, int>,
+public sealed class RoleCommandRepository(AccountManagementCommandDbContext dbContext) :
+    BaseCommandRepository<Role, AccountManagementCommandDbContext, int>(dbContext),
     IRoleCommandRepository
 {
-    public RoleCommandRepository(AccountManagementCommandDbContext dbContext) : base(dbContext)
-    {
-    }
 }

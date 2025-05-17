@@ -19,40 +19,52 @@ namespace ShopManagement.EndPoint.Api.Shops
     public sealed class ShopController : BaseController
     {
         [HttpPost("CreateOrder")]
+        [Consumes("multipart/form-data")]
         public async Task<IActionResult> CreateOrder([FromBody] CreateOrderCommand command) => await Create<CreateOrderCommand, Guid>(command);
 
         [HttpPut("UpdateOrder")]
+        [Consumes("multipart/form-data")]
         public async Task<IActionResult> UpdateOrder([FromBody] UpdateOrderCommand command) => await Edit(command);
 
         [HttpDelete("DeleteOrder")]
+        [Consumes("multipart/form-data")]
         public async Task<IActionResult> DeletOrder([FromBody] DeleteOrderCommand command) => await Delete(command);
 
         [HttpPost("CreateProductCategory")]
-        public async Task<IActionResult> CreateProductCategory([FromBody] CreateProductCategoryCommand command) => await Create<CreateProductCategoryCommand, Guid>(command);
+        [Consumes("multipart/form-data")]
+        public async Task<IActionResult> CreateProductCategory([FromForm] CreateProductCategoryCommand command) => await Create<CreateProductCategoryCommand, Guid>(command);
 
         [HttpPut("UpdateProductCategory")]
-        public async Task<IActionResult> UpdateProductCategory([FromBody] UpdateProductCategoryCommand command) => await Edit(command);
+        [Consumes("multipart/form-data")]
+        public async Task<IActionResult> UpdateProductCategory([FromForm] UpdateProductCategoryCommand command) => await Edit(command);
 
         [HttpDelete("DeleteProductCategory")]
+        [Consumes("multipart/form-data")]
         public async Task<IActionResult> DeleteProductCategory([FromBody] DeleteProductCategoryCommand command) => await Delete(command);
 
         [HttpPost("CreateProduct")]
-        public async Task<IActionResult> CreateProduct([FromBody] CreateProductCommand command) => await Create<CreateProductCommand, Guid>(command);
+        [Consumes("multipart/form-data")]
+        public async Task<IActionResult> CreateProduct([FromForm] CreateProductCommand command) => await Create<CreateProductCommand, Guid>(command);
 
         [HttpPut("UpdateProduct")]
-        public async Task<IActionResult> UpdateProduct([FromBody] UpdateProductCommand command) => await Edit(command);
+        [Consumes("multipart/form-data")]
+        public async Task<IActionResult> UpdateProduct([FromForm] UpdateProductCommand command) => await Edit(command);
 
         [HttpDelete("DeleteProduct")]
+        [Consumes("multipart/form-data")]
         public async Task<IActionResult> DeleteProduct([FromBody] DeleteProductCommand command) => await Delete(command);
 
 
         [HttpGet("GetByIdOrder")]
+        [Consumes("multipart/form-data")]
         public async Task<IActionResult> GetByIdOrder(GetOrderByIdQuery query) => await Query<GetOrderByIdQuery, OrderQr?>(query);
 
         [HttpGet("GetByIdProductCategory")]
+        [Consumes("multipart/form-data")]
         public async Task<IActionResult> GetByIdProductCategory(GetProductCategoryByIdQuery query) => await Query<GetProductCategoryByIdQuery, ProductCategoryQr?>(query);
 
         [HttpGet("GetByIdProduct")]
+        [Consumes("multipart/form-data")]
         public async Task<IActionResult> GetByIdProduct(GetProductByIdQuery query) => await Query<GetProductByIdQuery, ProductQr?>(query);
     }
 }

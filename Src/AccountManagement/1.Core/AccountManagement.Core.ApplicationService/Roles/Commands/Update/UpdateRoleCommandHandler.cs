@@ -1,6 +1,7 @@
 ﻿using AccountManagement.Core.Contract.Roles.Commands;
 using AccountManagement.Core.RequestResponse.Roles.Commands.Update;
 using Framework.Enums.Validation;
+using Framework.ValidationMessages;
 using Zamin.Core.ApplicationServices.Commands;
 using Zamin.Core.Domain.Exceptions;
 using Zamin.Core.RequestResponse.Commands;
@@ -13,9 +14,11 @@ public sealed class UpdateRoleCommandHandler(ZaminServices zaminServices,
 {
     public override async Task<CommandResult> Handle(UpdateRoleCommand command)
     {
-        var role = await roleCommandRepository.GetAsync(command.Id);
-        if (role is null)
-            throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.NotAccount));
+        if (await roleCommandRepository.ExistsAsync(r => r.Name == command.Name))
+            throw new InvalidEntityStateException(ValidationMessages.DuplicateRoleName);
+
+        var role = await roleCommandRepository.GetAsync(command.Id)
+            ?? throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.NotAccount));
 
         role.Edite(command.Name);
         await roleCommandRepository.CommitAsync();

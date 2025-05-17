@@ -2,6 +2,7 @@
 using AccountManagement.Core.Domain.Accounts.Entities;
 using AccountManagement.Core.RequestResponse.Accounts.Commands.Create;
 using Framework.Enums.Validation;
+using Framework.FileUpload;
 using Framework.PasswordHasher;
 using Zamin.Core.ApplicationServices.Commands;
 using Zamin.Core.Domain.Exceptions;
@@ -12,7 +13,7 @@ namespace AccountManagement.Core.ApplicationService.Accounts.Commands.Create;
 
 public sealed class CreateAccountCommandHandler(ZaminServices zaminServices,
     IAccountCommandRepository accountCommandRepository,
-    IPasswordHasher passwordHasher) : CommandHandler<CreateAccountCommand, Guid>(zaminServices)
+    IPasswordHasher passwordHasher, IFileUploader fileUploader) : CommandHandler<CreateAccountCommand, Guid>(zaminServices)
 {
     public override async Task<CommandResult<Guid>> Handle(CreateAccountCommand command)
     {
@@ -20,12 +21,15 @@ public sealed class CreateAccountCommandHandler(ZaminServices zaminServices,
         if (accountCommandRepository.Exists(c => c.Username == command.Username))
             throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.UsernameAlreadyExists));
 
+        var path = $"profilePhotos";
+        var profilePhoto = fileUploader.Upload(command.ProfilePhoto, path);
+
         var hashedPassword = passwordHasher.Hash(command.Password);
         var account = new Account(command.Fullname,
                                   command.Username,
                                   hashedPassword,
                                   command.Mobile,
-                                  command.ProfilePhoto);
+                                  profilePhoto);
 
         await accountCommandRepository.InsertAsync(account);
         await accountCommandRepository.CommitAsync();

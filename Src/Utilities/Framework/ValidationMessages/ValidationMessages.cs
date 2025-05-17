@@ -36,6 +36,11 @@
         public const string InvalidDate = "تاریخ عملیات معتبر نیست.";
         public const string DiscountRateValid = "میزان تخفیف باید بین 0 و 100 باشد.";
         public const string InvalidSlug = "Slug باید یک مقدار یکتا و بدون فاصله باشد.";
+        public const string DuplicateRoleName = "نام نقش تکراری است.";
+        public const string DuplicateInventory = "برای این محصول قبلاً موجودی تعریف شده است.";
+        public const string NegativePrice = "قیمت نمی‌تواند منفی باشد.";
+        public const string NegativeStock = "موجودی اولیه نمی‌تواند منفی باشد.";
+        public const string InvalidOperation = "برخی عملیات وارد شده نامعتبر هستند.";
     }
 
 }

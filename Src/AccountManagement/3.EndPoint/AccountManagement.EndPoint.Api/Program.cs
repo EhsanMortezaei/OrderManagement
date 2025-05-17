@@ -1,6 +1,7 @@
 using AccountManagement.EndPoint.Api.Extentions;
 using Framework.AuthHelper;
-using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 using Zamin.Extensions.DependencyInjection;
 using Zamin.Utilities.SerilogRegistration.Extensions;
 
@@ -14,24 +15,32 @@ SerilogExtensions.RunWithSerilogExceptionHandling(() =>
         options.MinimumSameSitePolicy = SameSiteMode.Lax;
     });
 
-    builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, o =>
-                {
-                    o.LoginPath = new PathString("/Account");
-                    o.LogoutPath = new PathString("/Account");
-                });
+    var jwtKey = builder.Configuration["Jwt:Key"];
+    if (string.IsNullOrWhiteSpace(jwtKey))
+        throw new InvalidOperationException("JWT key is missing in configuration. Please set 'Jwt:Key' in appsettings.json");
 
-    builder.Services.AddAuthorization(options =>
+    var keyBytes = Encoding.UTF8.GetBytes(jwtKey);
+
+    builder.Services.AddAuthentication("Bearer")
+    .AddJwtBearer("Bearer", options =>
     {
-        options.AddPolicy("AdminArea",
-            builder => builder.RequireRole(new List<string> { Roles.Administator, Roles.ContentUploader }));
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            ValidAudience = builder.Configuration["Jwt:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(keyBytes)
 
-        options.AddPolicy("Shop",
-            builde => builde.RequireRole(new List<string> { Roles.Administator }));
-
-        options.AddPolicy("Account",
-            builde => builde.RequireRole(new List<string> { Roles.Administator }));
+        };
     });
+
+    builder.Services.AddAuthorizationBuilder()
+        .AddPolicy("AdminArea", builder => builder.RequireRole(new List<string> { Roles.Administator, Roles.ContentUploader }))
+        .AddPolicy("Shop", builde => builde.RequireRole(new List<string> { Roles.Administator }))
+        .AddPolicy("Account", builde => builde.RequireRole(new List<string> { Roles.Administator }));
 
     var app = builder.AddZaminSerilog(o =>
     {

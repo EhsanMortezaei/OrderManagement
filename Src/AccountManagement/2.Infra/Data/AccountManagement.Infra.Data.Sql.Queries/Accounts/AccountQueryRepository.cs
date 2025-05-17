@@ -7,11 +7,8 @@ using Zamin.Infra.Data.Sql.Queries;
 
 namespace AccountManagement.Infra.Data.Sql.Queries.Accounts;
 
-public sealed class AccountQueryRepository : BaseQueryRepository<AccountManagementQueryDbContext>, IAccountQueryRepository
+public sealed class AccountQueryRepository(AccountManagementQueryDbContext dbContext) : BaseQueryRepository<AccountManagementQueryDbContext>(dbContext), IAccountQueryRepository
 {
-    public AccountQueryRepository(AccountManagementQueryDbContext dbContext) : base(dbContext)
-    {
-    }
     public async Task<AccountQr?> ExecuteAsync(GetAccountByIdQuery query)
     => await _dbContext.Accounts.Select(c => new AccountQr()
     {

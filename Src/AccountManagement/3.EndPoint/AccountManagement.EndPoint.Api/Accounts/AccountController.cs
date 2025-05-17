@@ -30,31 +30,40 @@ public sealed class AccountController : BaseController
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create([FromBody] CreateAccountCommand command) => await Create<CreateAccountCommand, Guid>(command);
+    [Consumes("multipart/form-data")]
+    public async Task<IActionResult> Create([FromForm] CreateAccountCommand command) => await Create<CreateAccountCommand, Guid>(command);
 
     [HttpPut("UpdateAccount")]
-    public async Task<IActionResult> Update([FromBody] UpdateAccountCommand command) => await Edit(command);
+    [Consumes("multipart/form-data")]
+    public async Task<IActionResult> Update([FromForm] UpdateAccountCommand command) => await Edit(command);
 
     [HttpDelete("DeleteAccount")]
+    [Consumes("multipart/form-data")]
     public async Task<IActionResult> DeleteAccount([FromBody] DeleteAccountCommand command) => await Delete(command);
 
 
     [HttpPost("AddAccountRole")]
+    [Consumes("multipart/form-data")]
     public async Task<IActionResult> AddAccountRole([FromBody] AddAccountRoleCommand command) => await Create(command);
 
     [HttpDelete("RemoveAccountRole")]
+    [Consumes("multipart/form-data")]
     public async Task<IActionResult> RemoveAccountRole([FromBody] RemoveAccountRoleCommand command) => await Delete(command);
 
     [HttpPost("CreateRole")]
+    [Consumes("multipart/form-data")]
     public async Task<IActionResult> CreateRole([FromBody] CreateRoleCommand command) => await Create<CreateRoleCommand, Guid>(command);
 
     [HttpPut("UpdateRole")]
+    [Consumes("multipart/form-data")]
     public async Task<IActionResult> UpdateRole([FromBody] UpdateRoleCommand command) => await Edit(command);
 
     [HttpDelete("DeleteRole")]
+    [Consumes("multipart/form-data")]
     public async Task<IActionResult> DeleteRole([FromBody] DeleteRoleCommand command) => await Delete(command);
 
     [HttpPost("Login")]
+    [Consumes("multipart/form-data")]
     public async Task<IActionResult> Login([FromBody] LoginAccountCommand command)
         => await Create<LoginAccountCommand, LoginAccountCommandResult>(command);
     //public async Task<IActionResult> Login([FromBody] LoginAccountCommand command)
@@ -73,14 +82,18 @@ public sealed class AccountController : BaseController
     //public async Task<IActionResult> DeletePermission([FromBody] DeletePermissionCommand command) => await Delete(command);
 
     [HttpPost("AddPermission")]
+    [Consumes("multipart/form-data")]
     public async Task<IActionResult> AddPermission([FromBody] AddPermissionCommand command) => await Create(command);
 
     [HttpDelete("RemovePermission")]
+    [Consumes("multipart/form-data")]
     public async Task<IActionResult> RemovePermission([FromBody] RemovePermissionCommand command) => await Delete(command);
 
     [HttpGet("GetByIdAccount")]
+    [Consumes("multipart/form-data")]
     public async Task<IActionResult> GetByIdAccount([FromQuery] GetAccountByIdQuery query) => await Query<GetAccountByIdQuery, AccountQr?>(query);
 
     [HttpGet("GetByIdRole")]
+    [Consumes("multipart/form-data")]
     public async Task<IActionResult> GetByIdRole([FromQuery] GetRoleByIdQuery query) => await Query<GetRoleByIdQuery, RoleQr?>(query);
 }

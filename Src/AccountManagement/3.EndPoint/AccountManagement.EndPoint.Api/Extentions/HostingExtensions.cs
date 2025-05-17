@@ -1,8 +1,10 @@
 ﻿using AccountManagement.EndPoint.Api.CustomDecorators;
 using AccountManagement.EndPoint.Api.Extentions.DependencyInjection.Swaggers.Extentions;
+using AccountManagement.EndPoint.Api.FileUploade;
 using AccountManagement.Infra.Data.Sql.Commands.Common;
 using AccountManagement.Infra.Data.Sql.Queries.Common;
 using Framework.AuthHelper;
+using Framework.FileUpload;
 using Framework.PasswordHasher;
 using MediatR;
 using Microsoft.AspNetCore.Cors.Infrastructure;
@@ -29,6 +31,7 @@ public static class HostingExtensions
         builder.Services.AddTransient<IPasswordHasher, PasswordHasher>();
         builder.Services.AddTransient<IAuthHelper, AuthHelper>();
         builder.Services.AddTransient<IMediator, Mediator>();
+        builder.Services.AddTransient<IFileUploader, FileUploader>();
 
         builder.Services.AddZaminApiCore("Zamin", "AccountManagement");
 

@@ -1,10 +1,13 @@
+using Framework.FileUpload;
 using ShopManagement.EndPoint.Api.Extentions;
+using ShopManagement.EndPoint.Api.FileUploade;
 using Zamin.Extensions.DependencyInjection;
 using Zamin.Utilities.SerilogRegistration.Extensions;
 
 SerilogExtensions.RunWithSerilogExceptionHandling(() =>
 {
     var builder = WebApplication.CreateBuilder(args);
+    builder.Services.AddTransient<IFileUploader,FileUploader>();
     var app = builder.AddZaminSerilog(o =>
     {
         o.ApplicationName = builder.Configuration.GetValue<string>("ApplicationName");
