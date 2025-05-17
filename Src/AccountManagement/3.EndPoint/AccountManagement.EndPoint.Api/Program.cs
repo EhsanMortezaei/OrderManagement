@@ -1,6 +1,8 @@
 using AccountManagement.EndPoint.Api.Extentions;
 using Framework.AuthHelper;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 using Zamin.Extensions.DependencyInjection;
 using Zamin.Utilities.SerilogRegistration.Extensions;
 
@@ -14,12 +16,20 @@ SerilogExtensions.RunWithSerilogExceptionHandling(() =>
         options.MinimumSameSitePolicy = SameSiteMode.Lax;
     });
 
-    builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, o =>
-                {
-                    o.LoginPath = new PathString("/Account");
-                    o.LogoutPath = new PathString("/Account");
-                });
+    builder.Services.AddAuthentication("Bearer")
+    .AddJwtBearer("Bearer", options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            ValidAudience = builder.Configuration["Jwt:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+        };
+    });
 
     builder.Services.AddAuthorization(options =>
     {
