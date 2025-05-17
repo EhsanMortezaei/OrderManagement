@@ -13,10 +13,11 @@ public sealed class UpdateAccountCommandHandler(ZaminServices zainServices,
 {
     public override async Task<CommandResult> Handle(UpdateAccountCommand command)
     {
-        var account = await accountCommandRepository.GetAsync(command.Id);
-        if (account is null)
-            throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.NotAccount));
+        if (accountCommandRepository.Exists(c => c.Username == command.Username))
+            throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.UsernameAlreadyExists));
 
+        var account = await accountCommandRepository.GetAsync(command.Id)
+            ?? throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.NotAccount));
         account.Edit(command.Fullname,
                      command.Username,
                      command.Mobile,

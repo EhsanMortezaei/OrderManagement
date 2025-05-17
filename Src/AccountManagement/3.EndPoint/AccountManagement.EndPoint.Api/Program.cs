@@ -1,6 +1,5 @@
 using AccountManagement.EndPoint.Api.Extentions;
 using Framework.AuthHelper;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Zamin.Extensions.DependencyInjection;

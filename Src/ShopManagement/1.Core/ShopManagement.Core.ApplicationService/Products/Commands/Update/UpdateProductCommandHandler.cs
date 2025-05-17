@@ -1,4 +1,5 @@
 ﻿using Framework.Enums.Validation;
+using Framework.ValidationMessages;
 using ShopManagement.Core.Contracts.Products.Command;
 using ShopManagement.Core.RequestResponse.Products.Command.Update;
 using Zamin.Core.ApplicationServices.Commands;
@@ -13,9 +14,11 @@ public sealed class UpdateProductCommandHandler(ZaminServices zaminServices,
 {
     public override async Task<CommandResult> Handle(UpdateProductCommand command)
     {
-        var product = await productCommandRepository.GetAsync(command.Id);
-        if (product is null)
-            throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.ProductError));
+        if (productCommandRepository.Exists(c => c.Id == command.Id))
+            throw new InvalidEntityStateException(ValidationMessages.DuplicateRoleName);
+
+        var product = await productCommandRepository.GetAsync(command.Id)
+            ?? throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.ProductError));
         product.Edit(command.Name,
                      command.Code,
                      command.ShortDescription,

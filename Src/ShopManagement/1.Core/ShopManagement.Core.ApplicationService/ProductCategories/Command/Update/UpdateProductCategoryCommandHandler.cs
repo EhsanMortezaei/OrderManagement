@@ -1,4 +1,5 @@
 ﻿using Framework.Enums.Validation;
+using Framework.ValidationMessages;
 using ShopManagement.Core.Contracts.ProductCategories.Command;
 using ShopManagement.Core.RequestResponse.ProductCategories.Command.Update;
 using Zamin.Core.ApplicationServices.Commands;
@@ -13,9 +14,11 @@ public sealed class UpdateProductCategoryCommandHandler(ZaminServices zaminServi
 {
     public override async Task<CommandResult> Handle(UpdateProductCategoryCommand command)
     {
-        var productCategory = await productCategoryCommandRepository.GetAsync(command.Id);
-        if (productCategory is null)
-            throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.ProductCategoryError));
+        if (productCategoryCommandRepository.Exists(x => x.Name == command.Name))
+            throw new InvalidEntityStateException(ValidationMessages.DuplicateRoleName);
+
+        var productCategory = await productCategoryCommandRepository.GetAsync(command.Id)
+            ?? throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.ProductCategoryError));
         productCategory.Edit(command.Name,
                              command.Description,
                              command.Picture,

@@ -1,7 +1,9 @@
-﻿using ShopManagement.Core.Contracts.Products.Command;
+﻿using Framework.ValidationMessages;
+using ShopManagement.Core.Contracts.Products.Command;
 using ShopManagement.Core.Domain.Products.Entities;
 using ShopManagement.Core.RequestResponse.Products.Command.Create;
 using Zamin.Core.ApplicationServices.Commands;
+using Zamin.Core.Domain.Exceptions;
 using Zamin.Core.RequestResponse.Commands;
 using Zamin.Utilities;
 
@@ -12,11 +14,15 @@ public sealed class CreateProductCommandHandler(ZaminServices zaminServices,
 {
     public override async Task<CommandResult<Guid>> Handle(CreateProductCommand command)
     {
-        //var entity = await _productCommandRepository.GetAsync(command.Id);
+        //var entity = await productCommandRepository.GetAsync(command.CategoryId);
         //if (entity is null)
         //{
-        //    throw new Exception("id نمیتواند خالی باشد") ;
+        //    throw new Exception("id نمیتواند خالی باشد");
         //}
+
+        if (productCommandRepository.Exists(x => x.Name == command.Name))
+            throw new InvalidEntityStateException(ValidationMessages.DuplicateRoleName);
+
         var product = new Product(command.Name,
                                   command.Code,
                                   command.ShortDescription,

@@ -13,11 +13,8 @@ public sealed class RemovePermissionCommandHandler(ZaminServices zaminServices,
 {
     public override async Task<CommandResult> Handle(RemovePermissionCommand command)
     {
-        var role = await roleCommandRepository.GetGraphAsync(command.RoleId);
-
-        if (role is null)
-            throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.NotAccount));
-
+        var role = await roleCommandRepository.GetGraphAsync(command.RoleId)
+            ?? throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.NotAccount));
         role.RemovePermission(command.PermissionId);
         return Ok();
     }
