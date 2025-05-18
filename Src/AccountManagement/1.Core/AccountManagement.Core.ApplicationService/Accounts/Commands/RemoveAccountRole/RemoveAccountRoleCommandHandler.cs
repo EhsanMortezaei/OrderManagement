@@ -13,10 +13,8 @@ public sealed class RemoveAccountRoleCommandHandler(ZaminServices zaminServices,
 {
     public async override Task<CommandResult> Handle(RemoveAccountRoleCommand command)
     {
-        var accountRole = await accountCommandRepository.GetGraphAsync(command.AccountId);
-        if (accountRole is null)
-            throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.RoleError));
-
+        var accountRole = await accountCommandRepository.GetGraphAsync(command.AccountId)
+            ?? throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.RoleError));
         accountRole.RemoveRole(command.RoleId);
 
         await accountCommandRepository.CommitAsync();

@@ -15,7 +15,8 @@ public class DeleteAccountCommandHandler(ZaminServices zaminServices,
 
     public override async Task<CommandResult> Handle(DeleteAccountCommand command)
     {
-        var account = await _accountCommandRepository.GetGraphAsync(command.Id) ?? throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.NotAccount));
+        var account = await _accountCommandRepository.GetGraphAsync(command.Id)
+            ?? throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.NotAccount));
 
         _accountCommandRepository.Delete(account);
         await _accountCommandRepository.CommitAsync();

@@ -13,7 +13,8 @@ public sealed class DeleteInventoryCommandHandler(ZaminServices zaminServices,
 {
     public override async Task<CommandResult> Handle(DeleteInventoryCommand command)
     {
-        var inventory = await inventoryCommandRepository.GetGraphAsync(command.Id) ?? throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.InventoyError));
+        var inventory = await inventoryCommandRepository.GetGraphAsync(command.Id)
+            ?? throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.InventoyError));
 
         inventoryCommandRepository.Delete(inventory);
         await inventoryCommandRepository.CommitAsync();
