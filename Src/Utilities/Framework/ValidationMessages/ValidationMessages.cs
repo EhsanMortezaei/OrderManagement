@@ -3,8 +3,8 @@
 public static class ValidationMessages
 {
     //public const string Required = "ولیدیشن اجباری است";
-    public const string MinimumLength = "Validation.MinimumLength";
-    public const string MaximumLength = "Validation.MaximumLength";
+    public const string MinimumLength = "طول این فیلد نباید کمتر از {1} کاراکتر باشد.";
+    public const string MaximumLength = "طول این فیلد نباید بیشتر از {1} کاراکتر باشد.";
     public const string IdGreaterThanZero = "شناسه باید بزرگ‌تر از صفر باشد.";
     public const string Required = "فیلد {PropertyName} اجباری است.";
     public const string NotNull = "عملیات نمی‌تواند null باشد.";
