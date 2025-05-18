@@ -11,15 +11,13 @@ namespace AccountManagement.Core.ApplicationService.Accounts.Commands.Delete;
 public class DeleteAccountCommandHandler(ZaminServices zaminServices,
     IAccountCommandRepository accountCommandRepository) : CommandHandler<DeleteAccountCommand>(zaminServices)
 {
-    readonly IAccountCommandRepository _accountCommandRepository = accountCommandRepository;
-
     public override async Task<CommandResult> Handle(DeleteAccountCommand command)
     {
-        var account = await _accountCommandRepository.GetGraphAsync(command.Id)
+        var account = await accountCommandRepository.GetGraphAsync(command.Id)
             ?? throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.NotAccount));
 
-        _accountCommandRepository.Delete(account);
-        await _accountCommandRepository.CommitAsync();
+        accountCommandRepository.Delete(account);
+        await accountCommandRepository.CommitAsync();
 
         return Ok();
     }

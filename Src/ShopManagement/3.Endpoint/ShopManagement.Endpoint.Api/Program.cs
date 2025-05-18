@@ -7,7 +7,7 @@ using Zamin.Utilities.SerilogRegistration.Extensions;
 SerilogExtensions.RunWithSerilogExceptionHandling(() =>
 {
     var builder = WebApplication.CreateBuilder(args);
-    builder.Services.AddTransient<IFileUploader,FileUploader>();
+    builder.Services.AddTransient<IFileUploader, FileUploader>();
     var app = builder.AddZaminSerilog(o =>
     {
         o.ApplicationName = builder.Configuration.GetValue<string>("ApplicationName");

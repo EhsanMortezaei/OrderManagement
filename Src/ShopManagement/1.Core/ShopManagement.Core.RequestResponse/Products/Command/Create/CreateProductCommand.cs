@@ -1,5 +1,4 @@
-﻿using Framework.FileUpload;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Zamin.Core.RequestResponse.Commands;
 
 namespace ShopManagement.Core.RequestResponse.Products.Command.Create;
