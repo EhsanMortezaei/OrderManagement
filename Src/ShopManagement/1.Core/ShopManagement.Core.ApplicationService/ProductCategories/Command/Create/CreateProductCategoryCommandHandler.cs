@@ -1,4 +1,4 @@
-﻿using Framework.Enums.Validation;
+﻿using Framework.ErrorMessages;
 using Framework.FileUpload;
 using ShopManagement.Core.Contracts.ProductCategories.Command;
 using ShopManagement.Core.Domain.ProductCategories.Entities;
@@ -17,7 +17,7 @@ public sealed class CreateProductCategoryCommandHandler(ZaminServices zaminServi
     public override async Task<CommandResult<Guid>> Handle(CreateProductCategoryCommand command)
     {
         if (productCategoryCommandRepository.Exists(c => c.Name == command.Name))
-            throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.UsernameAlreadyExists));
+            throw new InvalidEntityStateException(ErrorMessage.UsernameAlreadyExists);
 
         var path = $"profilePhotos";
         var picture = fileUploader.Upload(command.Picture, path);

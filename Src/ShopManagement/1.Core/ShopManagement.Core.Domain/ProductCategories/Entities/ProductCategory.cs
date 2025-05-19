@@ -4,6 +4,7 @@ namespace ShopManagement.Core.Domain.ProductCategories.Entities;
 
 public sealed class ProductCategory : AggregateRoot<int>
 {
+    #region Properties
     public string Name { get; private set; } = null!;
     public string Description { get; private set; } = null!;
     public string Picture { get; private set; } = string.Empty;
@@ -12,8 +13,10 @@ public sealed class ProductCategory : AggregateRoot<int>
     public string KeyWords { get; private set; } = string.Empty;
     public string MetaDescription { get; private set; } = string.Empty;
     public string Slug { get; private set; } = string.Empty;
+    #endregion
 
-    ProductCategory() { }
+    #region Constructors
+    private ProductCategory() { }
 
     public ProductCategory(string name,
                            string description,
@@ -33,7 +36,9 @@ public sealed class ProductCategory : AggregateRoot<int>
         MetaDescription = metaDescription;
         Slug = slug;
     }
+    #endregion
 
+    #region Commands
     public void Edit(string name,
                      string description,
                      string picture,
@@ -45,14 +50,15 @@ public sealed class ProductCategory : AggregateRoot<int>
     {
         Name = name;
         Description = description;
+
         if (!string.IsNullOrWhiteSpace(picture))
-        {
             Picture = picture;
-        }
+
         PictureAlt = pictureAlt;
         PictureTitle = pictureTitle;
         KeyWords = keyWords;
         MetaDescription = metaDescription;
         Slug = slug;
     }
+    #endregion
 }

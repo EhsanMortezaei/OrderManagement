@@ -1,4 +1,4 @@
-﻿using Framework.Enums.Validation;
+﻿using Framework.ErrorMessages;
 using ShopManagement.Core.Contracts.Orders.Commands;
 using ShopManagement.Core.RequestResponse.Orders.Command.Update;
 using Zamin.Core.ApplicationServices.Commands;
@@ -13,10 +13,8 @@ public sealed class UpdateOrderCommandHandler(ZaminServices zaminServices,
 {
     public override async Task<CommandResult> Handle(UpdateOrderCommand command)
     {
-        var order = await orderCommandRepository.GetAsync(command.Id);
-        // eslah shavad
-        if (order is null)
-            throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.OrderError));
+        var order = await orderCommandRepository.GetAsync(command.Id)
+            ?? throw new InvalidEntityStateException(ErrorMessage.OrderError);
 
         order.Edit(command.AccountId,
                    command.PaymentMethod,

@@ -1,7 +1,7 @@
 ﻿using AccountManagement.Core.Contract.Roles.Commands;
 using AccountManagement.Core.Domain.Roles.Entities;
 using AccountManagement.Core.RequestResponse.Roles.Commands.Create;
-using Framework.ValidationMessages;
+using Framework.ErrorMessages;
 using Zamin.Core.ApplicationServices.Commands;
 using Zamin.Core.Domain.Exceptions;
 using Zamin.Core.RequestResponse.Commands;
@@ -15,7 +15,7 @@ public sealed class CreateRoleCommandHandler(ZaminServices zaminServices,
     public override async Task<CommandResult<Guid>> Handle(CreateRoleCommand command)
     {
         if (await roleCommandRepository.ExistsAsync(c => c.Name == command.Name))
-            throw new InvalidEntityStateException(ValidationMessages.DuplicateRoleName);
+            throw new InvalidEntityStateException(ErrorMessage.DuplicateRoleName);
 
         var role = new Role(command.Name);
 

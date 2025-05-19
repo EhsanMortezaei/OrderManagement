@@ -1,4 +1,4 @@
-﻿using Framework.Enums.Validation;
+﻿using Framework.ErrorMessages;
 using InventoryManagement.Core.Contracts.Inventories.Commands;
 using InventoryManagement.Core.RequestResponse.Inventories.Commands.Delet;
 using Zamin.Core.ApplicationServices.Commands;
@@ -14,7 +14,7 @@ public sealed class DeleteInventoryCommandHandler(ZaminServices zaminServices,
     public override async Task<CommandResult> Handle(DeleteInventoryCommand command)
     {
         var inventory = await inventoryCommandRepository.GetGraphAsync(command.Id)
-            ?? throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.InventoyError));
+            ?? throw new InvalidEntityStateException(ErrorMessage.InventoyError);
 
         inventoryCommandRepository.Delete(inventory);
         await inventoryCommandRepository.CommitAsync();

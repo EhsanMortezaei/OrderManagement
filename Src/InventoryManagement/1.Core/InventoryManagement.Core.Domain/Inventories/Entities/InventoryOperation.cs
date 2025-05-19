@@ -4,6 +4,7 @@ namespace InventoryManagement.Core.Domain.Inventories.Entities;
 
 public sealed class InventoryOperation : Entity<int>
 {
+    #region Properties
     public bool Operation { get; private set; }
     public long Count { get; private set; }
     public long OperatorId { get; private set; }
@@ -12,8 +13,10 @@ public sealed class InventoryOperation : Entity<int>
     public string Description { get; private set; } = string.Empty;
     public long OrderId { get; private set; }
     public long InventoryId { get; private set; }
+    #endregion
 
-    InventoryOperation() { }
+    #region Constructors
+    private InventoryOperation() { }
 
     public InventoryOperation(bool operation,
                               long count,
@@ -32,7 +35,9 @@ public sealed class InventoryOperation : Entity<int>
         InventoryId = inventoryId;
         OperationDate = DateTime.Now;
     }
+    #endregion
 
+    #region Commands
     public void Edit(bool operation,
                      long count,
                      long operatorId,
@@ -50,4 +55,5 @@ public sealed class InventoryOperation : Entity<int>
         InventoryId = inventoryId;
         OperationDate = DateTime.Now;
     }
+    #endregion
 }

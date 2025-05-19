@@ -1,6 +1,6 @@
 ﻿using AccountManagement.Core.Contract.Accounts.Commands;
 using AccountManagement.Core.RequestResponse.Accounts.Commands.Delete;
-using Framework.Enums.Validation;
+using Framework.ErrorMessages;
 using Zamin.Core.ApplicationServices.Commands;
 using Zamin.Core.Domain.Exceptions;
 using Zamin.Core.RequestResponse.Commands;
@@ -14,7 +14,7 @@ public class DeleteAccountCommandHandler(ZaminServices zaminServices,
     public override async Task<CommandResult> Handle(DeleteAccountCommand command)
     {
         var account = await accountCommandRepository.GetGraphAsync(command.Id)
-            ?? throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.NotAccount));
+            ?? throw new InvalidEntityStateException(ErrorMessage.NotAccount);
 
         accountCommandRepository.Delete(account);
         await accountCommandRepository.CommitAsync();

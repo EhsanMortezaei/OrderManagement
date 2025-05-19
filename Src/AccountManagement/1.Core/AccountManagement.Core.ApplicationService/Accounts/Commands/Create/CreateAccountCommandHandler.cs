@@ -1,7 +1,7 @@
 ﻿using AccountManagement.Core.Contract.Accounts.Commands;
 using AccountManagement.Core.Domain.Accounts.Entities;
 using AccountManagement.Core.RequestResponse.Accounts.Commands.Create;
-using Framework.Enums.Validation;
+using Framework.ErrorMessages;
 using Framework.FileUpload;
 using Framework.PasswordHasher;
 using Zamin.Core.ApplicationServices.Commands;
@@ -19,7 +19,7 @@ public sealed class CreateAccountCommandHandler(ZaminServices zaminServices,
     {
         // validation hai ke niaz be check db darad dakhele command handler check shavad
         if (accountCommandRepository.Exists(c => c.Username == command.Username))
-            throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.UsernameAlreadyExists));
+            throw new InvalidEntityStateException(ErrorMessage.UsernameAlreadyExists);
 
         var path = $"profilePhotos";
         var profilePhoto = fileUploader.Upload(command.ProfilePhoto, path);

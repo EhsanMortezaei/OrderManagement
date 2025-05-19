@@ -1,4 +1,4 @@
-﻿using Framework.Enums.Validation;
+﻿using Framework.ErrorMessages;
 using ShopManagement.Core.Contracts.Orders.Commands;
 using ShopManagement.Core.RequestResponse.Orders.Command.Delete;
 using Zamin.Core.ApplicationServices.Commands;
@@ -13,7 +13,8 @@ public sealed class DeleteOrderCommandHandler(ZaminServices zaminServices,
 {
     public override async Task<CommandResult> Handle(DeleteOrderCommand command)
     {
-        var order = await orderCommandRepository.GetGraphAsync(command.Id) ?? throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.InventoyError));
+        var order = await orderCommandRepository.GetGraphAsync(command.Id)
+            ?? throw new InvalidEntityStateException(ErrorMessage.InventoyError);
 
         orderCommandRepository.Delete(order);
         await orderCommandRepository.CommitAsync();

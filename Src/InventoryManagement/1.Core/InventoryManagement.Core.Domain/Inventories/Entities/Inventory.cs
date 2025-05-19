@@ -4,12 +4,15 @@ namespace InventoryManagement.Core.Domain.Inventories.Entities;
 
 public sealed class Inventory : AggregateRoot<int>
 {
+    #region Properties
     public int ProductId { get; private set; }
     public double UnitPrice { get; private set; }
     public bool InStock { get; private set; }
     public List<InventoryOperation> Operations { get; private set; } = new List<InventoryOperation>();
+    #endregion
 
-    Inventory() { }
+    #region Constructors
+    private Inventory() { }
 
     public Inventory(int productId, double unitPrice, bool inStock, List<InventoryOperation> operations)
     {
@@ -18,7 +21,9 @@ public sealed class Inventory : AggregateRoot<int>
         Operations = operations;
         InStock = inStock;
     }
+    #endregion
 
+    #region Commands
     public void Edit(int productId, double unitPrice, List<InventoryOperation> operations)
     {
         ProductId = productId;
@@ -49,4 +54,5 @@ public sealed class Inventory : AggregateRoot<int>
         Operations.Add(operation);
         InStock = currentCount > 0;
     }
+    #endregion
 }

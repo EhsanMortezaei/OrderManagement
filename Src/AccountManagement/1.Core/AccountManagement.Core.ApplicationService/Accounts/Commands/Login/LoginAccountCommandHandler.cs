@@ -1,7 +1,7 @@
 ﻿using AccountManagement.Core.Contract.Accounts.Commands;
 using AccountManagement.Core.RequestResponse.Accounts.Commands.Login;
 using Framework.AuthHelper;
-using Framework.Enums.Validation;
+using Framework.ErrorMessages;
 using Framework.PasswordHasher;
 using Zamin.Core.ApplicationServices.Commands;
 using Zamin.Core.Domain.Exceptions;
@@ -19,13 +19,13 @@ public sealed class LoginAccountCommandHandler(ZaminServices zainServices,
     {
         // null ha check shavad
         var account = await accountCommandommandRepository.GetByUserName(command.UserName)
-            ?? throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.UsernameAlreadyExists));
+            ?? throw new InvalidEntityStateException(ErrorMessage.UsernameAlreadyExists);
 
         if (!passwordHasher.Check(account.Password, command.Password).Verified)
-            throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.UserNameAndPassword));
+            throw new InvalidEntityStateException(ErrorMessage.UserNameAndPassword);
 
         if (account == null! || account.Username != command.UserName)
-            throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.UserNameAndPassword));
+            throw new InvalidEntityStateException(ErrorMessage.UserNameAndPassword);
 
         var authModel = new AuthViewModel(account.Id,
                                           account.FullName,

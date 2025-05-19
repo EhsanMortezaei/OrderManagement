@@ -1,10 +1,10 @@
-﻿using ShopManagement.Core.Domain.Products.Event.Product;
-using Zamin.Core.Domain.Entities;
+﻿using Zamin.Core.Domain.Entities;
 
 namespace ShopManagement.Core.Domain.Products.Entities;
 
 public sealed class Product : AggregateRoot<int>
 {
+    #region Properties
     public string Name { get; private set; } = null!;
     public string Code { get; private set; } = null!;
     public string ShortDescription { get; private set; } = null!;
@@ -18,8 +18,10 @@ public sealed class Product : AggregateRoot<int>
     public string Slug { get; private set; } = null!;
     public string Keywords { get; private set; } = null!;
     public string MetaDescription { get; private set; } = null!;
+    #endregion
 
-    Product() { }
+    #region Constructors
+    private Product() { }
 
     public Product(string name,
                    string code,
@@ -44,12 +46,10 @@ public sealed class Product : AggregateRoot<int>
         Slug = slug;
         Keywords = keywords;
         MetaDescription = metaDescription;
-
-        AddEvent(new ProductCreated(BusinessId.Value, Name, Code, ShortDescription,
-            Descrption, Picture, PictureAlt, PictureTitle,
-            ProductCategoryId, Slug, Keywords, MetaDescription));
     }
+    #endregion
 
+    #region Commands
     public void Edit(string name,
                      string code,
                      string shortDescription,
@@ -76,8 +76,6 @@ public sealed class Product : AggregateRoot<int>
         Slug = slug;
         Keywords = keywords;
         MetaDescription = metaDescription;
-
-        AddEvent(new ProductUpdated(BusinessId.Value, Name, Code, ShortDescription,
-            Descrption, Picture, PictureAlt, PictureTitle, ProductCategoryId, Slug, Keywords, MetaDescription));
     }
+    #endregion
 }

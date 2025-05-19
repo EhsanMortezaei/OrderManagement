@@ -1,10 +1,10 @@
-﻿using ShopManagement.Core.Domain.Orders.Events;
-using Zamin.Core.Domain.Entities;
+﻿using Zamin.Core.Domain.Entities;
 
 namespace ShopManagement.Core.Domain.Orders.Entities;
 
 public sealed class Order : AggregateRoot<int>
 {
+    #region Properties
     public long AccountId { get; private set; }
     public int PaymentMethod { get; private set; }
     public double TotalAmount { get; private set; }
@@ -15,8 +15,10 @@ public sealed class Order : AggregateRoot<int>
     public string IssueTrackingNo { get; private set; } = string.Empty;
     public long RefId { get; private set; }
     public List<OrderItem> Items { get; private set; } = new List<OrderItem>();
+    #endregion
 
-    Order() { }
+    #region Constructors
+    private Order() { }
 
     public Order(List<OrderItem> items)
     {
@@ -43,16 +45,10 @@ public sealed class Order : AggregateRoot<int>
 
         Items = new List<OrderItem>();
         Items = items;
-
-        // pak shavad
-        AddEvent(new OrderCreated(BusinessId.Value,
-                                  AccountId,
-                                  PaymentMethod,
-                                  TotalAmount,
-                                  DiscountAmount,
-                                  PayAmount));
     }
+    #endregion
 
+    #region Commands
     public void Edit(long accountId, int paymentMethod, double totalAmount, double discountAmount, double payAmount)
     {
         AccountId = accountId;
@@ -70,18 +66,10 @@ public sealed class Order : AggregateRoot<int>
             RefId = refId;
     }
 
-    public void Cancel()
-    {
-        IsCanceled = true;
-    }
+    public void Cancel() => IsCanceled = true;
 
-    public void SetIssueTrackingNo(string number)
-    {
-        IssueTrackingNo = number;
-    }
+    public void SetIssueTrackingNo(string number) => IssueTrackingNo = number;
 
-    public void AddItem(OrderItem item)
-    {
-        Items.Add(item);
-    }
+    public void AddItem(OrderItem item) => Items.Add(item);
+    #endregion
 }

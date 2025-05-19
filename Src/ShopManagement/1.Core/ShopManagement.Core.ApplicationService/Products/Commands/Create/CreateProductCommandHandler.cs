@@ -1,5 +1,5 @@
-﻿using Framework.FileUpload;
-using Framework.ValidationMessages;
+﻿using Framework.ErrorMessages;
+using Framework.FileUpload;
 using ShopManagement.Core.Contracts.Products.Command;
 using ShopManagement.Core.Domain.Products.Entities;
 using ShopManagement.Core.RequestResponse.Products.Command.Create;
@@ -16,14 +16,8 @@ public sealed class CreateProductCommandHandler(ZaminServices zaminServices,
 {
     public override async Task<CommandResult<Guid>> Handle(CreateProductCommand command)
     {
-        //var entity = await productCommandRepository.GetAsync(command.CategoryId);
-        //if (entity is null)
-        //{
-        //    throw new Exception("id نمیتواند خالی باشد");
-        //}
-
         if (productCommandRepository.Exists(x => x.Name == command.Name))
-            throw new InvalidEntityStateException(ValidationMessages.DuplicateRoleName);
+            throw new InvalidEntityStateException(ErrorMessage.DuplicateRoleName);
 
         var path = $"profilePhotos";
         var picture = fileUploader.Upload(command.Picture, path);

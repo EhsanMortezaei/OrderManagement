@@ -1,6 +1,5 @@
-﻿using Framework.Enums.Validation;
+﻿using Framework.ErrorMessages;
 using Framework.FileUpload;
-using Framework.ValidationMessages;
 using ShopManagement.Core.Contracts.ProductCategories.Command;
 using ShopManagement.Core.RequestResponse.ProductCategories.Command.Update;
 using Zamin.Core.ApplicationServices.Commands;
@@ -17,13 +16,13 @@ public sealed class UpdateProductCategoryCommandHandler(ZaminServices zaminServi
     public override async Task<CommandResult> Handle(UpdateProductCategoryCommand command)
     {
         if (productCategoryCommandRepository.Exists(x => x.Name == command.Name))
-            throw new InvalidEntityStateException(ValidationMessages.DuplicateRoleName);
+            throw new InvalidEntityStateException(ErrorMessage.DuplicateRoleName);
 
         var path = $"profilePhotos";
         var picture = fileUploader.Upload(command.Picture, path);
 
         var productCategory = await productCategoryCommandRepository.GetAsync(command.Id)
-            ?? throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.ProductCategoryError));
+            ?? throw new InvalidEntityStateException(ErrorMessage.ProductCategoryError);
         productCategory.Edit(command.Name,
                              command.Description,
                              picture,

@@ -4,15 +4,18 @@ namespace AccountManagement.Core.Domain.Accounts.Entities;
 
 public sealed class AccountRole : Entity<int>
 {
+    #region Properties
     public int AccountId { get; private set; }
     public int RoleId { get; private set; }
+    #endregion
 
-    AccountRole() { }
+    #region Constructors
+    private AccountRole() { }
 
-    public AccountRole(int roleId)
-    {
-        RoleId = roleId;
-    }
+    public AccountRole(int roleId) => RoleId = roleId;
+    #endregion
 
-    public static AccountRole Create(int roleId) => new AccountRole(roleId);
+    #region Commands
+    public static AccountRole Create(int roleId) => new(roleId);
+    #endregion
 }
