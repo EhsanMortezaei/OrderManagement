@@ -30,32 +30,41 @@ public sealed class AccountController : BaseController
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create([FromBody] CreateAccountCommand command) => await Create<CreateAccountCommand, Guid>(command);
+    [Consumes("multipart/form-data")]
+    public async Task<IActionResult> Create([FromForm] CreateAccountCommand command) => await Create<CreateAccountCommand, Guid>(command);
 
     [HttpPut("UpdateAccount")]
-    public async Task<IActionResult> Update([FromBody] UpdateAccountCommand command) => await Edit(command);
+    [Consumes("multipart/form-data")]
+    public async Task<IActionResult> Update([FromForm] UpdateAccountCommand command) => await Edit(command);
 
     [HttpDelete("DeleteAccount")]
-    public async Task<IActionResult> DeleteAccount([FromBody] DeleteAccountCommand command) => await Delete(command);
+    [Consumes("multipart/form-data")]
+    public async Task<IActionResult> DeleteAccount([FromForm] DeleteAccountCommand command) => await Delete(command);
 
 
     [HttpPost("AddAccountRole")]
-    public async Task<IActionResult> AddAccountRole([FromBody] AddAccountRoleCommand command) => await Create(command);
+    [Consumes("multipart/form-data")]
+    public async Task<IActionResult> AddAccountRole([FromForm] AddAccountRoleCommand command) => await Create(command);
 
     [HttpDelete("RemoveAccountRole")]
-    public async Task<IActionResult> RemoveAccountRole([FromBody] RemoveAccountRoleCommand command) => await Delete(command);
+    [Consumes("multipart/form-data")]
+    public async Task<IActionResult> RemoveAccountRole([FromForm] RemoveAccountRoleCommand command) => await Delete(command);
 
     [HttpPost("CreateRole")]
-    public async Task<IActionResult> CreateRole([FromBody] CreateRoleCommand command) => await Create<CreateRoleCommand, Guid>(command);
+    [Consumes("multipart/form-data")]
+    public async Task<IActionResult> CreateRole([FromForm] CreateRoleCommand command) => await Create<CreateRoleCommand, Guid>(command);
 
     [HttpPut("UpdateRole")]
-    public async Task<IActionResult> UpdateRole([FromBody] UpdateRoleCommand command) => await Edit(command);
+    [Consumes("multipart/form-data")]
+    public async Task<IActionResult> UpdateRole([FromForm] UpdateRoleCommand command) => await Edit(command);
 
     [HttpDelete("DeleteRole")]
-    public async Task<IActionResult> DeleteRole([FromBody] DeleteRoleCommand command) => await Delete(command);
+    [Consumes("multipart/form-data")]
+    public async Task<IActionResult> DeleteRole([FromForm] DeleteRoleCommand command) => await Delete(command);
 
     [HttpPost("Login")]
-    public async Task<IActionResult> Login([FromBody] LoginAccountCommand command)
+    [Consumes("multipart/form-data")]
+    public async Task<IActionResult> Login([FromForm] LoginAccountCommand command)
         => await Create<LoginAccountCommand, LoginAccountCommandResult>(command);
     //public async Task<IActionResult> Login([FromBody] LoginAccountCommand command)
     //{
@@ -73,14 +82,18 @@ public sealed class AccountController : BaseController
     //public async Task<IActionResult> DeletePermission([FromBody] DeletePermissionCommand command) => await Delete(command);
 
     [HttpPost("AddPermission")]
-    public async Task<IActionResult> AddPermission([FromBody] AddPermissionCommand command) => await Create(command);
+    [Consumes("multipart/form-data")]
+    public async Task<IActionResult> AddPermission([FromForm] AddPermissionCommand command) => await Create(command);
 
     [HttpDelete("RemovePermission")]
-    public async Task<IActionResult> RemovePermission([FromBody] RemovePermissionCommand command) => await Delete(command);
+    [Consumes("multipart/form-data")]
+    public async Task<IActionResult> RemovePermission([FromForm] RemovePermissionCommand command) => await Delete(command);
 
     [HttpGet("GetByIdAccount")]
+    [Consumes("multipart/form-data")]
     public async Task<IActionResult> GetByIdAccount([FromQuery] GetAccountByIdQuery query) => await Query<GetAccountByIdQuery, AccountQr?>(query);
 
     [HttpGet("GetByIdRole")]
+    [Consumes("multipart/form-data")]
     public async Task<IActionResult> GetByIdRole([FromQuery] GetRoleByIdQuery query) => await Query<GetRoleByIdQuery, RoleQr?>(query);
 }

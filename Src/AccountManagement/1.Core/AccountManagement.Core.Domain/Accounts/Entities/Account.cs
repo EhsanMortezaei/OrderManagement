@@ -29,11 +29,10 @@ public sealed class Account : AggregateRoot<int>
         FullName = fullname;
         Username = username;
         Password = password;
-        if (string.IsNullOrWhiteSpace(mobile) ||
-            !Regex.IsMatch(mobile, @"^09\d{9}$"))
-        {
+
+        if (string.IsNullOrWhiteSpace(mobile) || !Regex.IsMatch(mobile, @"^09\d{9}$"))
             throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.MobileError));
-        }
+
         Mobile = mobile;
 
         ProfilePhoto = profilePhoto;
@@ -48,17 +47,12 @@ public sealed class Account : AggregateRoot<int>
         Username = username;
 
 
-        if (string.IsNullOrWhiteSpace(mobile) ||
-            !Regex.IsMatch(mobile, @"^09\d{9}$"))
-        {
+        if (string.IsNullOrWhiteSpace(mobile) || !Regex.IsMatch(mobile, @"^09\d{9}$"))
             throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.MobileError));
-        }
 
         Mobile = mobile;
         if (!string.IsNullOrEmpty(profilePhoto))
-        {
             ProfilePhoto = profilePhoto;
-        }
     }
 
     public void ChangePassword(string password)
@@ -76,12 +70,8 @@ public sealed class Account : AggregateRoot<int>
     }
     public void RemoveRole(int roleId)
     {
-        var accountRole = _accountRoles.FirstOrDefault(x => x.RoleId == roleId);
-        if (accountRole is null)
-        {
-            throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.RoleError));
-        }
-
+        var accountRole = _accountRoles.FirstOrDefault(x => x.RoleId == roleId)
+            ?? throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.RoleError));
         _accountRoles.Remove(accountRole);
     }
 }

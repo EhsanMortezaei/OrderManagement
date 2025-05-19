@@ -6,15 +6,8 @@ using System.Security.Claims;
 
 namespace Framework.AuthHelper;
 
-public sealed class AuthHelper : IAuthHelper
+public sealed class AuthHelper(IHttpContextAccessor contextAccessor) : IAuthHelper
 {
-    readonly IHttpContextAccessor _contextAccessor;
-
-    public AuthHelper(IHttpContextAccessor contextAccessor)
-    {
-        _contextAccessor = contextAccessor;
-    }
-
     public AuthViewModel CurrentAccountInfo()
     {
         //var result = new AuthViewModel();
@@ -32,7 +25,7 @@ public sealed class AuthHelper : IAuthHelper
         if (!IsAuthenticated())
             return result;
 
-        var claims = _contextAccessor.HttpContext?.User?.Claims?.ToList();
+        var claims = contextAccessor.HttpContext?.User?.Claims?.ToList();
         if (claims == null)
             return result;
 
@@ -72,7 +65,7 @@ public sealed class AuthHelper : IAuthHelper
         if (!IsAuthenticated())
             return new List<int>();
 
-        var permissions = _contextAccessor.HttpContext.User.Claims
+        var permissions = contextAccessor.HttpContext.User.Claims
             .FirstOrDefault(x => x.Type == "permissions")?.Value;
 
         return permissions != null
@@ -85,7 +78,7 @@ public sealed class AuthHelper : IAuthHelper
     {
         if (IsAuthenticated())
         {
-            var accountIdClaim = _contextAccessor.HttpContext?.User?.Claims
+            var accountIdClaim = contextAccessor.HttpContext?.User?.Claims
                 .FirstOrDefault(x => x.Type == "AccountId")?.Value;
 
             if (!string.IsNullOrWhiteSpace(accountIdClaim) && long.TryParse(accountIdClaim, out var accountId))
@@ -99,13 +92,13 @@ public sealed class AuthHelper : IAuthHelper
     public string? CurrentAccountRole()
     {
         if (IsAuthenticated())
-            return _contextAccessor.HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Role)?.Value;
+            return contextAccessor.HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Role)?.Value;
         return null;
     }
 
     public bool IsAuthenticated()
     {
-        return _contextAccessor.HttpContext?.User?.Identity?.IsAuthenticated ?? false;
+        return contextAccessor.HttpContext?.User?.Identity?.IsAuthenticated ?? false;
     }
 
 
@@ -130,13 +123,13 @@ public sealed class AuthHelper : IAuthHelper
             ExpiresUtc = DateTimeOffset.UtcNow.AddDays(1)
         };
 
-        _contextAccessor.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
+        contextAccessor.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
             new ClaimsPrincipal(claimsIdentity),
             authProperties);
     }
 
     public void SignOut()
     {
-        _contextAccessor.HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        contextAccessor.HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
     }
 }

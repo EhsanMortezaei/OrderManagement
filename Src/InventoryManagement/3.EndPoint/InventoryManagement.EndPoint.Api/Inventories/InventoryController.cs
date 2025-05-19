@@ -17,33 +17,43 @@ namespace InventoryManagement.EndPoint.Api.Inventories;
 public sealed class InventoryController : BaseController
 {
     [HttpPost("CreateInventory")]
-    public async Task<IActionResult> CreateInventory([FromBody] CreateInventoryCommand command) => await Create<CreateInventoryCommand, Guid>(command);
+    [Consumes("multipart/form-data")]
+    public async Task<IActionResult> CreateInventory([FromForm] CreateInventoryCommand command) => await Create<CreateInventoryCommand, Guid>(command);
 
     [HttpPut("UpdateInventory")]
-    public async Task<IActionResult> UpdateInventory([FromBody] UpdateInventoryCommand command) => await Edit(command);
+    [Consumes("multipart/form-data")]
+    public async Task<IActionResult> UpdateInventory([FromForm] UpdateInventoryCommand command) => await Edit(command);
 
     [HttpDelete("DeleteInventory")]
-    public async Task<IActionResult> DeleteInventory([FromBody] DeleteInventoryCommand command) => await Delete(command);
+    [Consumes("multipart/form-data")]
+    public async Task<IActionResult> DeleteInventory([FromForm] DeleteInventoryCommand command) => await Delete(command);
 
     [HttpPost("IncreaseInventory")]
-    public async Task<IActionResult> IncreaseInventory([FromBody] IncreaseInventoryCommand command) => await Create<IncreaseInventoryCommand, Guid>(command);
+    [Consumes("multipart/form-data")]
+    public async Task<IActionResult> IncreaseInventory([FromForm] IncreaseInventoryCommand command) => await Create<IncreaseInventoryCommand, Guid>(command);
 
     [HttpPost("ReduceInventory")]
-    public async Task<IActionResult> ReduceInventory([FromBody] ReduceInventoryCommand command) => await Create<ReduceInventoryCommand, Guid>(command);
+    [Consumes("multipart/form-data")]
+    public async Task<IActionResult> ReduceInventory([FromForm] ReduceInventoryCommand command) => await Create<ReduceInventoryCommand, Guid>(command);
 
     [HttpPost("CreateInventoryOperation")]
-    public async Task<IActionResult> CreateInventoryOperation([FromBody] CreateInventoryOperationCommand command) => await Create<CreateInventoryOperationCommand, Guid>(command);
+    [Consumes("multipart/form-data")]
+    public async Task<IActionResult> CreateInventoryOperation([FromForm] CreateInventoryOperationCommand command) => await Create<CreateInventoryOperationCommand, Guid>(command);
 
     [HttpPut("UpdateInventoryOperation")]
-    public async Task<IActionResult> UpdateInventoryOperation([FromBody] UpdateInventoryOperationCommand command) => await Edit(command);
+    [Consumes("multipart/form-data")]
+    public async Task<IActionResult> UpdateInventoryOperation([FromForm] UpdateInventoryOperationCommand command) => await Edit(command);
 
     [HttpDelete("DeleteInventoryOperation")]
-    public async Task<IActionResult> DeleteInventoryOperation([FromBody] DeleteInventoryOperationCommand command) => await Delete(command);
+    [Consumes("multipart/form-data")]
+    public async Task<IActionResult> DeleteInventoryOperation([FromForm] DeleteInventoryOperationCommand command) => await Delete(command);
 
 
     [HttpGet("GetByIdInnventory")]
+    [Consumes("multipart/form-data")]
     public async Task<IActionResult> GetByIdInventory([FromQuery] GetInventoryByIdQuery query) => await Query<GetInventoryByIdQuery, InventoryQr?>(query);
 
     [HttpGet("GetByIdInventoryOperation")]
+    [Consumes("multipart/form-data")]
     public async Task<IActionResult> GetByIdInventoryOperation([FromQuery] GetInventoryOperationByIdQuery query) => await Query<GetInventoryOperationByIdQuery, InventoryOperationQr?>(query);
 }

@@ -7,16 +7,13 @@ using Zamin.Extensions.Events.Outbox.Dal.EF;
 
 namespace ShopManagement.Infra.Data.Sql.Commands.Common;
 
-public sealed class ShopManagementCommandDbContext : BaseOutboxCommandDbContext
+public sealed class ShopManagementCommandDbContext(
+    DbContextOptions<ShopManagementCommandDbContext> options) : BaseOutboxCommandDbContext(options)
 {
     public DbSet<Order> Orders { get; set; }
     public DbSet<OrderItem> OrderItems { get; set; }
     public DbSet<Product> Products { get; set; }
     public DbSet<ProductCategory> ProductCategories { get; set; }
-
-    public ShopManagementCommandDbContext(DbContextOptions<ShopManagementCommandDbContext> options) : base(options)
-    {
-    }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

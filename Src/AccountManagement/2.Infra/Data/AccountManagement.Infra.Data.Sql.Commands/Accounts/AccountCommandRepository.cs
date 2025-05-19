@@ -6,18 +6,12 @@ using Zamin.Infra.Data.Sql.Commands;
 
 namespace AccountManagement.Infra.Data.Sql.Commands.Accounts;
 
-public sealed class AccountCommandRepository :
-    BaseCommandRepository<Account, AccountManagementCommandDbContext, int>,
+public sealed class AccountCommandRepository(AccountManagementCommandDbContext dbContext, AccountManagementCommandDbContext context) :
+    BaseCommandRepository<Account, AccountManagementCommandDbContext, int>(dbContext),
     IAccountCommandRepository
 {
-    readonly AccountManagementCommandDbContext _context;
-    public AccountCommandRepository(AccountManagementCommandDbContext dbContext, AccountManagementCommandDbContext context) : base(dbContext)
-    {
-        _context = context;
-    }
-
     public async Task<Account?> GetByUserName(string username)
     {
-        return await _context.Accounts.FirstOrDefaultAsync(x => x.Username == username);
+        return await context.Accounts.FirstOrDefaultAsync(x => x.Username == username);
     }
 }

@@ -36,10 +36,8 @@ public sealed class Role : AggregateRoot<int>
 
     public void RemovePermission(int permissionId)
     {
-        var permission = _permissions.FirstOrDefault(x => x.Id == permissionId);
-
-        if (permission is null)
-            throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.Permission));
+        var permission = _permissions.FirstOrDefault(x => x.Id == permissionId)
+            ?? throw new InvalidEntityStateException(ErrorMessages.Get(ErrorMessageKey.Permission));
         _permissions.Remove(permission);
     }
 }
