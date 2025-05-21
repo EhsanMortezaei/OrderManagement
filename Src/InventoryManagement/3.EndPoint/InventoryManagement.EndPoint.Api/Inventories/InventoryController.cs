@@ -16,6 +16,7 @@ namespace InventoryManagement.EndPoint.Api.Inventories;
 [Route("api/InventoryManagement/[controller]/[action]")]
 public sealed class InventoryController : BaseController
 {
+    #region Commands
     [HttpPost("CreateInventory")]
     [Consumes("multipart/form-data")]
     public async Task<IActionResult> CreateInventory([FromForm] CreateInventoryCommand command) => await Create<CreateInventoryCommand, Guid>(command);
@@ -47,8 +48,9 @@ public sealed class InventoryController : BaseController
     [HttpDelete("DeleteInventoryOperation")]
     [Consumes("multipart/form-data")]
     public async Task<IActionResult> DeleteInventoryOperation([FromForm] DeleteInventoryOperationCommand command) => await Delete(command);
+    #endregion
 
-
+    #region Queries
     [HttpGet("GetByIdInnventory")]
     [Consumes("multipart/form-data")]
     public async Task<IActionResult> GetByIdInventory([FromQuery] GetInventoryByIdQuery query) => await Query<GetInventoryByIdQuery, InventoryQr?>(query);
@@ -56,4 +58,5 @@ public sealed class InventoryController : BaseController
     [HttpGet("GetByIdInventoryOperation")]
     [Consumes("multipart/form-data")]
     public async Task<IActionResult> GetByIdInventoryOperation([FromQuery] GetInventoryOperationByIdQuery query) => await Query<GetInventoryOperationByIdQuery, InventoryOperationQr?>(query);
+    #endregion
 }

@@ -18,6 +18,7 @@ namespace ShopManagement.EndPoint.Api.Shops
     [Route("api/ShopManagement/[controller]/[action]")]
     public sealed class ShopController : BaseController
     {
+        #region Commands
         [HttpPost("CreateOrder")]
         [Consumes("multipart/form-data")]
         public async Task<IActionResult> CreateOrder([FromForm] CreateOrderCommand command) => await Create<CreateOrderCommand, Guid>(command);
@@ -53,8 +54,9 @@ namespace ShopManagement.EndPoint.Api.Shops
         [HttpDelete("DeleteProduct")]
         [Consumes("multipart/form-data")]
         public async Task<IActionResult> DeleteProduct([FromForm] DeleteProductCommand command) => await Delete(command);
+        #endregion
 
-
+        #region Queries
         [HttpGet("GetByIdOrder")]
         [Consumes("multipart/form-data")]
         public async Task<IActionResult> GetByIdOrder([FromQuery] GetOrderByIdQuery query) => await Query<GetOrderByIdQuery, OrderQr?>(query);
@@ -66,5 +68,6 @@ namespace ShopManagement.EndPoint.Api.Shops
         [HttpGet("GetByIdProduct")]
         [Consumes("multipart/form-data")]
         public async Task<IActionResult> GetByIdProduct([FromQuery] GetProductByIdQuery query) => await Query<GetProductByIdQuery, ProductQr?>(query);
+        #endregion
     }
 }

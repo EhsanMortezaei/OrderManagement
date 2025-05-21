@@ -22,13 +22,7 @@ namespace AccountManagement.EndPoint.Api.Accounts;
 [Route("api/AccountManagement/[controller]/[action]")]
 public sealed class AccountController : BaseController
 {
-    readonly IMediator _mediator;
-
-    public AccountController(IMediator mediator)
-    {
-        _mediator = mediator;
-    }
-
+    #region Commands
     [HttpPost]
     [Consumes("multipart/form-data")]
     public async Task<IActionResult> Create([FromForm] CreateAccountCommand command) => await Create<CreateAccountCommand, Guid>(command);
@@ -88,7 +82,9 @@ public sealed class AccountController : BaseController
     [HttpDelete("RemovePermission")]
     [Consumes("multipart/form-data")]
     public async Task<IActionResult> RemovePermission([FromForm] RemovePermissionCommand command) => await Delete(command);
+    #endregion
 
+    #region Queries
     [HttpGet("GetByIdAccount")]
     [Consumes("multipart/form-data")]
     public async Task<IActionResult> GetByIdAccount([FromQuery] GetAccountByIdQuery query) => await Query<GetAccountByIdQuery, AccountQr?>(query);
@@ -96,4 +92,5 @@ public sealed class AccountController : BaseController
     [HttpGet("GetByIdRole")]
     [Consumes("multipart/form-data")]
     public async Task<IActionResult> GetByIdRole([FromQuery] GetRoleByIdQuery query) => await Query<GetRoleByIdQuery, RoleQr?>(query);
+    #endregion
 }
